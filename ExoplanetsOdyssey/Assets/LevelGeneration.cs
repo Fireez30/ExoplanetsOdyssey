@@ -195,8 +195,9 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
         SetRessourcesInMap(mapBase, 1);
         SpreadRessourcesInMap(mapBase);
         RenderMap(mapBase, tiles, basic,fuel,iron);
-        RenderOldChanges();
         UpdateMap(mapBase, tiles);
+        RenderOldChanges();
+
     }
 
     private void Update()
