@@ -1752,9 +1752,11 @@ GameObject:
   - component: {fileID: 1781128671}
   - component: {fileID: 1781128670}
   - component: {fileID: 1781128672}
+  - component: {fileID: 1781128673}
+  - component: {fileID: 1781128674}
   m_Layer: 0
   m_Name: GM
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1807,3 +1809,25 @@ MonoBehaviour:
   iron: {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
   tiles: {fileID: 1738558514}
   worldseed: 56846
+--- !u!114 &1781128673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1781128669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8814f5d1207fd774ba15f8b4c992d0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1781128674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1781128669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ed64e329419bd4cac7afe7af405b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

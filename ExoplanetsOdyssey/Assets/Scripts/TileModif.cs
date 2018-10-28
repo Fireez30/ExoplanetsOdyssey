@@ -9,8 +9,13 @@ public class TileModif : MonoBehaviour {
     public Camera cam;
     public List<TileBase> tileList;
     public int currentIndex;
+    GameObject GM;
 
-	void Update () {
+    private void Start()
+    {
+        GM = GameObject.FindGameObjectWithTag("GameManager");
+    }
+    void Update () {
 		if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
@@ -20,6 +25,7 @@ public class TileModif : MonoBehaviour {
             if (tilemap.GetTile(tilePos))
             {
                 tilemap.SetTile(tilePos, null);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, null, false,tilePos.x,tilePos.y);
             }
         }
         if (Input.GetMouseButton(1))
@@ -31,6 +37,7 @@ public class TileModif : MonoBehaviour {
             if (!tilemap.GetTile(tilePos))
             {
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, tileList[currentIndex], true, tilePos.x, tilePos.y);
             }
         }
 

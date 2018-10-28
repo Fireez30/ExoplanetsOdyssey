@@ -20,6 +20,7 @@ public class LevelGeneration : MonoBehaviour {
     GameObject player;
 	// Use this for initialization
 	void Start () {
+        worldseed = 56989;
         TileMapGen();
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
@@ -165,6 +166,7 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
 
     public void TileMapGen()
     {
+
         mapBase = GenerateArray(worldWidth, worldHeight, true);
         mapBase = RandomWalkTopSmoothed(mapBase, worldseed, 4);
         SetRessourcesInMap(mapBase, 1);
