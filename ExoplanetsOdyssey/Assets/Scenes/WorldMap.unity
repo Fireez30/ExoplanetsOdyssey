@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 1738558510}
   m_Layer: 0
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: TileMap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1751,8 +1751,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1781128671}
   - component: {fileID: 1781128670}
-  - component: {fileID: 1781128672}
   - component: {fileID: 1781128673}
+  - component: {fileID: 1781128672}
   - component: {fileID: 1781128674}
   m_Layer: 0
   m_Name: GM
@@ -1773,7 +1773,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1738558514}
-  cam: {fileID: 519420031}
   tileList:
   - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
   - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
@@ -1831,3 +1830,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ed64e329419bd4cac7afe7af405b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actualPlanet: 0

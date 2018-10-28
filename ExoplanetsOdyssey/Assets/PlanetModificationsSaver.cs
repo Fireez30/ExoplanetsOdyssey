@@ -8,7 +8,7 @@ public class PlanetModificationsSaver : MonoBehaviour {
     public Dictionary<float,List<TileChange>> visitedPlanets;
 	// Use this for initialization
 
-	void Start () {
+	void Awake () {
         visitedPlanets = new Dictionary<float, List<TileChange>>();
 	}
 
@@ -20,10 +20,9 @@ public class PlanetModificationsSaver : MonoBehaviour {
         }
     }
 
-    public void AddModification(float seed,TileBase id, bool type, int xcord, int ycord)
+    public void AddModification(float seed,TileBase id, int xcord, int ycord)
     {
         TileChange t;
-        t.type = type;
         t.id = id;
         t.x = xcord;
         t.y = ycord;
@@ -45,7 +44,6 @@ public class PlanetModificationsSaver : MonoBehaviour {
 [System.Serializable]
 public struct TileChange
 {
-    public bool type;// 0 -> Tile deletion, no use of id , 1 -> tile addition, player added the tile "id"
     public TileBase id;//which tile has been added
     public int x;//x coordinate of the change
     public int y;//y coordinate of the change

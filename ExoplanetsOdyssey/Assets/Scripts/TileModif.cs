@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class TileModif : MonoBehaviour {
 
     public Tilemap tilemap;
-    public Camera cam;
     public List<TileBase> tileList;
     public int currentIndex;
     GameObject GM;
@@ -19,25 +19,25 @@ public class TileModif : MonoBehaviour {
 		if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-            Vector3 screenPos = cam.ScreenToWorldPoint(mousePos);
+            Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             Vector3Int tilePos = tilemap.WorldToCell(screenPos);
 
             if (tilemap.GetTile(tilePos))
             {
                 tilemap.SetTile(tilePos, null);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, null, false,tilePos.x,tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, null,tilePos.x,tilePos.y);
             }
         }
         if (Input.GetMouseButton(1))
         {
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-            Vector3 screenPos = cam.ScreenToWorldPoint(mousePos);
+            Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             Vector3Int tilePos = tilemap.WorldToCell(screenPos);
 
             if (!tilemap.GetTile(tilePos))
             {
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, tileList[currentIndex], true, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, tileList[currentIndex], tilePos.x, tilePos.y);
             }
         }
 
@@ -60,5 +60,10 @@ public class TileModif : MonoBehaviour {
                 currentIndex = 0;
             }
         }
-	}
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
 }

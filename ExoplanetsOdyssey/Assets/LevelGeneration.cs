@@ -16,11 +16,12 @@ public class LevelGeneration : MonoBehaviour {
     public float worldseed;
 
     int[,] mapBase;
-
+    GameObject GM;
     GameObject player;
 	// Use this for initialization
 	void Start () {
         worldseed = 56989;
+        GM = GameObject.FindGameObjectWithTag("GameManager");
         TileMapGen();
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
@@ -75,12 +76,15 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
     }
     public void SetRessourcesInMap(int[,] map,int chance)
     {
+        //Seed our random
+        System.Random rand2 = new System.Random(worldseed.GetHashCode());
+
         for (int x = 0; x < map.GetUpperBound(0); x++)
         {
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                int type = Random.Range(0, 2);
-                int rand = Random.Range(0, 100);
+                int type = rand2.Next(2);
+                int rand = rand2.Next(100);
                 if (rand < chance && map[x,y] == 1)
                 {
                     map[x, y] = type+2;
@@ -91,6 +95,8 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
 
     public void SpreadRessourcesInMap(int[,] map)
     {
+        System.Random rand2 = new System.Random(worldseed.GetHashCode());
+
         int [,] map2 = map;
         for (int x = 0; x < map.GetUpperBound(0); x++)
         {
@@ -101,10 +107,10 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
                 {
                     int newX = x;
                     int newY = y;
-                    int tailleChunck = Random.Range(1, 4);
+                    int tailleChunck = rand2.Next(3) + 1;
                     for (int i = 0; i < tailleChunck; i++)
                     {
-                        int dir = Random.Range(0, 4);
+                        int dir = rand2.Next(4);
                         switch (dir)
                         {
                             case 0: newX--;break;
@@ -126,7 +132,7 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
         System.Random rand = new System.Random(seed.GetHashCode());
 
         //Determine the start position
-        int lastHeight = Random.Range(map.GetUpperBound(1)/2, map.GetUpperBound(1));
+        int lastHeight = rand.Next(map.GetUpperBound(1) / 2) + map.GetUpperBound(1) / 2;
 
         //Used to determine which direction to go
         int nextMove = 0;
@@ -164,14 +170,32 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
         return map;
     }
 
+    public void RenderOldChanges()
+    {
+        if (GM.GetComponent<PlanetModificationsSaver>().visitedPlanets.Count > 0)
+            foreach (float key in GM.GetComponent<PlanetModificationsSaver>().visitedPlanets.Keys)
+            {
+                if (key.Equals(worldseed))
+                {
+                    Debug.Log("Changes found !");
+                    foreach (TileChange t in GM.GetComponent<PlanetModificationsSaver>().visitedPlanets[key])
+                    {
+                        Debug.Log("Mise en place d'un changement a la posion x : " + t.x + " et y : " + t.y);
+                        tiles.SetTile(new Vector3Int(t.x, t.y, 0), t.id);
+                    }
+                    return;
+                }
+            }
+    }
+
     public void TileMapGen()
     {
-
         mapBase = GenerateArray(worldWidth, worldHeight, true);
         mapBase = RandomWalkTopSmoothed(mapBase, worldseed, 4);
         SetRessourcesInMap(mapBase, 1);
         SpreadRessourcesInMap(mapBase);
         RenderMap(mapBase, tiles, basic,fuel,iron);
+        RenderOldChanges();
         UpdateMap(mapBase, tiles);
     }
 
