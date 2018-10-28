@@ -175,7 +175,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &396126510
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1801,13 +1801,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19418ecbf70e8a442a738198abd6d6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldWidth: 80
-  worldHeight: 60
+  worldWidth: 1000
+  worldHeight: 100
   basic: {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
   fuel: {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
   iron: {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
   tiles: {fileID: 1738558514}
-  worldseed: 56846
+  worldseed: 41553
 --- !u!114 &1781128673
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,6 @@ public class LevelGeneration : MonoBehaviour {
     GameObject player;
 	// Use this for initialization
 	void Start () {
-        worldseed = 56989;
         GM = GameObject.FindGameObjectWithTag("GameManager");
         TileMapGen();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -83,31 +82,38 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
         {
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                int type = rand2.Next(2);
-                int rand = rand2.Next(100);
+                int rand = rand2.Next(200);
                 if (rand < chance && map[x,y] == 1)
                 {
+                    int type = rand2.Next(2);
                     map[x, y] = type+2;
                 }
             }
         }
     }
 
-    public void SpreadRessourcesInMap(int[,] map)
+    public int[,] SpreadRessourcesInMap(int[,] map)
     {
         System.Random rand2 = new System.Random(worldseed.GetHashCode());
 
-        int [,] map2 = map;
-        for (int x = 0; x < map.GetUpperBound(0); x++)
+        int [,] map2 = new int[map.GetUpperBound(0)+1,map.GetUpperBound(1)+1];
+        for (int i = 0; i <= map.GetUpperBound(0); i++)
         {
-            for (int y = 0; y < map.GetUpperBound(1); y++)
+            for (int i2 = 0; i2 <= map.GetUpperBound(1); i2++)
+            {
+                map2[i, i2] = map[i, i2];
+            }
+        }
+        for (int x = 0; x <= map.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y <= map.GetUpperBound(1); y++)
             {
                 int type = map[x, y];
                 if (type != 0 && type != 1)
                 {
                     int newX = x;
                     int newY = y;
-                    int tailleChunck = rand2.Next(3) + 1;
+                    int tailleChunck = rand2.Next(1,4);
                     for (int i = 0; i < tailleChunck; i++)
                     {
                         int dir = rand2.Next(4);
@@ -118,15 +124,15 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
                             case 2: newY--;break;
                             case 3: newY++;break;
                         }
-                        if (newX > 0 && newY > 0 && newX < map.GetUpperBound(0) && newY < map.GetUpperBound(1))
+                        if (newX > 0 && newY > 0 && newX <= map.GetUpperBound(0) && newY <= map.GetUpperBound(1))
                             map2[newX, newY] = type;
                     }
                 }
             }
         }
-        map = map2;
+        return map2;
     }
-    public static int[,] RandomWalkTopSmoothed(int[,] map, float seed, int minSectionWidth)
+    public static int[,] RandomWalkTopSmoothed(int[,] map, float seed, int minSectionWidth, int maxSectionWidth)
     {
         //Seed our random
         System.Random rand = new System.Random(seed.GetHashCode());
@@ -134,37 +140,35 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
         //Determine the start position
         int lastHeight = rand.Next(map.GetUpperBound(1) / 2) + map.GetUpperBound(1) / 2;
 
-        //Used to determine which direction to go
-        int nextMove = 0;
-        //Used to keep track of the current sections width
-        int sectionWidth = 0;
+        int x = 0;
+
 
         //Work through the array width
-        for (int x = 0; x <= map.GetUpperBound(0); x++)
+        
+        while (x <= map.GetUpperBound(0))
         {
-            //Determine the next move
-            nextMove = rand.Next(2);
-
-            //Only change the height if we have used the current height more than the minimum required section width
-            if (nextMove == 0 && lastHeight > 0 && sectionWidth > minSectionWidth)
+            //Used to keep track of the current sections width
+            int sectionWidth = Mathf.Min(map.GetUpperBound(0) - x + 1, rand.Next(minSectionWidth, maxSectionWidth));
+            //Used to determine which direction to go
+            int nextMove = rand.Next(2);
+            if (nextMove == 0 && lastHeight > 0)
             {
                 lastHeight--;
-                sectionWidth = 0;
             }
-            else if (nextMove == 1 && lastHeight < map.GetUpperBound(1) && sectionWidth > minSectionWidth)
+            else if (nextMove == 1 && lastHeight < map.GetUpperBound(1))
             {
                 lastHeight++;
-                sectionWidth = 0;
             }
-            //Increment the section width
-            sectionWidth++;
-
-            //Work our way from the height down to 0
-            for (int y = lastHeight; y >= 0; y--)
+            for(int i=0; i< sectionWidth; i++)
             {
-                map[x, y] = 1;
+                for (int y = lastHeight; y >= 0; y--)
+                {
+                    map[x+i, y] = 1;
+                }
             }
+            x += sectionWidth;
         }
+
 
         //Return the modified map
         return map;
@@ -191,9 +195,9 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
     public void TileMapGen()
     {
         mapBase = GenerateArray(worldWidth, worldHeight, true);
-        mapBase = RandomWalkTopSmoothed(mapBase, worldseed, 4);
+        mapBase = RandomWalkTopSmoothed(mapBase, worldseed, 4, 10);
         SetRessourcesInMap(mapBase, 1);
-        SpreadRessourcesInMap(mapBase);
+        mapBase = SpreadRessourcesInMap(mapBase);
         RenderMap(mapBase, tiles, basic,fuel,iron);
         UpdateMap(mapBase, tiles);
         RenderOldChanges();

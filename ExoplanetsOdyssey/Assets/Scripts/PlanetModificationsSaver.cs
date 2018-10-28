@@ -12,7 +12,7 @@ public class PlanetModificationsSaver : MonoBehaviour {
         visitedPlanets = new Dictionary<float, List<TileChange>>();
 	}
 
-    void Update()
+    void FixedUpdate()
     {
         foreach (float key in visitedPlanets.Keys)
         {
@@ -20,6 +20,10 @@ public class PlanetModificationsSaver : MonoBehaviour {
         }
     }
 
+
+    /*
+    ====== A OPTIMISER : Actuellement on stocke toutes les modifs faîtes à une coordonnée alors qu'une seule modif suffit
+    */
     public void AddModification(float seed,TileBase id, int xcord, int ycord)
     {
         TileChange t;
@@ -28,7 +32,6 @@ public class PlanetModificationsSaver : MonoBehaviour {
         t.y = ycord;
         if (visitedPlanets.ContainsKey(seed))
         {
-           
             visitedPlanets[seed].Add(t);
         }
         else
