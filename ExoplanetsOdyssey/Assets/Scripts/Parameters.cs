@@ -5,10 +5,22 @@ using UnityEngine;
 public class Parameters : MonoBehaviour {
 
     public float actualPlanet;
+    public string planetType;
+    public static Parameters Instance;
+
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+        if (Instance == false)
+        {
+            Instance = this;
+
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         DontDestroyOnLoad(this);
-        actualPlanet = 0;
-	}
+    }
 
 }

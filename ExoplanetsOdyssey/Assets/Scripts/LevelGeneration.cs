@@ -8,26 +8,37 @@ public class LevelGeneration : MonoBehaviour {
     public int worldWidth;
     public int worldHeight;
 
-    public TileBase basic;
-    public TileBase fuel;
-    public TileBase iron;
-
+    public List<Palette> tilesList;
     public Tilemap tiles;
     public float worldseed;
 
     int[,] mapBase;
     GameObject GM;
     GameObject player;
+    string planetType;
 	// Use this for initialization
 	void Start () {
         GM = GameObject.FindGameObjectWithTag("GameManager");
+        planetType = GM.GetComponent<Parameters>().planetType;
+        worldseed = GM.GetComponent<Parameters>().actualPlanet;
         TileMapGen();
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
         Camera.main.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
     }
 
-public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBase fuel, TileBase iron)
+    public TileBase getTileFromPalette(string ptype,int index)
+    {
+        foreach (Palette p in tilesList)
+        {
+            if (p.type.Equals(ptype)){
+                return p.Alltiles[index];
+            }
+        }
+
+        return null;
+    }
+public void RenderMap(int[,] map, Tilemap tilemap)
     {
         //Clear the map (ensures we dont overlap)
         tilemap.ClearAllTiles();
@@ -40,15 +51,15 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
                 // 1 = tile, 0 = no tile
                 if (map[x, y] == 1)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), basic);
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType,0));
                 }
                 else if (map[x,y] == 2)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), fuel);
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 1));
                 }
                 else if (map[x, y] == 3)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), iron);
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 2));
                 }
             }
         }
@@ -132,7 +143,7 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
         }
         return map2;
     }
-    public static int[,] RandomWalkTopSmoothed(int[,] map, float seed, int minSectionWidth, int maxSectionWidth)
+    public int[,] RandomWalkTopSmoothed(int[,] map, float seed, int minSectionWidth, int maxSectionWidth)
     {
         //Seed our random
         System.Random rand = new System.Random(seed.GetHashCode());
@@ -176,20 +187,29 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
 
     public void RenderOldChanges()
     {
-        if (GM.GetComponent<PlanetModificationsSaver>().visitedPlanets.Count > 0)
-            foreach (float key in GM.GetComponent<PlanetModificationsSaver>().visitedPlanets.Keys)
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt"))
+        {
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt");
+        }
+
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt");
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if (!(lines[i].Contains("#")))
             {
-                if (key.Equals(worldseed))
+                string[] tmp = lines[i].Split(';');
+                if (int.Parse(tmp[3]) == -1)
                 {
-                    Debug.Log("Changes found !");
-                    foreach (TileChange t in GM.GetComponent<PlanetModificationsSaver>().visitedPlanets[key])
-                    {
-                        Debug.Log("Mise en place d'un changement a la posion x : " + t.x + " et y : " + t.y);
-                        tiles.SetTile(new Vector3Int(t.x, t.y, 0), t.id);
-                    }
-                    return;
+                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0), null);
                 }
+                else
+                {
+                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0),getTileFromPalette(tmp[2], int.Parse(tmp[3])));
+                }
+               
             }
+        }
     }
 
     public void TileMapGen()
@@ -198,7 +218,7 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
         mapBase = RandomWalkTopSmoothed(mapBase, worldseed, 4, 10);
         SetRessourcesInMap(mapBase, 1);
         mapBase = SpreadRessourcesInMap(mapBase);
-        RenderMap(mapBase, tiles, basic,fuel,iron);
+        RenderMap(mapBase, tiles);
         UpdateMap(mapBase, tiles);
         RenderOldChanges();
 
@@ -225,4 +245,11 @@ public static void RenderMap(int[,] map, Tilemap tilemap, TileBase basic,TileBas
                 }
             }
         }
+}
+
+[System.Serializable]
+public struct Palette
+{
+    public string type;
+    public List<TileBase> Alltiles;
 }

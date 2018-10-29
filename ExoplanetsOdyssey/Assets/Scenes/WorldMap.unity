@@ -337,7 +337,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1801,13 +1801,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19418ecbf70e8a442a738198abd6d6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldWidth: 1000
-  worldHeight: 100
-  basic: {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
-  fuel: {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
-  iron: {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
+  worldWidth: 100
+  worldHeight: 50
+  tilesList:
+  - type: classic
+    Alltiles:
+    - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
+    - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
+    - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
   tiles: {fileID: 1738558514}
-  worldseed: 41553
+  worldseed: 0
 --- !u!114 &1781128673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1830,4 +1833,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ed64e329419bd4cac7afe7af405b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualPlanet: 0
+  actualPlanet: 41553
+  planetType: classic
