@@ -1810,7 +1810,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
     - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
   tiles: {fileID: 1738558514}
-  worldseed: la graine de l'aleatoire
+  worldseed: 
 --- !u!114 &1781128673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1833,5 +1833,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ed64e329419bd4cac7afe7af405b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualPlanet: 41553
+  actualPlanet: 254562
   planetType: classic

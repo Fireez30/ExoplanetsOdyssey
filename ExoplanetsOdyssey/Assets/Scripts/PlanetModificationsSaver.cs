@@ -5,13 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class PlanetModificationsSaver : MonoBehaviour {
 
-    public Dictionary<float,List<TileChange>> visitedPlanets;
-    float actualSeed;
+    public Dictionary<string,List<TileChange>> visitedPlanets;
+    string actualSeed;
 	// Use this for initialization
 
 	void Awake () {
-        visitedPlanets = new Dictionary<float, List<TileChange>>();
-        actualSeed = -1;
+        visitedPlanets = new Dictionary<string, List<TileChange>>();
 	}
 
      void Start()
@@ -20,7 +19,7 @@ public class PlanetModificationsSaver : MonoBehaviour {
     }
     void FixedUpdate()
     {
-        foreach (float key in visitedPlanets.Keys)
+        foreach (string key in visitedPlanets.Keys)
         {
             Debug.Log("planete : " + key + " nombre d'elements : " + visitedPlanets[key].Count);
         }
@@ -65,12 +64,21 @@ public class PlanetModificationsSaver : MonoBehaviour {
             newLines[index] = t.x + ";" + t.y + ";" + t.planetType + ";" + t.tileIndex;
             index++;
         }
+        string[] final = new string[lines.Length+newLines.Length];
+        for (int i = 0; i < lines.Length; i++)
+        {
+            final[i] = lines[i];
+        }
+        for (int i = 0; i < newLines.Length; i++)
+        {
+            final[i + lines.Length] = newLines[i];
+        }
 
-        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/" + actualSeed + ".plnt", newLines);
+        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/" + actualSeed + ".plnt", final);
         visitedPlanets.Clear();
     }
 
-    public void AddModification(float seed, string planetType,int index, int xcord, int ycord)
+    public void AddModification(string seed, string planetType,int index, int xcord, int ycord)
     {
         if (actualSeed != seed)
             actualSeed = seed;

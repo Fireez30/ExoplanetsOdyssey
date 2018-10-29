@@ -23,7 +23,7 @@ public class LevelGeneration : MonoBehaviour {
         rand = new System.Random(worldseed.GetHashCode());
         GM = GameObject.FindGameObjectWithTag("GameManager");
         planetType = GM.GetComponent<Parameters>().planetType;
-        //worldseed = GM.GetComponent<Parameters>().actualPlanet;
+        worldseed = GM.GetComponent<Parameters>().actualPlanet;
         TileMapGen();
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
