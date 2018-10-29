@@ -25,7 +25,7 @@ public class TileModif : MonoBehaviour {
             if (tilemap.GetTile(tilePos))
             {
                 tilemap.SetTile(tilePos, null);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType,-1,tilePos.x,tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed.GetHashCode(), GM.GetComponent<Parameters>().planetType,-1,tilePos.x,tilePos.y);
             }
         }
         if (Input.GetMouseButton(1))
@@ -37,7 +37,7 @@ public class TileModif : MonoBehaviour {
             if (!tilemap.GetTile(tilePos))
             {
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed.GetHashCode(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
             }
         }
 
