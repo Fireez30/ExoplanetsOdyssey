@@ -68,6 +68,57 @@ public void RenderMap(int[,] map, Tilemap tilemap)
         }
     }
 
+    public void writeMap(int [,] map)
+    {
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn"))
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn");
+
+        string[] lines = new string[map.GetUpperBound(0)];
+        int currentid = 0;
+        for (int x = 0; x < map.GetUpperBound(0); x++)
+        {
+            string line = "";
+            //Loop through the height of the map
+            for (int y = 0; y < map.GetUpperBound(1)-1; y++)
+            {
+                line += map[x, y] + ";";
+            }
+            line += map[x, map.GetUpperBound(1) - 2];
+            lines[currentid] = line;
+            currentid++;
+        }
+
+        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn", lines);
+
+    }
+
+    public int[,] loadMap()
+    {
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn"))
+            return null;
+
+        int[,] map = new int[worldWidth + 1, worldHeight + 1];
+
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn");
+
+        for (int i = 0; i < lines.Length; i++)//on update ici les modifications de tile deja existantes
+        {
+            if (!(lines[i].Contains("#")))
+            {
+                Debug.Log("display : "+ lines[i]);
+                string[] tmp = lines[i].Split(';');
+                Debug.Log("apres split "+tmp[0]);
+                for (int j=0; j < tmp.Length; j++)
+                {
+                    Debug.Log("contenu: "+ int.Parse(tmp[j]));
+                    map[i, j] = int.Parse(tmp[j]);
+                }
+            }
+        }
+
+        return map;
+    }
+
     public static int[,] GenerateArray(int width, int height, bool empty)
     {
         int[,] map = new int[width, height];
@@ -272,15 +323,15 @@ public void RenderMap(int[,] map, Tilemap tilemap)
 
     public void TileMapGen()
     {
-        mapBase = GenerateArray(worldWidth, worldHeight, true);
-        mapBase = RandomWalkTopSmoothed(mapBase, 4, 10);
-        GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), minSurface + 5), 20);
-        SetRessourcesInMap(mapBase, 1);
-        mapBase = SpreadRessourcesInMap(mapBase);
-        RenderMap(mapBase, tiles);
-        UpdateMap(mapBase, tiles);
-        RenderOldChanges();
-
+            mapBase = GenerateArray(worldWidth, worldHeight, true);
+            mapBase = RandomWalkTopSmoothed(mapBase, 4, 10);
+            GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), minSurface + 5), 20);
+            SetRessourcesInMap(mapBase, 1);
+            mapBase = SpreadRessourcesInMap(mapBase);
+            RenderMap(mapBase, tiles);
+            UpdateMap(mapBase, tiles);
+            RenderOldChanges();
+       
     }
 
     private void Update()

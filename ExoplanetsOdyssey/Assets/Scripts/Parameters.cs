@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Parameters : MonoBehaviour {
 
-    public string actualPlanet;
+    public string actualPlanet;//seed de la map
     public string planetType;
     public static Parameters Instance;
 
