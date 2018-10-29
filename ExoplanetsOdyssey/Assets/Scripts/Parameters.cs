@@ -8,19 +8,21 @@ public class Parameters : MonoBehaviour {
     public string planetType;
     public static Parameters Instance;
 
+    
+
 	// Use this for initialization
 	void Awake () {
         if (Instance == false)
         {
             Instance = this;
-
+            DontDestroyOnLoad(this);
         }
         else
         {
             Destroy(this);
         }
 
-        DontDestroyOnLoad(this);
+
     }
 
 }
