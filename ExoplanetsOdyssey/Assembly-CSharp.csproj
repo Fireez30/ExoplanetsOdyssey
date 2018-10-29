@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\LevelGeneration.cs" />
     <Compile Include="Assets\Packages\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Packages\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Packages\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -124,8 +123,9 @@
     <Compile Include="Assets\Packages\Tilemap\Tiles\Rule Tile\Scripts\RuleTile.cs" />
     <Compile Include="Assets\Packages\Tilemap\Tiles\Terrain Tile\Scripts\TerrainTile.cs" />
     <Compile Include="Assets\Packages\Tilemap\Tiles\Weighted Random Tile\WeightedRandomTile.cs" />
-    <Compile Include="Assets\Parameters.cs" />
-    <Compile Include="Assets\PlanetModificationsSaver.cs" />
+    <Compile Include="Assets\Scripts\LevelGeneration.cs" />
+    <Compile Include="Assets\Scripts\Parameters.cs" />
+    <Compile Include="Assets\Scripts\PlanetModificationsSaver.cs" />
     <Compile Include="Assets\Scripts\TileModif.cs" />
     <None Include="Assets\Packages\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
     <None Include="Assets\Packages\Tilemap\Brushes\Tint Brush Smooth\Shaders\TintedTilemap.shader" />

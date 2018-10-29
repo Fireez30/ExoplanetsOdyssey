@@ -21,9 +21,7 @@ public class PlanetModificationsSaver : MonoBehaviour {
     }
 
 
-    /*
-    ====== A OPTIMISER : Actuellement on stocke toutes les modifs faîtes à une coordonnée alors qu'une seule modif suffit
-    */
+
     public void AddModification(float seed,TileBase id, int xcord, int ycord)
     {
         TileChange t;
@@ -32,6 +30,14 @@ public class PlanetModificationsSaver : MonoBehaviour {
         t.y = ycord;
         if (visitedPlanets.ContainsKey(seed))
         {
+            foreach (TileChange k in visitedPlanets[seed])
+            {
+                if (k.x == xcord && k.y == ycord)
+                {
+                    visitedPlanets[seed].Remove(k);
+                    break;
+                }
+            }
             visitedPlanets[seed].Add(t);
         }
         else
