@@ -8,7 +8,7 @@ public class LevelGeneration : MonoBehaviour {
     private System.Random rand;
     public int worldWidth;
     public int worldHeight;
-    private int minSurface;
+    private int maxSurface;
 
     public List<Palette> tilesList;
     public Tilemap tiles;
@@ -93,11 +93,18 @@ public void RenderMap(int[,] map, Tilemap tilemap)
         {
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                if (rand.Next(200) < chance && map[x,y] == 1)
+                int memChance = chance;
+                if (map[x, y] == -1)
+                {
+                    chance *= 30;
+                    map[x, y] = 1;
+                }
+                if (rand.Next(500) < chance && map[x,y] == 1)
                 {
                     int type = rand.Next(2);
                     map[x, y] = type+2;
                 }
+                chance = memChance;
             }
         }
     }
@@ -145,7 +152,7 @@ public void RenderMap(int[,] map, Tilemap tilemap)
     {
         //Determine the start position
         int lastHeight = rand.Next(map.GetUpperBound(1) / 2) + map.GetUpperBound(1) / 2;
-        minSurface = lastHeight;
+        maxSurface = lastHeight;
         int x = 0;
 
         //Work through the array width
@@ -159,12 +166,12 @@ public void RenderMap(int[,] map, Tilemap tilemap)
             if (nextMove == 0 && lastHeight > 0)
             {
                 lastHeight--;
-                if (lastHeight < minSurface)
-                    minSurface = lastHeight;
             }
             else if (nextMove == 1 && lastHeight < map.GetUpperBound(1))
             {
                 lastHeight++;
+                if (lastHeight > maxSurface)
+                    maxSurface = lastHeight;
             }
             for(int i=0; i< sectionWidth; i++)
             {
@@ -237,11 +244,19 @@ public void RenderMap(int[,] map, Tilemap tilemap)
         List<Vector2> TabcontrolPoint = new List<Vector2>();
         int nbControlPoint = 3;
         TabcontrolPoint.Add(ptStart);
+        float minX=9999999, maxX=-1, minY=9999999, maxY=-1;
         for (int i = 0; i < nbControlPoint; i++)
-            TabcontrolPoint.Add(new Vector2(rand.Next(worldWidth), rand.Next(minSurface + 5)));
-        int nbPoints = 1000;
-        Vector2[] tab = new Vector2[nbPoints + 1];
-        for (int i = 0; i <= nbPoints; i++)
+        {
+            Vector2 v = new Vector2(rand.Next(worldWidth), rand.Next(maxSurface));
+            TabcontrolPoint.Add(v);
+            if (v.x > maxX) maxX = v.x;
+            if (v.x < minX) minX = v.x;
+            if (v.y > maxY) maxY = v.y;
+            if (v.y < minY) minY = v.y;
+        }
+        int nbPoints = (int)((maxY - minY + maxX - minX)/1.5);
+        Vector2[] tab = new Vector2[nbPoints];
+        for (int i = 0; i < nbPoints; i++)
         {
             float u = (float)(i) / (float)(nbPoints);
             float x = 0, y = 0;
@@ -251,19 +266,29 @@ public void RenderMap(int[,] map, Tilemap tilemap)
                 y += calculCoeff(i2, TabcontrolPoint.Count - 1, u) * TabcontrolPoint[i2].y;
             }
             tab[i] = new Vector2(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
-            if (rand.Next(10000) < chance)
+            if (rand.Next(nbPoints*20) < chance)
             {
                 GenerateCave(map, tab[i], chance - 5);
             }
         }
         foreach (Vector2 v in tab)
         {
-            for (int x = -1; x < 2; x++)
+            int range = rand.Next(1, 4);
+            for (int x = -1*range - 1; x <= range; x++)
             {
-                for (int y = -1; y < 2; y++)
+                for (int y = -1*range - 1; y <= range; y++)
                 {
                     if (v.x + x >= 0 && v.x + x <= map.GetUpperBound(0) && v.y + y >= 0 && v.y + y <= map.GetUpperBound(1))
-                        map[(int)v.x + x, (int)v.y + y] = 0;
+                    {
+                        if(x == -1 * range - 1 || x == range || y == -1 * range - 1 || y == range)
+                        {
+                            if(map[(int)v.x + x, (int)v.y + y] == 1)
+                                map[(int)v.x + x, (int)v.y + y] = -1;
+                        }
+                        else
+                            map[(int)v.x + x, (int)v.y + y] = 0;
+                    }
+                    
                 }
             }
         }
@@ -274,7 +299,7 @@ public void RenderMap(int[,] map, Tilemap tilemap)
     {
         mapBase = GenerateArray(worldWidth, worldHeight, true);
         mapBase = RandomWalkTopSmoothed(mapBase, 4, 10);
-        GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), minSurface + 5), 20);
+        GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), maxSurface), 20);
         SetRessourcesInMap(mapBase, 1);
         mapBase = SpreadRessourcesInMap(mapBase);
         RenderMap(mapBase, tiles);
