@@ -9,11 +9,12 @@ public class TileModif : MonoBehaviour {
     public Tilemap tilemap;
     public List<TileBase> tileList;
     public int currentIndex;
+
     GameObject GM;
     private Vector3Int memTile;
     private float timerBreakTile;
 
-    private void Start()
+    private void Awake()
     {
         GM = GameObject.FindGameObjectWithTag("GameManager");
         memTile = new Vector3Int();
@@ -21,38 +22,50 @@ public class TileModif : MonoBehaviour {
     }
 
     void FixedUpdate () {
-		if (Input.GetMouseButton(0))
+		if (Input.GetMouseButton(0))                                                                    //Clic gauche
         {
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-            Vector3Int tilePos = tilemap.WorldToCell(screenPos);
-            float timeBreak = 0.4f;
-            if(tilePos != memTile && tilemap.GetTile(tilePos))
+            Vector3Int tilePos = tilemap.WorldToCell(screenPos);                                        //Récupère la position dans la tilemap de la tile où est la souris
+            float timeBreak = -1;                                                                       //Temps nécessaire pour casser une tile
+            TileBase tile = tilemap.GetTile(tilePos);
+            if (tile)                                                                                   //S'il y a bien une tile à la position de la souris, on modifie le temps nécessaire pour la casser en fonction de son type
+            {
+                string nameTile = tile.name;
+                switch (nameTile)
+                {
+                    case "ground": timeBreak = 0.4f; break;
+                    case "Redstuff": timeBreak = 1f; break;
+                    case "BlueStuff": timeBreak = 1.5f; break;
+                    default : timeBreak = -1; break;                                                    //Si tileBreak == -1, alors on ne peux pas casser la tile
+                }
+            }
+            if (tilePos != memTile && timeBreak!=-1)                                                    //Si la souris est plus sur la même tiles, on reset le cassage de tile
             {
                 if(tilemap.GetTile(memTile))
                     tilemap.SetColor(memTile, new Color(1, 1, 1, 1));
                 timerBreakTile = 0;
                 memTile = tilePos;
             }
-            else if(tilePos == memTile && tilemap.GetTile(tilePos) && timerBreakTile < timeBreak)
+            else if(tilePos == memTile && timeBreak!=-1 && timerBreakTile < timeBreak)                  //Si la souris est sur la même tile mais pas depuis assez longtemps pour la casser, on change l'opacité de la tile
             {
                 timerBreakTile += Time.fixedDeltaTime;
                 tilemap.SetColor(tilePos, new Color(1, 1, 1, 1 - (timerBreakTile) / timeBreak));
             }
-            else if(timerBreakTile >= timeBreak && tilePos == memTile && tilemap.GetTile(tilePos))
+            else if(timerBreakTile >= timeBreak && tilePos == memTile && timeBreak!=-1)                 //Si on est toujours sur la même tile et qu'on l'a cassé
             {
                 tilemap.SetTile(tilePos, null);
                 GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
             }
         }
-        else
+        else                                                                                            //Si on a relâché le clic, on reset le cassage de tile
         {
             if (tilemap.GetTile(memTile))
                 tilemap.SetColor(memTile, new Color(1, 1, 1, 1));
             timerBreakTile = 0;
             memTile = new Vector3Int();
         }
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))                                                                    //Clic droit
         {
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);

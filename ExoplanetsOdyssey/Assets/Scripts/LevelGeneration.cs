@@ -5,28 +5,28 @@ using UnityEngine.Tilemaps;
 
 public class LevelGeneration : MonoBehaviour {
 
-    private System.Random rand;
     public int worldWidth;
     public int worldHeight;
-    private int maxSurface;
-
     public List<Palette> tilesList;
     public Tilemap tiles;
     public string worldseed;
-    
-    int[,] mapBase;
-    GameObject GM;
-    GameObject player;
-    string planetType;
+    public GameObject player;
+
+    private int maxSurface;
+    private System.Random rand;
+    private int[,] mapBase;
+    private GameObject GM;
+    private string planetType;
+
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         rand = new System.Random(worldseed.GetHashCode());
         GM = GameObject.FindGameObjectWithTag("GameManager");
         planetType = GM.GetComponent<Parameters>().planetType;
         worldseed = GM.GetComponent<Parameters>().actualPlanet;
         TileMapGen();
-        player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
+        if(player)
+            player.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
         Camera.main.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
     }
 
@@ -41,7 +41,8 @@ public class LevelGeneration : MonoBehaviour {
 
         return null;
     }
-public void RenderMap(int[,] map, Tilemap tilemap)
+
+    public void RenderMap(int[,] map, Tilemap tilemap)
     {
         //Clear the map (ensures we dont overlap)
         tilemap.ClearAllTiles();
@@ -75,15 +76,15 @@ public void RenderMap(int[,] map, Tilemap tilemap)
 
         string[] lines = new string[map.GetUpperBound(0)];
         int currentid = 0;
-        for (int x = 0; x < map.GetUpperBound(0); x++)
+        for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
             string line = "";
             //Loop through the height of the map
-            for (int y = 0; y < map.GetUpperBound(1)-1; y++)
+            for (int y = 0; y < map.GetUpperBound(1); y++)
             {
                 line += map[x, y] + ";";
             }
-            line += map[x, map.GetUpperBound(1) - 2];
+            line += map[x, map.GetUpperBound(1)];
             lines[currentid] = line;
             currentid++;
         }
@@ -119,30 +120,23 @@ public void RenderMap(int[,] map, Tilemap tilemap)
         return map;
     }
 
-    public static int[,] GenerateArray(int width, int height, bool empty)
+    public static int[,] GenerateArray(int width, int height, int tile)
     {
         int[,] map = new int[width, height];
-        for (int x = 0; x < map.GetUpperBound(0); x++)
+        for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
-            for (int y = 0; y < map.GetUpperBound(1); y++)
+            for (int y = 0; y <= map.GetUpperBound(1); y++)
             {
-                if (empty)
-                {
-                    map[x, y] = 0;
-                }
-                else
-                {
-                    map[x, y] = 1;
-                }
+                map[x, y] = tile;
             }
         }
         return map;
     }
     public void SetRessourcesInMap(int[,] map,int chance) {
 
-        for (int x = 0; x < map.GetUpperBound(0); x++)
+        for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
-            for (int y = 0; y < map.GetUpperBound(1); y++)
+            for (int y = 0; y <= map.GetUpperBound(1); y++)
             {
                 int memChance = chance;
                 if (map[x, y] == -1)
@@ -164,12 +158,10 @@ public void RenderMap(int[,] map, Tilemap tilemap)
     {
 
         int [,] map2 = new int[map.GetUpperBound(0)+1,map.GetUpperBound(1)+1];
-        for (int i = 0; i <= map.GetUpperBound(0); i++)
+        for (int i = 0; i <= map.GetUpperBound(0); i++)                             //Deep copy de la map
         {
             for (int i2 = 0; i2 <= map.GetUpperBound(1); i2++)
-            {
                 map2[i, i2] = map[i, i2];
-            }
         }
         for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
@@ -199,7 +191,7 @@ public void RenderMap(int[,] map, Tilemap tilemap)
         }
         return map2;
     }
-    public int[,] RandomWalkTopSmoothed(int[,] map, int minSectionWidth, int maxSectionWidth)
+    public void RandomWalkTopSmoothed(int[,] map, int minSectionWidth, int maxSectionWidth)
     {
         //Determine the start position
         int lastHeight = rand.Next(map.GetUpperBound(1) / 2) + map.GetUpperBound(1) / 2;
@@ -233,10 +225,6 @@ public void RenderMap(int[,] map, Tilemap tilemap)
             }
             x += sectionWidth;
         }
-
-
-        //Return the modified map
-        return map;
     }
 
     public void RenderOldChanges()
@@ -268,19 +256,10 @@ public void RenderMap(int[,] map, Tilemap tilemap)
 
     float factorielle(int n)
     {
-        if (n == 0)
-        {
-            return 1;
-        }
-        else
-        {
-            int resultat = 1;
-            for (int i = 1; i <= n; i++)
-            {
-                resultat = resultat * i;
-            }
-            return resultat;
-        }
+        int resultat = 1;
+        for (int i = 2; i <= n; i++)
+            resultat = resultat * i;
+        return resultat;
     }
 
     float calculCoeff(int i, int n, float t)
@@ -291,11 +270,10 @@ public void RenderMap(int[,] map, Tilemap tilemap)
 
     public void GenerateCave(int[,] map, Vector2 ptStart, int chance)
     {
-
         List<Vector2> TabcontrolPoint = new List<Vector2>();
-        int nbControlPoint = 3;
+        int nbControlPoint = 3;                                                          //3 points générés + point de départ = 4 points de contrôle
         TabcontrolPoint.Add(ptStart);
-        float minX=9999999, maxX=-1, minY=9999999, maxY=-1;
+        float minX=9999999, maxX=-1, minY=9999999, maxY=-1;                             //Pour calculer la distance 4 entre les deux points les plus éloignés (pour pas générer trop de points)
         for (int i = 0; i < nbControlPoint; i++)
         {
             Vector2 v = new Vector2(rand.Next(worldWidth), rand.Next(maxSurface));
@@ -305,9 +283,9 @@ public void RenderMap(int[,] map, Tilemap tilemap)
             if (v.y > maxY) maxY = v.y;
             if (v.y < minY) minY = v.y;
         }
-        int nbPoints = (int)((maxY - minY + maxX - minX)/1.5);
+        int nbPoints = (int)(maxY - minY + maxX - minX);
         Vector2[] tab = new Vector2[nbPoints];
-        for (int i = 0; i < nbPoints; i++)
+        for (int i = 0; i < nbPoints; i++)                                              //Calcul des coordonnées de chacuns des points de la courbe de Bézier
         {
             float u = (float)(i) / (float)(nbPoints);
             float x = 0, y = 0;
@@ -317,12 +295,12 @@ public void RenderMap(int[,] map, Tilemap tilemap)
                 y += calculCoeff(i2, TabcontrolPoint.Count - 1, u) * TabcontrolPoint[i2].y;
             }
             tab[i] = new Vector2(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
-            if (rand.Next(nbPoints*20) < chance)
+            if (rand.Next(nbPoints*20) < chance)                                        //On génère une nouvelle courbe par récursivité pour créer des branchements au tunel
             {
                 GenerateCave(map, tab[i], chance - 5);
             }
         }
-        foreach (Vector2 v in tab)
+        foreach (Vector2 v in tab)                                                      //Pour chaque points de la courbe, on enlève les voisins dans une certaine range
         {
             int range = rand.Next(1, 4);
             for (int x = -1*range - 1; x <= range; x++)
@@ -331,7 +309,7 @@ public void RenderMap(int[,] map, Tilemap tilemap)
                 {
                     if (v.x + x >= 0 && v.x + x <= map.GetUpperBound(0) && v.y + y >= 0 && v.y + y <= map.GetUpperBound(1))
                     {
-                        if(x == -1 * range - 1 || x == range || y == -1 * range - 1 || y == range)
+                        if(x == -1 * range - 1 || x == range || y == -1 * range - 1 || y == range)  //Si l'une de ces tiles est un mur, on lui attribu une valeur différente pour que ce mur ai plus de chance de générer des ressources.
                         {
                             if(map[(int)v.x + x, (int)v.y + y] == 1)
                                 map[(int)v.x + x, (int)v.y + y] = -1;
@@ -348,19 +326,14 @@ public void RenderMap(int[,] map, Tilemap tilemap)
 
     public void TileMapGen()
     {
-        mapBase = GenerateArray(worldWidth, worldHeight, true);
-        mapBase = RandomWalkTopSmoothed(mapBase, 4, 10);
+        mapBase = GenerateArray(worldWidth, worldHeight, 0);
+        RandomWalkTopSmoothed(mapBase, 4, 10);
         GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), maxSurface), 20);
         SetRessourcesInMap(mapBase, 1);
         mapBase = SpreadRessourcesInMap(mapBase);
         RenderMap(mapBase, tiles);
         UpdateMap(mapBase, tiles);
         RenderOldChanges();
-    }
-
-    private void Update()
-    {
-
     }
 
     public static void UpdateMap(int[,] map, Tilemap tilemap) //Takes in our map and tilemap, setting null tiles where needed

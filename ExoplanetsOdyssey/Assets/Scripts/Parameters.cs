@@ -12,7 +12,7 @@ public class Parameters : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        if (Instance == false)
+        if (!Instance)
         {
             Instance = this;
             DontDestroyOnLoad(this);
@@ -21,8 +21,6 @@ public class Parameters : MonoBehaviour {
         {
             Destroy(this);
         }
-
-
     }
 
 }

@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
 
-	Rigidbody2D rb;
+	public Rigidbody2D rb;
 	public float speed = 10.0f;
 	bool facingRight = true;
-
-
-	// Use this for initialization
-	void Start () {
-		rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-	}
-	
+    
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		float move = Input.GetAxis("Horizontal");
 		rb.velocity = new Vector2 (speed * move, rb.velocity.y);
 
@@ -32,11 +26,8 @@ public class PlayerMove : MonoBehaviour {
 	void Flip()
 	{
 		facingRight = !facingRight;
-
 		Vector3 scale = transform.localScale;
-
 		scale.x *= -1;
-
 		transform.localScale = scale;
 	}
 	

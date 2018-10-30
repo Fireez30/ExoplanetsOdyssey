@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour {
 
-	Rigidbody2D rb;
+	public Rigidbody2D rb;
 
 	[Range(1,10)]
 	public float jumpVelocity;
 	public float fallMult = 2.5f;
 	public float lowMult = 2f;
-
-	// Use this for initialization
-	void Start () {
-		rb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-	}
-	
+    
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		if( Input.GetButtonDown("Jump") && rb.velocity.y == 0 ) 
 		{
@@ -26,11 +21,11 @@ public class PlayerJump : MonoBehaviour {
 
 		if( rb.velocity.y < 0 )
 		{
-			rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMult - 1) * Time.deltaTime; 
+			rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMult - 1) * Time.fixedDeltaTime; 
 		}
 		else if( rb.velocity.y > 0 && !Input.GetButton("Jump") )
 		{
-			rb.velocity += Vector2.up * Physics2D.gravity.y * (lowMult - 1) * Time.deltaTime; 
+			rb.velocity += Vector2.up * Physics2D.gravity.y * (lowMult - 1) * Time.fixedDeltaTime; 
 		}
 	}
 }
