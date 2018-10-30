@@ -124,6 +124,8 @@ GameObject:
   - component: {fileID: 396126510}
   - component: {fileID: 396126509}
   - component: {fileID: 396126508}
+  - component: {fileID: 396126513}
+  - component: {fileID: 396126512}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -235,6 +237,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &396126512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 396126507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155a02b827e9e22419edf0d8c204c530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+--- !u!114 &396126513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 396126507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b977f7cacebf349bc113d190726c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpVelocity: 6.04
+  fallMult: 2.5
+  lowMult: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
