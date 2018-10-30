@@ -348,17 +348,6 @@ public void RenderMap(int[,] map, Tilemap tilemap)
 
     public void TileMapGen()
     {
-<<<<<<< HEAD
-            mapBase = GenerateArray(worldWidth, worldHeight, true);
-            mapBase = RandomWalkTopSmoothed(mapBase, 4, 10);
-            GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), minSurface + 5), 20);
-            SetRessourcesInMap(mapBase, 1);
-            mapBase = SpreadRessourcesInMap(mapBase);
-            RenderMap(mapBase, tiles);
-            UpdateMap(mapBase, tiles);
-            RenderOldChanges();
-       
-=======
         mapBase = GenerateArray(worldWidth, worldHeight, true);
         mapBase = RandomWalkTopSmoothed(mapBase, 4, 10);
         GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), maxSurface), 20);
@@ -367,8 +356,6 @@ public void RenderMap(int[,] map, Tilemap tilemap)
         RenderMap(mapBase, tiles);
         UpdateMap(mapBase, tiles);
         RenderOldChanges();
-
->>>>>>> 34cb2623506c69ef506f01166a91449851551775
     }
 
     private void Update()
