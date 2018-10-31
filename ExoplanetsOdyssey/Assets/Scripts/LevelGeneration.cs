@@ -254,6 +254,14 @@ public class LevelGeneration : MonoBehaviour {
         }
     }
 
+    public void GenerateUnbreakableTiles()
+    {
+        for (int i = 0; i <= mapBase.GetUpperBound(0); i++)
+        {
+            tiles.SetTile(new Vector3Int(i, 0, 0), getTileFromPalette(planetType, 3));
+        }
+    }
+
     float factorielle(int n)
     {
         int resultat = 1;
@@ -334,6 +342,7 @@ public class LevelGeneration : MonoBehaviour {
         RenderMap(mapBase, tiles);
         UpdateMap(mapBase, tiles);
         RenderOldChanges();
+        GenerateUnbreakableTiles();
     }
 
     public static void UpdateMap(int[,] map, Tilemap tilemap) //Takes in our map and tilemap, setting null tiles where needed

@@ -408,6 +408,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
     - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
     - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
+    - {fileID: 11400000, guid: aec06497cee8a6642a33137ef12ad22b, type: 2}
   tiles: {fileID: 1738558514}
   worldseed: poihg
   player: {fileID: 396126507}
@@ -868,6 +869,8 @@ MonoBehaviour:
   tileList:
   - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
   - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
+  - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
+  - {fileID: 11400000, guid: aec06497cee8a6642a33137ef12ad22b, type: 2}
   currentIndex: 0
 --- !u!4 &1781128671
 Transform:
