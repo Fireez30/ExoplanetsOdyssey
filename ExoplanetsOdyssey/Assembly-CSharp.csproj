@@ -118,6 +118,7 @@
      <Compile Include="Assets\Scripts\LevelGeneration.cs" />
      <Compile Include="Assets\Scripts\Parameters.cs" />
      <Compile Include="Assets\Scripts\PlanetModificationsSaver.cs" />
+     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
      <Compile Include="Assets\Scripts\PlayerJump.cs" />
      <Compile Include="Assets\Scripts\PlayerMove.cs" />
      <Compile Include="Assets\Scripts\Spaceship_Planet.cs" />

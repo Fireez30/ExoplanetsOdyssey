@@ -10,6 +10,8 @@ public class TileModif : MonoBehaviour {
     public List<TileBase> tileList;
     public int currentIndex;
 
+    public GameObject player;
+
     GameObject GM;
     private Vector3Int memTile;
     private float timerBreakTile;
@@ -59,6 +61,18 @@ public class TileModif : MonoBehaviour {
                 }
                 else if (timerBreakTile >= timeBreak && tilePos == memTile && timeBreak != -1)                 //Si on est toujours sur la même tile et qu'on l'a cassé
                 {
+                    TileBase actual = tilemap.GetTile(tilePos);
+                    for (int i = 0; i < tileList.Count; i++)
+                        if (tileList[i].Equals(actual))
+                        {
+                            if (i == 1)
+                                player.GetComponent<PlayerInventory>().fuelAmount++;
+                            else if (i == 2)
+                                player.GetComponent<PlayerInventory>().ironAmount++;
+                            else
+                                player.GetComponent<PlayerInventory>().tileAmounts[i]++;
+                        }
+
                     tilemap.SetTile(tilePos, null);
                     GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
                 }
@@ -77,9 +91,10 @@ public class TileModif : MonoBehaviour {
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             Vector3Int tilePos = tilemap.WorldToCell(screenPos);
 
-            if (!tilemap.GetTile(tilePos))
+            if (!tilemap.GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 && tilePos != tilemap.WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))
             {
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
+                player.GetComponent<PlayerInventory>().tileAmounts[currentIndex]--;
                 GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
             }
         }
@@ -109,6 +124,7 @@ public class TileModif : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R))
         {
             GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
+            player.GetComponent<PlayerInventory>().computeChangesToFile();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
