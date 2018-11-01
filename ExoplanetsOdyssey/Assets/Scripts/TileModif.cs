@@ -34,8 +34,6 @@ public class TileModif : MonoBehaviour {
             float timeBreak = -1;                                                                       //Temps nécessaire pour casser une tile
             TileBase tile = tilemap.GetTile(tilePos);
 
-            if (!tile.Equals(tileList[3]))
-            {
                 if (tile)                                                                                   //S'il y a bien une tile à la position de la souris, on modifie le temps nécessaire pour la casser en fonction de son type
                 {
                     string nameTile = tile.name;
@@ -76,7 +74,6 @@ public class TileModif : MonoBehaviour {
                     tilemap.SetTile(tilePos, null);
                     GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
                 }
-            }
         }
         else                                                                                            //Si on a relâché le clic, on reset le cassage de tile
         {
