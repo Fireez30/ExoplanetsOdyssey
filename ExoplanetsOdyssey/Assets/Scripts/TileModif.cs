@@ -13,6 +13,7 @@ public class TileModif : MonoBehaviour {
     public GameObject player;
 
     GameObject GM;
+    public GameObject planetManager;
     private Vector3Int memTile;
     private float timerBreakTile;
 
@@ -72,7 +73,7 @@ public class TileModif : MonoBehaviour {
                         }
 
                     tilemap.SetTile(tilePos, null);
-                    GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
+                    GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
                 }
         }
         else                                                                                            //Si on a relâché le clic, on reset le cassage de tile
@@ -92,7 +93,7 @@ public class TileModif : MonoBehaviour {
             {
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
                 player.GetComponent<PlayerInventory>().tileAmounts[currentIndex]--;
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(GM.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
             }
         }
 
