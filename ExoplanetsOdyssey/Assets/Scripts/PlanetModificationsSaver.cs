@@ -33,7 +33,7 @@ public class PlanetModificationsSaver : MonoBehaviour {
 
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + actualSeed + ".plnt"))
         {
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + actualSeed + ".plnt");
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + actualSeed + ".plnt").Close();
 
         }
 

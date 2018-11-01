@@ -121,6 +121,7 @@
      <Compile Include="Assets\Scripts\PlayerInventory.cs" />
      <Compile Include="Assets\Scripts\PlayerJump.cs" />
      <Compile Include="Assets\Scripts\PlayerMove.cs" />
+     <Compile Include="Assets\Scripts\ShipInventory.cs" />
      <Compile Include="Assets\Scripts\Spaceship_Planet.cs" />
      <Compile Include="Assets\Scripts\TileModif.cs" />
      <None Include="Assets\Packages\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />

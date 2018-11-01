@@ -19,10 +19,11 @@ public class PlayerInventory : MonoBehaviour {
         oxygenAmount = 0;
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/player.save"))
         {
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/player.save");
-            string[] baseQuantity = new string[2];
-            baseQuantity[0] = "0;0;0";
-            baseQuantity[1] = "0;0;0;0";
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/player.save").Close();
+            string[] baseQuantity = new string[3];
+            baseQuantity[0] = "0;0;0";//fuel, iron , playeroxygen
+            baseQuantity[1] = "0;0;0;0";//tiles (not useful for this script)
+            baseQuantity[2] = "0;100;100;100";//shipoxygen, engine tank and oxygen State
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", baseQuantity);
         }
         else
@@ -44,11 +45,12 @@ public class PlayerInventory : MonoBehaviour {
 	
 	public void computeChangesToFile()
     {
-        string[] tmp = new string[2];
-        tmp[0] = fuelAmount+";"+ironAmount+";"+oxygenAmount;
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/player.save");
+        lines[0] = fuelAmount+";"+ironAmount+";"+oxygenAmount;
+        lines[1] = "";
         for (int i = 0; i < tileAmounts.Count-1; i++)
-            tmp[1] += tileAmounts[i]+";";
-        tmp[1] += tileAmounts[tileAmounts.Count - 1];
-        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", tmp);
+            lines[1] += tileAmounts[i]+";";
+        lines[1] += tileAmounts[tileAmounts.Count - 1];
+        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", lines);
     }
 }

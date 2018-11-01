@@ -72,7 +72,7 @@ public class LevelGeneration : MonoBehaviour {
     public void writeMap(int [,] map)
     {
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn"))
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn");
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn").Close();
 
         string[] lines = new string[map.GetUpperBound(0)];
         int currentid = 0;
@@ -231,7 +231,7 @@ public class LevelGeneration : MonoBehaviour {
     {
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt"))
         {
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt");
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt").Close();
         }
 
         string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt");
