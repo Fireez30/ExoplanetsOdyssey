@@ -30,6 +30,20 @@ public class LevelGeneration : MonoBehaviour {
         Camera.main.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
     }
 
+    void Update ()
+    {
+        Vector3 playPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        Vector3 screenPos = Camera.main.ScreenToWorldPoint(playPos);
+        Vector3Int tilePos = tiles.WorldToCell(screenPos);
+
+
+        if (tilePos.x > tiles.cellBounds.xMax)
+        {
+            tiles = Instantiate(tiles, new Vector3(tiles.cellBounds.xMax, 0, 0), new Quaternion(0, 0, 0, 0), tiles.transform);
+
+        }
+    }
+
     public TileBase getTileFromPalette(string ptype,int index)
     {
         foreach (Palette p in tilesList)
