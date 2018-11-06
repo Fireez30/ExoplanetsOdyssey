@@ -42,7 +42,7 @@ public class TilesLevelGeneration : MonoBehaviour {
         Camera.main.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
     }
 
-    void Update()
+    /*void Update()
     {
         Vector3 playPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         Vector3 screenPos = Camera.main.ScreenToWorldPoint(playPos);
@@ -54,7 +54,7 @@ public class TilesLevelGeneration : MonoBehaviour {
             tiles = Instantiate(tiles, tiles.CellToWorld(new Vector3Int(tiles.cellBounds.xMax, 0, 0)), Quaternion.identity);
 
         }
-    }
+    }*/
 
     public TileBase getTileFromPalette(string ptype, int index)
     {

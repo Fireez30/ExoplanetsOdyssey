@@ -8,11 +8,10 @@ public class TilesThoricModifs : MonoBehaviour
 {
 
     public Tilemap tilemap;
-    Tilemap leftCopy;
-    Tilemap rightCopy;
+    Tilemap[] maps;
+    int mapsIndex;
     public List<TileBase> tileList;
     public int currentIndex;
-    Tilemap Actual;
     public GameObject player;
 
     GameObject GM;
@@ -24,21 +23,24 @@ public class TilesThoricModifs : MonoBehaviour
     {
         GM = GameObject.FindGameObjectWithTag("GameManager");
         memTile = new Vector3Int();
+        maps = new Tilemap[3];
+        mapsIndex = 0;
         timerBreakTile = 0;
     }
 
     void Start()
     {
+        maps[0] = tilemap;
         Tilemap[] t = GameObject.FindObjectsOfType<Tilemap>();
         for (int i = 0; i < t.Length; i++)
         {
             if (t[i].name.Equals("left"))
             {
-                leftCopy = t[i];
+                maps[1] = t[i];
             }
             else if (!(t[i] == tilemap))
             {
-                rightCopy = t[i];
+                maps[2] = t[i];
             }
         }
 
@@ -46,26 +48,26 @@ public class TilesThoricModifs : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.transform.position.x < -planetManager.GetComponent<TilesLevelGeneration>().worldWidth && Actual != leftCopy)
+        if (player.transform.position.x < -planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 1)
         {
-            Actual = leftCopy;
+            mapsIndex = 1;
         }
-        else if (player.transform.position.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && Actual != rightCopy)
+        else if (player.transform.position.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
         {
-            Actual = rightCopy;
+            mapsIndex = 2;
         }
-        else if (Actual != tilemap)
+        else if (mapsIndex != 0)
         {
-            Actual = tilemap;
+            mapsIndex = 0;
         }
 
         if (Input.GetMouseButton(0))                                                                    //Clic gauche
         {
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-            Vector3Int tilePos = Actual.WorldToCell(screenPos);                                        //Récupère la position dans la tilemap de la tile où est la souris
+            Vector3Int tilePos = maps[mapsIndex].WorldToCell(screenPos);                                        //Récupère la position dans la tilemap de la tile où est la souris
             float timeBreak = -1;                                                                       //Temps nécessaire pour casser une tile
-            TileBase tile = Actual.GetTile(tilePos);
+            TileBase tile = maps[mapsIndex].GetTile(tilePos);
 
             if (tile)                                                                                   //S'il y a bien une tile à la position de la souris, on modifie le temps nécessaire pour la casser en fonction de son type
             {
@@ -80,19 +82,19 @@ public class TilesThoricModifs : MonoBehaviour
             }
             if (tilePos != memTile && timeBreak != -1)                                                    //Si la souris est plus sur la même tiles, on reset le cassage de tile
             {
-                if (Actual.GetTile(memTile))
-                    Actual.SetColor(memTile, new Color(1, 1, 1, 1));
+                if (maps[mapsIndex].GetTile(memTile))
+                    maps[mapsIndex].SetColor(memTile, new Color(1, 1, 1, 1));
                 timerBreakTile = 0;
                 memTile = tilePos;
             }
             else if (tilePos == memTile && timeBreak != -1 && timerBreakTile < timeBreak)                  //Si la souris est sur la même tile mais pas depuis assez longtemps pour la casser, on change l'opacité de la tile
             {
                 timerBreakTile += Time.fixedDeltaTime;
-                Actual.SetColor(tilePos, new Color(1, 1, 1, 1 - (timerBreakTile) / timeBreak));
+                maps[mapsIndex].SetColor(tilePos, new Color(1, 1, 1, 1 - (timerBreakTile) / timeBreak));
             }
             else if (timerBreakTile >= timeBreak && tilePos == memTile && timeBreak != -1)                 //Si on est toujours sur la même tile et qu'on l'a cassé
             {
-                TileBase actual = Actual.GetTile(tilePos);
+                TileBase actual = maps[mapsIndex].GetTile(tilePos);
                 for (int i = 0; i < tileList.Count; i++)
                     if (tileList[i].Equals(actual))
                     {
@@ -105,15 +107,15 @@ public class TilesThoricModifs : MonoBehaviour
                     }
 
                 tilemap.SetTile(tilePos, null);
-                rightCopy.SetTile(tilePos, null);
-                leftCopy.SetTile(tilePos, null);
+                maps[1].SetTile(tilePos, null);
+                maps[2].SetTile(tilePos, null);
                 GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
             }
         }
         else                                                                                            //Si on a relâché le clic, on reset le cassage de tile
         {
-            if (tilemap.GetTile(memTile))
-                tilemap.SetColor(memTile, new Color(1, 1, 1, 1));
+            if (maps[mapsIndex].GetTile(memTile))
+                maps[mapsIndex].SetColor(memTile, new Color(1, 1, 1, 1));
             timerBreakTile = 0;
             memTile = new Vector3Int();
         }
@@ -121,13 +123,13 @@ public class TilesThoricModifs : MonoBehaviour
         {
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-            Vector3Int tilePos = tilemap.WorldToCell(screenPos);
+            Vector3Int tilePos = maps[mapsIndex].WorldToCell(screenPos);
 
-            if (!tilemap.GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 && tilePos != tilemap.WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))
+            if (!maps[mapsIndex].GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 && tilePos != maps[mapsIndex].WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))
             {
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
-                leftCopy.SetTile(tilePos, tileList[currentIndex]);
-                rightCopy.SetTile(tilePos, tileList[currentIndex]);
+                maps[1].SetTile(tilePos, tileList[currentIndex]);
+                maps[2].SetTile(tilePos, tileList[currentIndex]);
                 player.GetComponent<PlayerInventory>().tileAmounts[currentIndex]--;
                 GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
             }
