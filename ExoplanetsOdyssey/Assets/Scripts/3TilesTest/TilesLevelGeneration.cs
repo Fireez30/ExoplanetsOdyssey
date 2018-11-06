@@ -34,12 +34,13 @@ public class TilesLevelGeneration : MonoBehaviour {
         TileMapGen();
         if (player)
         {
-            Vector3 worldPos = tiles.CellToWorld(new Vector3Int(tiles.cellBounds.x, tiles.cellBounds.y, 0));
-            player.transform.Translate(worldPos.x/2, worldPos.y, 0);
+            player.transform.Translate(mapBase.GetUpperBound(0) / 2, maxSurface+5, 0);
             leftPlayer.transform.Translate(player.transform.position.x-worldWidth, player.transform.position.y, 0);
             rightPlayer.transform.Translate(player.transform.position.x + worldWidth, player.transform.position.y, 0);
         }
-        Camera.main.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
+        Debug.Log(maxSurface);
+        Debug.Log(player.transform.position.x + " / " + player.transform.position.y);
+        Camera.main.transform.Translate(player.transform.position.x, player.transform.position.y,0);
     }
 
     /*void Update()

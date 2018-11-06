@@ -565,7 +565,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1150747471}
-  - component: {fileID: 1150747470}
   - component: {fileID: 1150747472}
   m_Layer: 0
   m_Name: Script planete
@@ -574,29 +573,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1150747470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1150747469}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19418ecbf70e8a442a738198abd6d6d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  worldWidth: 200
-  worldHeight: 200
-  tilesList:
-  - type: classic
-    Alltiles:
-    - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
-    - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
-    - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
-    - {fileID: 11400000, guid: aec06497cee8a6642a33137ef12ad22b, type: 2}
-  tiles: {fileID: 1738558514}
-  worldseed: poihg
-  player: {fileID: 396126507}
 --- !u!4 &1150747471
 Transform:
   m_ObjectHideFlags: 0
@@ -633,7 +609,7 @@ MonoBehaviour:
   transparent: {fileID: 11400000, guid: 0b3d87484232bed47ace6bce963ee887, type: 2}
   parent: {fileID: 1603097453}
   tiles: {fileID: 1738558514}
-  worldseed: oihg
+  worldseed: bad seed
   player: {fileID: 396126507}
   leftPlayer: {fileID: 493730755}
   rightPlayer: {fileID: 1334438768}

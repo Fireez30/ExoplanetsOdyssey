@@ -26,8 +26,8 @@ public class LevelGeneration : MonoBehaviour {
         worldseed = GM.GetComponent<Parameters>().actualPlanet;
         TileMapGen();
         if(player)
-            player.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
-        Camera.main.transform.Translate(mapBase.GetUpperBound(0) / 2, mapBase.GetUpperBound(1) + 1, 0);
+            player.transform.Translate(mapBase.GetUpperBound(0) / 2, maxSurface + 5, 0);
+        Camera.main.transform.Translate(player.transform.position.x, player.transform.position.y,0);
     }
 
     void Update ()
