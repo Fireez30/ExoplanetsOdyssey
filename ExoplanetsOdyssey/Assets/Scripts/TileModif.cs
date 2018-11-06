@@ -9,7 +9,6 @@ public class TileModif : MonoBehaviour {
     public Tilemap tilemap;
     public List<TileBase> tileList;
     public int currentIndex;
-
     public GameObject player;
 
     GameObject GM;
@@ -49,14 +48,14 @@ public class TileModif : MonoBehaviour {
                 if (tilePos != memTile && timeBreak != -1)                                                    //Si la souris est plus sur la même tiles, on reset le cassage de tile
                 {
                     if (tilemap.GetTile(memTile))
-                        tilemap.SetColor(memTile, new Color(1, 1, 1, 1));
+                    tilemap.SetColor(memTile, new Color(1, 1, 1, 1));
                     timerBreakTile = 0;
                     memTile = tilePos;
                 }
                 else if (tilePos == memTile && timeBreak != -1 && timerBreakTile < timeBreak)                  //Si la souris est sur la même tile mais pas depuis assez longtemps pour la casser, on change l'opacité de la tile
                 {
                     timerBreakTile += Time.fixedDeltaTime;
-                    tilemap.SetColor(tilePos, new Color(1, 1, 1, 1 - (timerBreakTile) / timeBreak));
+                tilemap.SetColor(tilePos, new Color(1, 1, 1, 1 - (timerBreakTile) / timeBreak));
                 }
                 else if (timerBreakTile >= timeBreak && tilePos == memTile && timeBreak != -1)                 //Si on est toujours sur la même tile et qu'on l'a cassé
                 {

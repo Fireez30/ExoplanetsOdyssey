@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Universe.unity
+- path: Assets/Scenes/WorldMap3TilesTest.unity
   isLoaded: 1
   isActive: 1

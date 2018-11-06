@@ -115,6 +115,8 @@
      <Compile Include="Assets\Packages\Tilemap\Tiles\Rule Tile\Scripts\RuleTile.cs" />
      <Compile Include="Assets\Packages\Tilemap\Tiles\Terrain Tile\Scripts\TerrainTile.cs" />
      <Compile Include="Assets\Packages\Tilemap\Tiles\Weighted Random Tile\WeightedRandomTile.cs" />
+     <Compile Include="Assets\Scripts\3TilesTest\TilesLevelGeneration.cs" />
+     <Compile Include="Assets\Scripts\3TilesTest\TilesThoricModifs.cs" />
      <Compile Include="Assets\Scripts\LevelGeneration.cs" />
      <Compile Include="Assets\Scripts\Parameters.cs" />
      <Compile Include="Assets\Scripts\PlanetModificationsSaver.cs" />
