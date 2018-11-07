@@ -10,7 +10,7 @@ public class LevelGeneration : MonoBehaviour
     public int worldHeight;
     public List<Palette> tilesList;
     public Tilemap tiles;
-    public string worldseed;
+    public int worldseed;
     public GameObject player;
 
     private int maxSurface;
@@ -25,7 +25,7 @@ public class LevelGeneration : MonoBehaviour
         rand = new System.Random(worldseed.GetHashCode());
         GM = GameObject.FindGameObjectWithTag("GameManager");
         planetType = GM.GetComponent<Parameters>().planetType;
-        worldseed = GM.GetComponent<Parameters>().actualPlanet;
+        worldseed = GM.GetComponent<Parameters>().getSeedToGen();
         TileMapGen();
         if (player)
             player.transform.Translate(mapBase.GetUpperBound(0) / 2, maxSurface + 5, 0);

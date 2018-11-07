@@ -46,6 +46,10 @@ public class SystemsGenerator : MonoBehaviour {
                 {
                     Vector3 position = new Vector3(posx, posy, 0);
                     GameObject tmp = Instantiate(starTemplate, position, Quaternion.identity);//instantiate the GameObject
+                    SystemInteraction interaction = tmp.GetComponent<SystemInteraction>();
+                    interaction.setIndex(nbOfSystems-1);
+                    interaction.setGenerator(this);
+
                     float scale = Random.Range(0.8f, 1.2f);//must use a variable because random is ..
                     tmp.transform.localScale = new Vector3(scale * tmp.transform.localScale.x, scale * tmp.transform.localScale.y, 0);//Random scale the gameObject
                     int index = Random.Range(0, starTypes.Count);//must use a variable because random is ..

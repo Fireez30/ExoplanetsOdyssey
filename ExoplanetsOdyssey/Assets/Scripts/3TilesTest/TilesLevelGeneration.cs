@@ -13,7 +13,6 @@ public class TilesLevelGeneration : MonoBehaviour {
     public Tilemap tiles;
     Tilemap leftCopy;
     Tilemap rightCopy;
-    public string worldseed;
     public GameObject player;
     public GameObject leftPlayer;
     public GameObject rightPlayer;
@@ -23,14 +22,20 @@ public class TilesLevelGeneration : MonoBehaviour {
     private int[,] mapBase;
     private GameObject GM;
     private string planetType;
+    private int planeteSeed;
+
+    public int getPlaneteSeed()
+    {
+        return planeteSeed;
+    }
 
     // Use this for initialization
     void Awake()
     {
-        rand = new System.Random(worldseed.GetHashCode());
         GM = GameObject.FindGameObjectWithTag("GameManager");
         planetType = GM.GetComponent<Parameters>().planetType;
-        worldseed = GM.GetComponent<Parameters>().actualPlanet;
+        planeteSeed = GM.GetComponent<Parameters>().getSeedToGen();
+        rand = new System.Random(planeteSeed);
         TileMapGen();
         if (player)
         {
@@ -99,8 +104,8 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     public void writeMap(int[,] map)
     {
-        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn"))
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn").Close();
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn"))
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn").Close();
 
         string[] lines = new string[map.GetUpperBound(0)];
         int currentid = 0;
@@ -117,18 +122,18 @@ public class TilesLevelGeneration : MonoBehaviour {
             currentid++;
         }
 
-        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn", lines);
+        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn", lines);
 
     }
 
     public int[,] loadMap()
     {
-        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn"))
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn"))
             return null;
 
         int[,] map = new int[worldWidth + 2, worldHeight];
 
-        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn");
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn");
 
         for (int i = 0; i < lines.Length; i++)//on update ici les modifications de tile deja existantes
         {
@@ -258,12 +263,12 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     public void RenderOldChanges()
     {
-        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt"))
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt"))
         {
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt").Close();
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt").Close();
         }
 
-        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + worldseed + ".plnt");
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt");
 
         for (int i = 0; i < lines.Length; i++)
         {
@@ -372,15 +377,15 @@ public class TilesLevelGeneration : MonoBehaviour {
         UpdateMap(mapBase, tiles);
         RenderOldChanges();
         GenerateUnbreakableTiles();
-        rightCopy = Instantiate(tiles,new Vector3(worldWidth-1,0 , 0), Quaternion.identity,parent.transform);
-        leftCopy = Instantiate(tiles, new Vector3(-worldWidth+1, 0, 0), Quaternion.identity, parent.transform);
+        rightCopy = Instantiate(tiles,new Vector3(worldWidth+10,0 , 0), Quaternion.identity,parent.transform);
+        leftCopy = Instantiate(tiles, new Vector3(-worldWidth, 0, 0), Quaternion.identity, parent.transform);
         leftCopy.name = "left";
-        for (int i = 0; i < rightCopy.cellBounds.yMax; i++)
+        for (int i = 0; i <= rightCopy.cellBounds.yMax; i++)
         {
             rightCopy.SetColor(new Vector3Int(0, i, 0), new Color(0, 0, 0, 0.00000001f));
             rightCopy.SetColliderType(new Vector3Int(0, i, 0), Tile.ColliderType.None);
         }
-        for (int i = 0; i < leftCopy.cellBounds.yMax; i++)
+        for (int i = 0; i <= leftCopy.cellBounds.yMax; i++)
         {
             leftCopy.SetColor(new Vector3Int(leftCopy.cellBounds.xMax, i, 0), new Color(0, 0, 0, 0.0000001f));
             leftCopy.SetColliderType(new Vector3Int(leftCopy.cellBounds.xMax, i, 0), Tile.ColliderType.None);

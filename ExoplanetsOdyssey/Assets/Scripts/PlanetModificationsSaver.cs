@@ -5,24 +5,17 @@ using UnityEngine.Tilemaps;
 
 public class PlanetModificationsSaver : MonoBehaviour {
 
-    public Dictionary<string,List<TileChange>> visitedPlanets;
-    string actualSeed;
+    public Dictionary<int,List<TileChange>> visitedPlanets;
+    int actualSeed;
 	// Use this for initialization
 
 	void Awake () {
-        visitedPlanets = new Dictionary<string, List<TileChange>>();
+        visitedPlanets = new Dictionary<int, List<TileChange>>();
 	}
 
      void Start()
     {
-        actualSeed = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().actualPlanet;
-    }
-    void FixedUpdate()
-    {
-        foreach (string key in visitedPlanets.Keys)
-        {
-            Debug.Log("planete : " + key + " nombre d'elements : " + visitedPlanets[key].Count);
-        }
+        actualSeed = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().getSeedToGen();
     }
 
 
@@ -78,7 +71,7 @@ public class PlanetModificationsSaver : MonoBehaviour {
         visitedPlanets.Clear();
     }
 
-    public void AddModification(string seed, string planetType,int index, int xcord, int ycord)
+    public void AddModification(int seed, string planetType,int index, int xcord, int ycord)
     {
         if (actualSeed != seed)
             actualSeed = seed;

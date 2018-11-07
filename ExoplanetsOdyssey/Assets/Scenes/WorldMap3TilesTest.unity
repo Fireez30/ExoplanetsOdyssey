@@ -862,7 +862,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1261,8 +1261,9 @@ MonoBehaviour:
   - {fileID: 1215554431}
   MainCamera: {fileID: 519420028}
   player: {fileID: 396126507}
-  worldWidht: 200
-  worldHeight: 200
+  worldWidht: 100
+  worldHeight: 100
+  currentPlayer: 0
 --- !u!4 &1150747471
 Transform:
   m_ObjectHideFlags: 0
@@ -1287,8 +1288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c076873fec43610418eebc345e0c99a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldWidth: 200
-  worldHeight: 200
+  worldWidth: 100
+  worldHeight: 100
   tilesList:
   - type: classic
     Alltiles:
@@ -1299,7 +1300,7 @@ MonoBehaviour:
   transparent: {fileID: 11400000, guid: 0b3d87484232bed47ace6bce963ee887, type: 2}
   parent: {fileID: 1603097453}
   tiles: {fileID: 1738558514}
-  worldseed: ;;;;;
+  worldseed: Bonjours debug moi stp
   player: {fileID: 396126507}
   leftPlayer: {fileID: 493730755}
   rightPlayer: {fileID: 1334438768}
@@ -2170,7 +2171,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1781128671}
-  - component: {fileID: 1781128670}
   - component: {fileID: 1781128673}
   - component: {fileID: 1781128674}
   - component: {fileID: 1781128672}
@@ -2181,26 +2181,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1781128670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1781128669}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea59dca8a0814964ab5e34aa1264658e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilemap: {fileID: 1738558514}
-  tileList:
-  - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
-  - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
-  - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
-  - {fileID: 11400000, guid: aec06497cee8a6642a33137ef12ad22b, type: 2}
-  currentIndex: 0
-  player: {fileID: 396126507}
-  planetManager: {fileID: 1150747469}
 --- !u!4 &1781128671
 Transform:
   m_ObjectHideFlags: 0
@@ -2257,7 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ed64e329419bd4cac7afe7af405b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualPlanet: 254562
+  actualPlanet: Bonjour je suis une nouvelle seed
   planetType: classic
 --- !u!1 &1814395651
 GameObject:

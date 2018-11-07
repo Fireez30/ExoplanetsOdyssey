@@ -127,7 +127,7 @@ public class TilesThoricModifs : MonoBehaviour
                 tilemap.SetTile(tilePos, null);
                 maps[1].SetTile(tilePos, null);
                 maps[2].SetTile(tilePos, null);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
             }
         }
         else                                                                                            //Si on a relâché le clic, on reset le cassage de tile
@@ -148,7 +148,7 @@ public class TilesThoricModifs : MonoBehaviour
                 maps[2].SetTile(tilePos, tileList[currentIndex]);
                 int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];
                 canvas.UpdateNbTiles(0, nb);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
             }
         }
 
