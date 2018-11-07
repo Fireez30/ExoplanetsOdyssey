@@ -13,6 +13,8 @@ public class TilesThoricModifs : MonoBehaviour
     public List<TileBase> tileList;
     public int currentIndex;
     public GameObject player;
+    public UIScript canvas;
+
 
     GameObject GM;
     public GameObject planetManager;
@@ -48,21 +50,20 @@ public class TilesThoricModifs : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.mousePosition.x < -planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 1)
-        {
-            mapsIndex = 1;
-        }
-        else if (Input.mousePosition.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
-        {
-            mapsIndex = 2;
-        }
-        else if (mapsIndex != 0)
-        {
-            mapsIndex = 0;
-        }
-
         if (Input.GetMouseButton(0))                                                                    //Clic gauche
         {
+            if (Input.mousePosition.x < -planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 1)
+            {
+                mapsIndex = 1;
+            }
+            else if (Input.mousePosition.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
+            {
+                mapsIndex = 2;
+            }
+            else if (mapsIndex != 0)
+            {
+                mapsIndex = 0;
+            }
             Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             Vector3Int tilePos = maps[mapsIndex].WorldToCell(screenPos);                                        //Récupère la position dans la tilemap de la tile où est la souris
@@ -98,12 +99,24 @@ public class TilesThoricModifs : MonoBehaviour
                 for (int i = 0; i < tileList.Count; i++)
                     if (tileList[i].Equals(actual))
                     {
-                        if (i == 1)
-                            player.GetComponent<PlayerInventory>().fuelAmount++;
-                        else if (i == 2)
-                            player.GetComponent<PlayerInventory>().ironAmount++;
-                        else
-                            player.GetComponent<PlayerInventory>().tileAmounts[i]++;
+                        if (tileList[i].Equals(actual))
+                        {
+                            if (i == 1)
+                            {
+                                int nb = ++player.GetComponent<PlayerInventory>().fuelAmount;
+                                canvas.UpdateNbTiles(1, nb);
+                            }
+                            else if (i == 2)
+                            {
+                                int nb = ++player.GetComponent<PlayerInventory>().ironAmount;
+                                canvas.UpdateNbTiles(2, nb);
+                            }
+                            else
+                            {
+                                int nb = ++player.GetComponent<PlayerInventory>().tileAmounts[i];
+                                canvas.UpdateNbTiles(0, nb);
+                            }
+                        }
                     }
 
                 tilemap.SetTile(tilePos, null);

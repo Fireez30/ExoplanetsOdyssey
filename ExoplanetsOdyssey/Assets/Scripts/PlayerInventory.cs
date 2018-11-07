@@ -41,6 +41,18 @@ public class PlayerInventory : MonoBehaviour {
                 tileAmounts[i]=int.Parse(tmp2[i]);
             }
         }
+        GameObject ui = GameObject.Find("Canvas");
+        if (ui)
+        {
+            UIScript canvas = ui.GetComponent<UIScript>();
+            canvas.UpdateNbTiles(0, tileAmounts[0]);
+            canvas.UpdateNbTiles(1, fuelAmount);
+            canvas.UpdateNbTiles(2, ironAmount);
+        }
+        else
+        {
+            Debug.LogError("Aucun canvas trouvé dans la scène de la planète - PlayerInventory line 44");
+        }
     }
 	
 	public void computeChangesToFile()

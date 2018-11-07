@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class LevelGeneration : MonoBehaviour {
+public class LevelGeneration : MonoBehaviour
+{
 
     public int worldWidth;
     public int worldHeight;
@@ -18,19 +19,20 @@ public class LevelGeneration : MonoBehaviour {
     private GameObject GM;
     private string planetType;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake()
+    {
         rand = new System.Random(worldseed.GetHashCode());
         GM = GameObject.FindGameObjectWithTag("GameManager");
         planetType = GM.GetComponent<Parameters>().planetType;
         worldseed = GM.GetComponent<Parameters>().actualPlanet;
         TileMapGen();
-        if(player)
+        if (player)
             player.transform.Translate(mapBase.GetUpperBound(0) / 2, maxSurface + 5, 0);
-        Camera.main.transform.Translate(player.transform.position.x, player.transform.position.y,0);
+        Camera.main.transform.Translate(player.transform.position.x, player.transform.position.y, 0);
     }
 
-    void Update ()
+    void Update()
     {
         Vector3 playPos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         Vector3 screenPos = Camera.main.ScreenToWorldPoint(playPos);
@@ -44,11 +46,12 @@ public class LevelGeneration : MonoBehaviour {
         }
     }
 
-    public TileBase getTileFromPalette(string ptype,int index)
+    public TileBase getTileFromPalette(string ptype, int index)
     {
         foreach (Palette p in tilesList)
         {
-            if (p.type.Equals(ptype)){
+            if (p.type.Equals(ptype))
+            {
                 return p.Alltiles[index];
             }
         }
@@ -69,9 +72,9 @@ public class LevelGeneration : MonoBehaviour {
                 // 1 = tile, 0 = no tile
                 if (map[x, y] == 1)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType,0));
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 0));
                 }
-                else if (map[x,y] == 2)
+                else if (map[x, y] == 2)
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 1));
                 }
@@ -83,7 +86,7 @@ public class LevelGeneration : MonoBehaviour {
         }
     }
 
-    public void writeMap(int [,] map)
+    public void writeMap(int[,] map)
     {
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn"))
             System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + worldseed + ".trn").Close();
@@ -120,12 +123,12 @@ public class LevelGeneration : MonoBehaviour {
         {
             if (!(lines[i].Contains("#")))
             {
-                Debug.Log("display : "+ lines[i]);
+                Debug.Log("display : " + lines[i]);
                 string[] tmp = lines[i].Split(';');
-                Debug.Log("apres split "+tmp[0]);
-                for (int j=0; j < tmp.Length; j++)
+                Debug.Log("apres split " + tmp[0]);
+                for (int j = 0; j < tmp.Length; j++)
                 {
-                    Debug.Log("contenu: "+ int.Parse(tmp[j]));
+                    Debug.Log("contenu: " + int.Parse(tmp[j]));
                     map[i, j] = int.Parse(tmp[j]);
                 }
             }
@@ -146,7 +149,8 @@ public class LevelGeneration : MonoBehaviour {
         }
         return map;
     }
-    public void SetRessourcesInMap(int[,] map,int chance) {
+    public void SetRessourcesInMap(int[,] map, int chance)
+    {
 
         for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
@@ -158,10 +162,10 @@ public class LevelGeneration : MonoBehaviour {
                     chance *= 30;
                     map[x, y] = 1;
                 }
-                if (rand.Next(500) < chance && map[x,y] == 1)
+                if (rand.Next(500) < chance && map[x, y] == 1)
                 {
                     int type = rand.Next(2);
-                    map[x, y] = type+2;
+                    map[x, y] = type + 2;
                 }
                 chance = memChance;
             }
@@ -171,7 +175,7 @@ public class LevelGeneration : MonoBehaviour {
     public int[,] SpreadRessourcesInMap(int[,] map)
     {
 
-        int [,] map2 = new int[map.GetUpperBound(0)+1,map.GetUpperBound(1)+1];
+        int[,] map2 = new int[map.GetUpperBound(0) + 1, map.GetUpperBound(1) + 1];
         for (int i = 0; i <= map.GetUpperBound(0); i++)                             //Deep copy de la map
         {
             for (int i2 = 0; i2 <= map.GetUpperBound(1); i2++)
@@ -186,16 +190,16 @@ public class LevelGeneration : MonoBehaviour {
                 {
                     int newX = x;
                     int newY = y;
-                    int tailleChunck = rand.Next(1,4);
+                    int tailleChunck = rand.Next(1, 4);
                     for (int i = 0; i < tailleChunck; i++)
                     {
                         int dir = rand.Next(4);
                         switch (dir)
                         {
-                            case 0: newX--;break;
-                            case 1: newX++;break;
-                            case 2: newY--;break;
-                            case 3: newY++;break;
+                            case 0: newX--; break;
+                            case 1: newX++; break;
+                            case 2: newY--; break;
+                            case 3: newY++; break;
                         }
                         if (newX > 0 && newY > 0 && newX <= map.GetUpperBound(0) && newY <= map.GetUpperBound(1))
                             map2[newX, newY] = type;
@@ -213,7 +217,7 @@ public class LevelGeneration : MonoBehaviour {
         int x = 0;
 
         //Work through the array width
-        
+
         while (x <= map.GetUpperBound(0))
         {
             //Used to keep track of the current sections width
@@ -230,11 +234,11 @@ public class LevelGeneration : MonoBehaviour {
                 if (lastHeight > maxSurface)
                     maxSurface = lastHeight;
             }
-            for(int i=0; i< sectionWidth; i++)
+            for (int i = 0; i < sectionWidth; i++)
             {
                 for (int y = lastHeight; y >= 0; y--)
                 {
-                    map[x+i, y] = 1;
+                    map[x + i, y] = 1;
                 }
             }
             x += sectionWidth;
@@ -261,9 +265,9 @@ public class LevelGeneration : MonoBehaviour {
                 }
                 else
                 {
-                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0),getTileFromPalette(tmp[2], int.Parse(tmp[3])));
+                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0), getTileFromPalette(tmp[2], int.Parse(tmp[3])));
                 }
-               
+
             }
         }
     }
@@ -295,7 +299,7 @@ public class LevelGeneration : MonoBehaviour {
         List<Vector2> TabcontrolPoint = new List<Vector2>();
         int nbControlPoint = 3;                                                          //3 points générés + point de départ = 4 points de contrôle
         TabcontrolPoint.Add(ptStart);
-        float minX=9999999, maxX=-1, minY=9999999, maxY=-1;                             //Pour calculer la distance 4 entre les deux points les plus éloignés (pour pas générer trop de points)
+        float minX = 9999999, maxX = -1, minY = 9999999, maxY = -1;                             //Pour calculer la distance 4 entre les deux points les plus éloignés (pour pas générer trop de points)
         for (int i = 0; i < nbControlPoint; i++)
         {
             Vector2 v = new Vector2(rand.Next(worldWidth), rand.Next(maxSurface));
@@ -317,7 +321,7 @@ public class LevelGeneration : MonoBehaviour {
                 y += calculCoeff(i2, TabcontrolPoint.Count - 1, u) * TabcontrolPoint[i2].y;
             }
             tab[i] = new Vector2(Mathf.RoundToInt(x), Mathf.RoundToInt(y));
-            if (rand.Next(nbPoints*20) < chance)                                        //On génère une nouvelle courbe par récursivité pour créer des branchements au tunel
+            if (rand.Next(nbPoints * 20) < chance)                                        //On génère une nouvelle courbe par récursivité pour créer des branchements au tunel
             {
                 GenerateCave(map, tab[i], chance - 5);
             }
@@ -325,21 +329,21 @@ public class LevelGeneration : MonoBehaviour {
         foreach (Vector2 v in tab)                                                      //Pour chaque points de la courbe, on enlève les voisins dans une certaine range
         {
             int range = rand.Next(1, 4);
-            for (int x = -1*range - 1; x <= range; x++)
+            for (int x = -1 * range - 1; x <= range; x++)
             {
-                for (int y = -1*range - 1; y <= range; y++)
+                for (int y = -1 * range - 1; y <= range; y++)
                 {
                     if (v.x + x >= 0 && v.x + x <= map.GetUpperBound(0) && v.y + y >= 0 && v.y + y <= map.GetUpperBound(1))
                     {
-                        if(x == -1 * range - 1 || x == range || y == -1 * range - 1 || y == range)  //Si l'une de ces tiles est un mur, on lui attribu une valeur différente pour que ce mur ai plus de chance de générer des ressources.
+                        if (x == -1 * range - 1 || x == range || y == -1 * range - 1 || y == range)  //Si l'une de ces tiles est un mur, on lui attribu une valeur différente pour que ce mur ai plus de chance de générer des ressources.
                         {
-                            if(map[(int)v.x + x, (int)v.y + y] == 1)
+                            if (map[(int)v.x + x, (int)v.y + y] == 1)
                                 map[(int)v.x + x, (int)v.y + y] = -1;
                         }
                         else
                             map[(int)v.x + x, (int)v.y + y] = 0;
                     }
-                    
+
                 }
             }
         }
@@ -360,21 +364,21 @@ public class LevelGeneration : MonoBehaviour {
     }
 
     public static void UpdateMap(int[,] map, Tilemap tilemap) //Takes in our map and tilemap, setting null tiles where needed
+    {
+        for (int x = 0; x < map.GetUpperBound(0); x++)
         {
-            for (int x = 0; x < map.GetUpperBound(0); x++)
+            for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                for (int y = 0; y < map.GetUpperBound(1); y++)
+                //We are only going to update the map, rather than rendering again
+                //This is because it uses less resources to update tiles to null
+                //As opposed to re-drawing every single tile (and collision data)
+                if (map[x, y] == 0)
                 {
-                    //We are only going to update the map, rather than rendering again
-                    //This is because it uses less resources to update tiles to null
-                    //As opposed to re-drawing every single tile (and collision data)
-                    if (map[x, y] == 0)
-                    {
-                        tilemap.SetTile(new Vector3Int(x, y, 0), null);
-                    }
+                    tilemap.SetTile(new Vector3Int(x, y, 0), null);
                 }
             }
         }
+    }
 }
 
 [System.Serializable]
