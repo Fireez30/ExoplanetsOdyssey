@@ -48,11 +48,11 @@ public class TilesThoricModifs : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.transform.position.x < -planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 1)
+        if (Input.mousePosition.x < -planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 1)
         {
             mapsIndex = 1;
         }
-        else if (player.transform.position.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
+        else if (Input.mousePosition.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
         {
             mapsIndex = 2;
         }
@@ -109,7 +109,7 @@ public class TilesThoricModifs : MonoBehaviour
                 tilemap.SetTile(tilePos, null);
                 maps[1].SetTile(tilePos, null);
                 maps[2].SetTile(tilePos, null);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
             }
         }
         else                                                                                            //Si on a relâché le clic, on reset le cassage de tile

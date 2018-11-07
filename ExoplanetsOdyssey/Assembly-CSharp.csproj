@@ -128,6 +128,7 @@
      <Compile Include="Assets\Scripts\SystemInteraction.cs" />
      <Compile Include="Assets\Scripts\SystemsGenerator.cs" />
      <Compile Include="Assets\Scripts\TileModif.cs" />
+     <Compile Include="Assets\ToricPlanetGestion.cs" />
      <None Include="Assets\Packages\Tilemap\Tiles\Rule Tile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
      <None Include="Assets\Packages\Tilemap\Brushes\Tint Brush Smooth\Shaders\TintedTilemap.shader" />
      <None Include="Assets\Packages\Cinemachine\ReleaseNotes.txt" />

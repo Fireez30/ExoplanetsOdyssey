@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour {
 
 	public Rigidbody2D rb;
 	public float speed = 10.0f;
-	bool facingRight = true;
+	public bool facingRight = true;
     
 	// Update is called once per frame
 	void FixedUpdate () {
