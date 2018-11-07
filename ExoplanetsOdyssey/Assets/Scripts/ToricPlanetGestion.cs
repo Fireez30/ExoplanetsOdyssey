@@ -30,9 +30,12 @@ public class ToricPlanetGestion : MonoBehaviour {
             Cameras[0].gameObject.SetActive(false);
             //MainCamera.GetComponent<Cinemachine.CinemachineBrain>(). = Charas[2];//change camera to go on the right most character
             Charas[0].Translate(2 * worldWidht,0,0);//left character has to go to the right now
+<<<<<<< HEAD:ExoplanetsOdyssey/Assets/ToricPlanetGestion.cs
             Debug.Log("tp gauche -> droite");
             Charas.Sort(new TransformComparer());//sort player to easily get the right most one
             Cameras.Sort(new CameraComparer());
+=======
+>>>>>>> 16279d0749677171bf609e6ffed17150f3706aa3:ExoplanetsOdyssey/Assets/Scripts/ToricPlanetGestion.cs
         }
 
         if (Charas[1].position.x >= worldWidht && player.GetComponent<PlayerMove>().facingRight)//If player cross right trigger and he is facing right
