@@ -52,12 +52,8 @@ public class TilesThoricModifs : MonoBehaviour
     {
         Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-<<<<<<< HEAD
 
-        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))                                                                    //Clic gauche
-=======
         if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
->>>>>>> 16279d0749677171bf609e6ffed17150f3706aa3
         {
             if (worldPos.x < 0 && mapsIndex != 1)
             {
@@ -71,19 +67,11 @@ public class TilesThoricModifs : MonoBehaviour
             {
                 mapsIndex = 0;
             }
-<<<<<<< HEAD
-
-            if (Input.GetMouseButton(0))                                                                    //Clic gauche
-            {
-            Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-            Vector3Int tilePos = maps[mapsIndex].WorldToCell(screenPos);                                        //Récupère la position dans la tilemap de la tile où est la souris
-=======
         }
         if (Input.GetMouseButton(0))                                                                    //Clic gauche
         {
             
             Vector3Int tilePos = maps[mapsIndex].WorldToCell(worldPos);                                        //Récupère la position dans la tilemap de la tile où est la souris
->>>>>>> 16279d0749677171bf609e6ffed17150f3706aa3
             float timeBreak = -1;                                                                       //Temps nécessaire pour casser une tile
             TileBase tile = maps[mapsIndex].GetTile(tilePos);
 
@@ -158,17 +146,10 @@ public class TilesThoricModifs : MonoBehaviour
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
                 maps[1].SetTile(tilePos, tileList[currentIndex]);
                 maps[2].SetTile(tilePos, tileList[currentIndex]);
-<<<<<<< HEAD
-                    int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];
-                    canvas.UpdateNbTiles(0, nb);
-                    GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
-                }
-=======
                 int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];
                 canvas.UpdateNbTiles(0, nb);
                 GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
             }
->>>>>>> 16279d0749677171bf609e6ffed17150f3706aa3
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
