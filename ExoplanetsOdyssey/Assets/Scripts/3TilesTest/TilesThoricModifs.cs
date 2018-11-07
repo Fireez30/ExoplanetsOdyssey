@@ -50,13 +50,16 @@ public class TilesThoricModifs : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButton(0))                                                                    //Clic gauche
+        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))                                                                    //Clic gauche
         {
-            if (Input.mousePosition.x < -planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 1)
+            if (worldPos.x < 0 && mapsIndex != 1)
             {
                 mapsIndex = 1;
             }
-            else if (Input.mousePosition.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
+            else if (worldPos.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
             {
                 mapsIndex = 2;
             }
@@ -64,7 +67,9 @@ public class TilesThoricModifs : MonoBehaviour
             {
                 mapsIndex = 0;
             }
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
+
+            if (Input.GetMouseButton(0))                                                                    //Clic gauche
+            {
             Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             Vector3Int tilePos = maps[mapsIndex].WorldToCell(screenPos);                                        //Récupère la position dans la tilemap de la tile où est la souris
             float timeBreak = -1;                                                                       //Temps nécessaire pour casser une tile
@@ -75,9 +80,9 @@ public class TilesThoricModifs : MonoBehaviour
                 string nameTile = tile.name;
                 switch (nameTile)
                 {
-                    case "ground": timeBreak = 0.4f; break;
-                    case "Redstuff": timeBreak = 1f; break;
-                    case "BlueStuff": timeBreak = 1.5f; break;
+                    case "ground": timeBreak = 0.2f; break;
+                    case "Redstuff": timeBreak = 0.5f; break;
+                    case "BlueStuff": timeBreak = 0.8f; break;
                     default: timeBreak = -1; break;                                                    //Si tileBreak == -1, alors on ne peux pas casser la tile
                 }
             }
@@ -134,18 +139,17 @@ public class TilesThoricModifs : MonoBehaviour
         }
         if (Input.GetMouseButton(1))                                                                    //Clic droit
         {
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-            Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-            Vector3Int tilePos = maps[mapsIndex].WorldToCell(screenPos);
+            Vector3Int tilePos = maps[mapsIndex].WorldToCell(worldPos);
 
             if (!maps[mapsIndex].GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 && tilePos != maps[mapsIndex].WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))
             {
                 tilemap.SetTile(tilePos, tileList[currentIndex]);
                 maps[1].SetTile(tilePos, tileList[currentIndex]);
                 maps[2].SetTile(tilePos, tileList[currentIndex]);
-                player.GetComponent<PlayerInventory>().tileAmounts[currentIndex]--;
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<LevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
-            }
+                    int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];
+                    canvas.UpdateNbTiles(0, nb);
+                    GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().worldseed, GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
+                }
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))

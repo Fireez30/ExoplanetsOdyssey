@@ -40,7 +40,7 @@ public class TilesLevelGeneration : MonoBehaviour {
         }
         Debug.Log(maxSurface);
         Debug.Log(player.transform.position.x + " / " + player.transform.position.y);
-        Camera.main.transform.Translate(player.transform.position.x, player.transform.position.y,0);
+        Camera.main.transform.Translate(/*player.transform.position.x*/10, player.transform.position.y,0);
     }
 
     /*void Update()

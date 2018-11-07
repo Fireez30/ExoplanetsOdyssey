@@ -9,35 +9,43 @@ public class ToricPlanetGestion : MonoBehaviour {
     public GameObject player;//to get player's facing, just need 1 because the 3 characters in the scene always face the same
     public int worldWidht;
     public int worldHeight;
-    int offset = 10;//change this to change triggers position in the middle tilemap
-
+    public int currentPlayer = 0;
     void Start()
     {
         Cameras[1].gameObject.SetActive(false);
         Cameras[2].gameObject.SetActive(false);
+        Charas.Sort(new TransformComparer());//sort player to easily get the right most one
+        Cameras.Sort(new CameraComparer());
+        foreach (Transform t in Charas)
+        {
+            Debug.Log("player name :" + t.gameObject.name);
+        }
     }
 	// Update is called once per frame
 	void Update () {
-        if (MainCamera.transform.position.x <= offset && !player.GetComponent<PlayerMove>().facingRight)//If player cross left trigger and he is facing left
+        if (Charas[1].position.x < 0 && !player.GetComponent<PlayerMove>().facingRight)//If player cross left trigger and he is facing left
         {
+            Cameras[2].gameObject.SetActive(true);
+            Cameras[1].gameObject.SetActive(false);
+            Cameras[0].gameObject.SetActive(false);
+            //MainCamera.GetComponent<Cinemachine.CinemachineBrain>(). = Charas[2];//change camera to go on the right most character
+            Charas[0].Translate(2 * worldWidht,0,0);//left character has to go to the right now
+            Debug.Log("tp gauche -> droite");
             Charas.Sort(new TransformComparer());//sort player to easily get the right most one
             Cameras.Sort(new CameraComparer());
-            Cameras[2].gameObject.SetActive(true);
-            Cameras[0].gameObject.SetActive(false);
-            Cameras[1].gameObject.SetActive(false);
-            //MainCamera.GetComponent<Cinemachine.CinemachineBrain>(). = Charas[2];//change camera to go on the right most character
-            Charas[0].position = new Vector3(2 * worldWidht - offset, Charas[2].position.y, Charas[2].position.z);//left character has to go to the right now
         }
 
-        if (MainCamera.transform.position.x >= worldWidht - offset && player.GetComponent<PlayerMove>().facingRight)//If player cross right trigger and he is facing right
+        if (Charas[1].position.x >= worldWidht && player.GetComponent<PlayerMove>().facingRight)//If player cross right trigger and he is facing right
         {
+
+            Cameras[0].gameObject.SetActive(true);
+            Cameras[1].gameObject.SetActive(false);
+            Cameras[2].gameObject.SetActive(false);
+            //MainCamera.transform.GetComponent<Cinemachine.CinemachineBrain>().Follow = Charas[0];//camera to go on the left most chaarcter
+            Charas[2].Translate(-2 * worldWidht, 0, 0);//right player tp to left of the world
+            Debug.Log("tp droite -> gauche");
             Charas.Sort(new TransformComparer());//sort players to easily get the left most one
             Cameras.Sort(new CameraComparer());
-            Cameras[0].gameObject.SetActive(true);
-            Cameras[2].gameObject.SetActive(false);
-            Cameras[1].gameObject.SetActive(false);
-            //MainCamera.transform.GetComponent<Cinemachine.CinemachineBrain>().Follow = Charas[0];//camera to go on the left most chaarcter
-            Charas[2].position = new Vector3(-2 * worldWidht + offset, Charas[0].position.y, Charas[0].position.z);//right player tp to left of the world
         }
     }
 }
