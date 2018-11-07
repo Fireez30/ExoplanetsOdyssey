@@ -7,9 +7,9 @@ public class ToricPlanetGestion : MonoBehaviour {
     public List<Cinemachine.CinemachineVirtualCamera> Cameras;
     public GameObject MainCamera;//To change camera player's following
     public GameObject player;//to get player's facing, just need 1 because the 3 characters in the scene always face the same
-    public int worldWidht;
-    public int worldHeight;
-    public int currentPlayer = 0;
+    public int worldWidht;//Size of the world in x coordinate
+    public int worldHeight;//Size of the world in y coordinate
+    //public int currentPlayer = 0;
     void Start()
     {
         Cameras[1].gameObject.SetActive(false);

@@ -5,17 +5,17 @@ using UnityEngine.Tilemaps;
 
 public class TilesLevelGeneration : MonoBehaviour {
 
-    public int worldWidth;
-    public int worldHeight;
-    public List<Palette> tilesList;
-    public TileBase transparent;
-    public GameObject parent;
-    public Tilemap tiles;
-    Tilemap leftCopy;
-    Tilemap rightCopy;
-    public GameObject player;
-    public GameObject leftPlayer;
-    public GameObject rightPlayer;
+    public int worldWidth;//world size in width
+    public int worldHeight;//world size in height
+    public List<Palette> tilesList;//list of all planet types and the different tiles for each type
+    //public TileBase transparent;
+    public GameObject parent;//needed to setup the 3 tilemaps in  the hierarchy
+    public Tilemap tiles;//the main tilemap
+    Tilemap leftCopy;//left copy (generated in TileMapGen())
+    Tilemap rightCopy;//right copy (generated in TileMapGen())
+    public GameObject player;//main player
+    public GameObject leftPlayer;//setup the leftcopy of the player in Awake
+    public GameObject rightPlayer;//setup the rightcopy of the player in Awake
 
     private int maxSurface;
     private System.Random rand;
@@ -35,13 +35,13 @@ public class TilesLevelGeneration : MonoBehaviour {
         GM = GameObject.FindGameObjectWithTag("GameManager");
         planetType = GM.GetComponent<Parameters>().planetType;
         planeteSeed = GM.GetComponent<Parameters>().getSeedToGen();
-        rand = new System.Random(planeteSeed);
-        TileMapGen();
-        if (player)
+        rand = new System.Random(planeteSeed);//setup a seeded random
+        TileMapGen();//creation of the different tilemaps
+        if (player)//setup players in the world
         {
-            player.transform.Translate(mapBase.GetUpperBound(0) / 2, maxSurface+5, 0);
-            leftPlayer.transform.Translate(player.transform.position.x-worldWidth, player.transform.position.y, 0);
-            rightPlayer.transform.Translate(player.transform.position.x + worldWidth, player.transform.position.y, 0);
+            player.transform.Translate(mapBase.GetUpperBound(0) / 2, maxSurface+5, 0);//middle position player
+            leftPlayer.transform.Translate(player.transform.position.x-worldWidth, player.transform.position.y, 0);//the left player is on the left map
+            rightPlayer.transform.Translate(player.transform.position.x + worldWidth, player.transform.position.y, 0);//the right player is on the right map
         }
         Debug.Log(maxSurface);
         Debug.Log(player.transform.position.x + " / " + player.transform.position.y);
@@ -64,15 +64,15 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     public TileBase getTileFromPalette(string ptype, int index)
     {
-        foreach (Palette p in tilesList)
+        foreach (Palette p in tilesList)//for each palette in the game
         {
-            if (p.type.Equals(ptype))
+            if (p.type.Equals(ptype))//find the one for this planet
             {
-                return p.Alltiles[index];
+                return p.Alltiles[index];//get the tile using the index
             }
         }
 
-        return null;
+        return null;//if not exist, don't put a tile
     }
 
     public void RenderMap(int[,] map, Tilemap tilemap)
@@ -85,18 +85,18 @@ public class TilesLevelGeneration : MonoBehaviour {
             //Loop through the height of the map
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                // 1 = tile, 0 = no tile
+                // 1 = tile, 2 = fuel 3 = iron
                 if (map[x, y] == 1)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 0));
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 0));//set the classic tile (index 0 in the palette)
                 }
                 else if (map[x, y] == 2)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 1));
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 1));//set the fuel tile (index 1 in the palette)
                 }
                 else if (map[x, y] == 3)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 2));
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 2));//set the iron tile (index 2 in the palette)
                 }
             }
         }
@@ -104,10 +104,10 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     public void writeMap(int[,] map)
     {
-        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn"))
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn").Close();
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn"))//if map dont exist in the files
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn").Close();//create it
 
-        string[] lines = new string[map.GetUpperBound(0)];
+        string[] lines = new string[map.GetUpperBound(0)];//line = x pos, characters = y pos
         int currentid = 0;
         for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
@@ -115,37 +115,37 @@ public class TilesLevelGeneration : MonoBehaviour {
             //Loop through the height of the map
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                line += map[x, y] + ";";
+                line += map[x, y] + ";";//add each tile as a character
             }
-            line += map[x, map.GetUpperBound(1)];
-            lines[currentid] = line;
-            currentid++;
+            line += map[x, map.GetUpperBound(1)];//add the last character without separator
+            lines[currentid] = line;//store the line
+            currentid++;//add another line
         }
 
-        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn", lines);
+        System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn", lines);//write lines created
 
     }
 
     public int[,] loadMap()
     {
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn"))
-            return null;
+            return null;//if no map of this kind exist, just return nothing
 
-        int[,] map = new int[worldWidth + 2, worldHeight];
+        int[,] map = new int[worldWidth + 2, worldHeight];//+2 because we generate 2 tiles to create smooth transitions
 
-        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn");
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".trn");//if map exist load it
 
-        for (int i = 0; i < lines.Length; i++)//on update ici les modifications de tile deja existantes
+        for (int i = 0; i < lines.Length; i++)//for each line = x coordinate
         {
             if (!(lines[i].Contains("#")))
             {
                 Debug.Log("display : " + lines[i]);
-                string[] tmp = lines[i].Split(';');
+                string[] tmp = lines[i].Split(';');//split line 
                 Debug.Log("apres split " + tmp[0]);
                 for (int j = 0; j < tmp.Length; j++)
                 {
                     Debug.Log("contenu: " + int.Parse(tmp[j]));
-                    map[i, j] = int.Parse(tmp[j]);
+                    map[i, j] = int.Parse(tmp[j]);//the map at x , j is the character read in the file
                 }
             }
         }
@@ -153,7 +153,7 @@ public class TilesLevelGeneration : MonoBehaviour {
         return map;
     }
 
-    public static int[,] GenerateArray(int width, int height, int tile)
+    public static int[,] GenerateArray(int width, int height, int tile)//just generate a world sized array to store the map template
     {
         int[,] map = new int[width, height];
         for (int x = 0; x <= map.GetUpperBound(0); x++)
@@ -165,7 +165,7 @@ public class TilesLevelGeneration : MonoBehaviour {
         }
         return map;
     }
-    public void SetRessourcesInMap(int[,] map, int chance)
+    public void SetRessourcesInMap(int[,] map, int chance)//randomly generate ressources
     {
 
         for (int x = 0; x <= map.GetUpperBound(0); x++)
@@ -201,15 +201,15 @@ public class TilesLevelGeneration : MonoBehaviour {
         {
             for (int y = 0; y <= map.GetUpperBound(1); y++)
             {
-                int type = map[x, y];
-                if (type != 0 && type != 1)
+                int type = map[x, y];//for each tile, 
+                if (type != 0 && type != 1)//if its a ressource
                 {
                     int newX = x;
                     int newY = y;
-                    int tailleChunck = rand.Next(1, 4);
+                    int tailleChunck = rand.Next(1, 4);//generate a size of the chunck of those ressources
                     for (int i = 0; i < tailleChunck; i++)
                     {
-                        int dir = rand.Next(4);
+                        int dir = rand.Next(4);//switch direction of the chunck
                         switch (dir)
                         {
                             case 0: newX--; break;
@@ -217,8 +217,8 @@ public class TilesLevelGeneration : MonoBehaviour {
                             case 2: newY--; break;
                             case 3: newY++; break;
                         }
-                        if (newX > 0 && newY > 0 && newX <= map.GetUpperBound(0) && newY <= map.GetUpperBound(1))
-                            map2[newX, newY] = type;
+                        if (newX > 0 && newY > 0 && newX <= map.GetUpperBound(0) && newY <= map.GetUpperBound(1))//if the tile chosen is in the map
+                            map2[newX, newY] = type;//it becomes a ressource
                     }
                 }
             }
@@ -263,25 +263,25 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     public void RenderOldChanges()
     {
-        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt"))
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt"))//if no file of this planet exist
         {
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt").Close();
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt").Close();//create it
         }
 
-        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt");
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/" + planeteSeed + ".plnt");//get file
 
         for (int i = 0; i < lines.Length; i++)
         {
             if (!(lines[i].Contains("#")))
             {
                 string[] tmp = lines[i].Split(';');
-                if (int.Parse(tmp[3]) == -1)
+                if (int.Parse(tmp[3]) == -1)//if the change stored is a break of the tile
                 {
-                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0), null);
+                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0), null);//Delete the tile on the map
                 }
                 else
                 {
-                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0), getTileFromPalette(tmp[2], int.Parse(tmp[3])));
+                    tiles.SetTile(new Vector3Int(int.Parse(tmp[0]), int.Parse(tmp[1]), 0), getTileFromPalette(tmp[2], int.Parse(tmp[3])));//else put a tile of the good type, in the good palette
                 }
 
             }
@@ -292,7 +292,7 @@ public class TilesLevelGeneration : MonoBehaviour {
     {
         for (int i = 0; i <= mapBase.GetUpperBound(0); i++)
         {
-            tiles.SetTile(new Vector3Int(i, 0, 0), getTileFromPalette(planetType, 3));
+            tiles.SetTile(new Vector3Int(i, 0, 0), getTileFromPalette(planetType, 3));//the bottom line of the tilemap becomes unbreakable
         }
     }
 
@@ -368,24 +368,24 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     public void TileMapGen()
     {
-        mapBase = GenerateArray(worldWidth+2, worldHeight, 0);
-        RandomWalkTopSmoothed(mapBase, 4, 10);
-        GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), maxSurface), 20);
-        SetRessourcesInMap(mapBase, 1);
-        mapBase = SpreadRessourcesInMap(mapBase);
-        RenderMap(mapBase, tiles);
+        mapBase = GenerateArray(worldWidth+2, worldHeight, 0);//create the array
+        RandomWalkTopSmoothed(mapBase, 4, 10);//generate the map using a smooth random walk 
+        GenerateCave(mapBase, new Vector2(rand.Next(worldWidth), maxSurface), 20);//generate caves using bezier
+        SetRessourcesInMap(mapBase, 1);//create ressources randomly
+        mapBase = SpreadRessourcesInMap(mapBase);//spread them
+        RenderMap(mapBase, tiles);//render the tilemap using the template 
         UpdateMap(mapBase, tiles);
-        RenderOldChanges();
-        GenerateUnbreakableTiles();
-        rightCopy = Instantiate(tiles,new Vector3(worldWidth+10,0 , 0), Quaternion.identity,parent.transform);
-        leftCopy = Instantiate(tiles, new Vector3(-worldWidth, 0, 0), Quaternion.identity, parent.transform);
-        leftCopy.name = "left";
-        for (int i = 0; i <= rightCopy.cellBounds.yMax; i++)
+        RenderOldChanges();//get old changes and apply them
+        GenerateUnbreakableTiles();//create a line of unbreakable tiles at the bottom
+        rightCopy = Instantiate(tiles,new Vector3(worldWidth+10,0 , 0), Quaternion.identity,parent.transform);//instantiate left copy 
+        leftCopy = Instantiate(tiles, new Vector3(-worldWidth, 0, 0), Quaternion.identity, parent.transform);//instantiate right copy
+        leftCopy.name = "left";//useful to sort tilemaps in another script , dont remove !!!!
+        for (int i = 0; i <= rightCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
         {
             rightCopy.SetColor(new Vector3Int(0, i, 0), new Color(0, 0, 0, 0.00000001f));
             rightCopy.SetColliderType(new Vector3Int(0, i, 0), Tile.ColliderType.None);
         }
-        for (int i = 0; i <= leftCopy.cellBounds.yMax; i++)
+        for (int i = 0; i <= leftCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
         {
             leftCopy.SetColor(new Vector3Int(leftCopy.cellBounds.xMax, i, 0), new Color(0, 0, 0, 0.0000001f));
             leftCopy.SetColliderType(new Vector3Int(leftCopy.cellBounds.xMax, i, 0), Tile.ColliderType.None);

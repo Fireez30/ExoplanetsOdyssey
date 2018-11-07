@@ -34,15 +34,15 @@ public class TilesThoricModifs : MonoBehaviour
     {
         maps[0] = tilemap;
         Tilemap[] t = GameObject.FindObjectsOfType<Tilemap>();
-        for (int i = 0; i < t.Length; i++)
+        for (int i = 0; i < t.Length; i++)//used to sort tilemaps in the tab, 0 = center one
         {
             if (t[i].name.Equals("left"))
             {
-                maps[1] = t[i];
+                maps[1] = t[i];// 1 = most left one
             }
             else if (!(t[i] == tilemap))
             {
-                maps[2] = t[i];
+                maps[2] = t[i];// 2 = most right one
             }
         }
 
@@ -50,22 +50,22 @@ public class TilesThoricModifs : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);//get mouse pos on screen
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);//change screen position to world position
 
-        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))//choose wich tile map will be use if we click
         {
-            if (worldPos.x < 0 && mapsIndex != 1)
+            if (worldPos.x < 0 && mapsIndex != 1)// if the click was on the left tilemap
             {
-                mapsIndex = 1;
+                mapsIndex = 1;//the index must change to the left one
             }
-            else if (worldPos.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)
+            else if (worldPos.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)//if the click was on the right tilemap
             {
-                mapsIndex = 2;
+                mapsIndex = 2;//index must change
             }
-            else if (mapsIndex != 0)
+            else if (mapsIndex != 0)//else we are in the center map
             {
-                mapsIndex = 0;
+                mapsIndex = 0;//index must change
             }
         }
         if (Input.GetMouseButton(0))                                                                    //Clic gauche
@@ -124,10 +124,10 @@ public class TilesThoricModifs : MonoBehaviour
                         }
                     }
 
-                tilemap.SetTile(tilePos, null);
+                tilemap.SetTile(tilePos, null);//apply modif to all maps 
                 maps[1].SetTile(tilePos, null);
                 maps[2].SetTile(tilePos, null);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);//send the modification to the modif saver
             }
         }
         else                                                                                            //Si on a relâché le clic, on reset le cassage de tile
@@ -143,16 +143,16 @@ public class TilesThoricModifs : MonoBehaviour
 
             if (!maps[mapsIndex].GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 && tilePos != maps[mapsIndex].WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))
             {
-                tilemap.SetTile(tilePos, tileList[currentIndex]);
+                tilemap.SetTile(tilePos, tileList[currentIndex]);//apply modif to all maps
                 maps[1].SetTile(tilePos, tileList[currentIndex]);
                 maps[2].SetTile(tilePos, tileList[currentIndex]);
                 int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];
                 canvas.UpdateNbTiles(0, nb);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);//send the modification to the modif saver
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))//must change, use a player inventory current tile 
         {
             if (currentIndex != 0)
             {
@@ -162,7 +162,7 @@ public class TilesThoricModifs : MonoBehaviour
                 currentIndex = tileList.Count - 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))//must change, use a player inventory current tile 
         {
             if (currentIndex < tileList.Count - 1)
             {
@@ -174,7 +174,7 @@ public class TilesThoricModifs : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))//debug only, remove on release
         {
             GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
             player.GetComponent<PlayerInventory>().computeChangesToFile();
