@@ -26,7 +26,7 @@ public class ToricPlanetGestion : MonoBehaviour {
             Cameras[0].gameObject.SetActive(false);
             Cameras[1].gameObject.SetActive(false);
             //MainCamera.GetComponent<Cinemachine.CinemachineBrain>(). = Charas[2];//change camera to go on the right most character
-            Charas[0].position = new Vector3(2 * worldWidht - offset, Charas[2].position.y, Charas[2].position.z);//left character has to go to the right now
+            Charas[0].Translate(2 * worldWidht,0,0);//left character has to go to the right now
         }
 
         if (MainCamera.transform.position.x >= worldWidht - offset && player.GetComponent<PlayerMove>().facingRight)//If player cross right trigger and he is facing right
