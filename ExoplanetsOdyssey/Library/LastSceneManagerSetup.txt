@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Universe.unity
+- path: Assets/Scenes/Vaisseau_General.unity
   isLoaded: 1
   isActive: 1
