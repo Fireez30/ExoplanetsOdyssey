@@ -32,8 +32,9 @@ public class SystemInteraction : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        Debug.Log("Du système vers le vaisseau ");
         param.setCurrentSystem(indexSystem);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
         //Change de scène pour aller dans le vaisseau
     }
 

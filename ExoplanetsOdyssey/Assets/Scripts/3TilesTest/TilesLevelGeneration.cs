@@ -80,10 +80,10 @@ public class TilesLevelGeneration : MonoBehaviour {
         //Clear the map (ensures we dont overlap)
         tilemap.ClearAllTiles();
         //Loop through the width of the map
-        for (int x = 0; x < map.GetUpperBound(0); x++)
+        for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
             //Loop through the height of the map
-            for (int y = 0; y < map.GetUpperBound(1); y++)
+            for (int y = 0; y <= map.GetUpperBound(1); y++)
             {
                 // 1 = tile, 2 = fuel 3 = iron
                 if (map[x, y] == 1)
@@ -377,26 +377,26 @@ public class TilesLevelGeneration : MonoBehaviour {
         UpdateMap(mapBase, tiles);
         RenderOldChanges();//get old changes and apply them
         GenerateUnbreakableTiles();//create a line of unbreakable tiles at the bottom
-        rightCopy = Instantiate(tiles,new Vector3(worldWidth+10,0 , 0), Quaternion.identity,parent.transform);//instantiate left copy 
-        leftCopy = Instantiate(tiles, new Vector3(-worldWidth, 0, 0), Quaternion.identity, parent.transform);//instantiate right copy
+        rightCopy = Instantiate(tiles,new Vector3(worldWidth+1,0 , 0), Quaternion.identity,parent.transform);//instantiate left copy 
+        leftCopy = Instantiate(tiles, new Vector3(-worldWidth-1, 0, 0), Quaternion.identity, parent.transform);//instantiate right copy
         leftCopy.name = "left";//useful to sort tilemaps in another script , dont remove !!!!
-        for (int i = 0; i <= rightCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
+        for (int i = 0; i < rightCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
         {
-            rightCopy.SetColor(new Vector3Int(0, i, 0), new Color(0, 0, 0, 0.00000001f));
+            rightCopy.SetColor(new Vector3Int(0, i, 0), new Color(1, 1, 1, 0.00000001f));
             rightCopy.SetColliderType(new Vector3Int(0, i, 0), Tile.ColliderType.None);
         }
-        for (int i = 0; i <= leftCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
+        for (int i = 0; i < leftCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
         {
-            leftCopy.SetColor(new Vector3Int(leftCopy.cellBounds.xMax, i, 0), new Color(0, 0, 0, 0.0000001f));
-            leftCopy.SetColliderType(new Vector3Int(leftCopy.cellBounds.xMax, i, 0), Tile.ColliderType.None);
+            leftCopy.SetColor(new Vector3Int(leftCopy.cellBounds.xMax-1, i, 0), new Color(1, 1, 1, 0.00000001f));
+            leftCopy.SetColliderType(new Vector3Int(leftCopy.cellBounds.xMax-1, i, 0), Tile.ColliderType.None);
         }
     }
 
     public static void UpdateMap(int[,] map, Tilemap tilemap) //Takes in our map and tilemap, setting null tiles where needed
     {
-        for (int x = 0; x < map.GetUpperBound(0); x++)
+        for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
-            for (int y = 0; y < map.GetUpperBound(1); y++)
+            for (int y = 0; y <= map.GetUpperBound(1); y++)
             {
                 //We are only going to update the map, rather than rendering again
                 //This is because it uses less resources to update tiles to null

@@ -27,8 +27,9 @@ public class Spaceship_Planet : MonoBehaviour {
     }
     private void OnMouseDown()
     {
+        Debug.Log("Du vaisseau à la planète");
         param.setCurrentPlanet(indexPlanet);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
     public void setIndexPlanet(int i) {
         indexPlanet = i;

@@ -12,6 +12,7 @@ public class shipInteraction : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+        Debug.Log("Arrivé dans le vaisseau");
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         seedPlanets = param.getAllSeedsSystem();
         for(int i =0;i<seedPlanets.Count;i++)
@@ -21,9 +22,4 @@ public class shipInteraction : MonoBehaviour {
             temp.GetComponent<Spaceship_Planet>().setIndexPlanet(i);
         }
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

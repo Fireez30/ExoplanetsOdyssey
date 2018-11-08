@@ -17,7 +17,6 @@ public class TilesThoricModifs : MonoBehaviour
 
 
     GameObject GM;
-    public GameObject planetManager;
     private Vector3Int memTile;
     private float timerBreakTile;
 
@@ -59,7 +58,7 @@ public class TilesThoricModifs : MonoBehaviour
             {
                 mapsIndex = 1;//the index must change to the left one
             }
-            else if (worldPos.x > planetManager.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)//if the click was on the right tilemap
+            else if (worldPos.x > gameObject.GetComponent<TilesLevelGeneration>().worldWidth && mapsIndex != 2)//if the click was on the right tilemap
             {
                 mapsIndex = 2;//index must change
             }
@@ -127,7 +126,7 @@ public class TilesThoricModifs : MonoBehaviour
                 tilemap.SetTile(tilePos, null);//apply modif to all maps 
                 maps[1].SetTile(tilePos, null);
                 maps[2].SetTile(tilePos, null);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);//send the modification to the modif saver
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(gameObject.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, -1, tilePos.x, tilePos.y);//send the modification to the modif saver
             }
         }
         else                                                                                            //Si on a relâché le clic, on reset le cassage de tile
@@ -148,7 +147,7 @@ public class TilesThoricModifs : MonoBehaviour
                 maps[2].SetTile(tilePos, tileList[currentIndex]);
                 int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];
                 canvas.UpdateNbTiles(0, nb);
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(planetManager.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);//send the modification to the modif saver
+                GM.GetComponent<PlanetModificationsSaver>().AddModification(gameObject.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);//send the modification to the modif saver
             }
         }
 
