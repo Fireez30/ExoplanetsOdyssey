@@ -377,18 +377,36 @@ public class TilesLevelGeneration : MonoBehaviour {
         UpdateMap(mapBase, tiles);
         RenderOldChanges();//get old changes and apply them
         GenerateUnbreakableTiles();//create a line of unbreakable tiles at the bottom
-        rightCopy = Instantiate(tiles,new Vector3(worldWidth+1,0 , 0), Quaternion.identity,parent.transform);//instantiate left copy 
-        leftCopy = Instantiate(tiles, new Vector3(-worldWidth-1, 0, 0), Quaternion.identity, parent.transform);//instantiate right copy
+        rightCopy = Instantiate(tiles,new Vector3(worldWidth+2,0 , 0), Quaternion.identity,parent.transform);//instantiate left copy 
+        leftCopy = Instantiate(tiles, new Vector3(-worldWidth-2, 0, 0), Quaternion.identity, parent.transform);//instantiate right copy
         leftCopy.name = "left";//useful to sort tilemaps in another script , dont remove !!!!
+
+        int maxX = rightCopy.cellBounds.xMax - 1;
         for (int i = 0; i < rightCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
         {
-            rightCopy.SetColor(new Vector3Int(0, i, 0), new Color(1, 1, 1, 0.00000001f));
-            rightCopy.SetColliderType(new Vector3Int(0, i, 0), Tile.ColliderType.None);
+            rightCopy.SetTile(new Vector3Int(-1, i, 0), rightCopy.GetTile(new Vector3Int(maxX, i, 0)));
+            rightCopy.SetColor(new Vector3Int(-1, i, 0), new Color(1, 1, 1, 0.2f));
+            rightCopy.SetColliderType(new Vector3Int(-1, i, 0), Tile.ColliderType.None);
         }
+        maxX = leftCopy.cellBounds.xMax;
         for (int i = 0; i < leftCopy.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
         {
-            leftCopy.SetColor(new Vector3Int(leftCopy.cellBounds.xMax-1, i, 0), new Color(1, 1, 1, 0.00000001f));
-            leftCopy.SetColliderType(new Vector3Int(leftCopy.cellBounds.xMax-1, i, 0), Tile.ColliderType.None);
+            leftCopy.SetTile(new Vector3Int(maxX, i, 0), leftCopy.GetTile(new Vector3Int(0, i, 0)));
+            leftCopy.SetColor(new Vector3Int(leftCopy.cellBounds.xMax - 1, i, 0), new Color(1, 1, 1, 0.5f));
+            leftCopy.SetColliderType(new Vector3Int(leftCopy.cellBounds.xMax - 1, i, 0), Tile.ColliderType.None);
+        }
+
+        int avantDerniere = tiles.cellBounds.xMax - 1, derniere = tiles.cellBounds.xMax; ;
+        for (int i = 0; i < tiles.cellBounds.yMax; i++)//create transparent tiles to smooth the contacts betweeen tilemaps
+        {
+            tiles.SetTile(new Vector3Int(-1, i, 0), tiles.GetTile(new Vector3Int(avantDerniere, i, 0)));
+            tiles.SetTile(new Vector3Int(derniere, i, 0), tiles.GetTile(new Vector3Int(0, i, 0)));
+
+            tiles.SetColor(new Vector3Int(derniere, i, 0), new Color(1, 1, 1, 0.5f));
+            tiles.SetColliderType(new Vector3Int(derniere, i, 0), Tile.ColliderType.None);
+            tiles.SetColor(new Vector3Int(-1, i, 0), new Color(1, 1, 1, 0.2f));
+            tiles.SetColliderType(new Vector3Int(-1, i, 0), Tile.ColliderType.None);
+
         }
     }
 
