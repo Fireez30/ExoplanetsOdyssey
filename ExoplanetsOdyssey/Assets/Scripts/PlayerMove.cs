@@ -7,7 +7,16 @@ public class PlayerMove : MonoBehaviour {
 	public Rigidbody2D rb;
 	public float speed = 10.0f;
 	public bool facingRight = true;
+
+	public float maxVerticalSpeed = -20.0f;
     
+	void Update()
+	{
+		if( rb.velocity.y < maxVerticalSpeed )
+		{
+			rb.velocity = new Vector2(rb.velocity.x, maxVerticalSpeed);
+		}
+	}
 	// Update is called once per frame
 	void FixedUpdate () {
 		float move = Input.GetAxis("Horizontal");                   //-1 si joueur appuie sur Q/<- ou 1 si le joueur appuie sur D/->
@@ -22,6 +31,7 @@ public class PlayerMove : MonoBehaviour {
 			Flip();
 		}
 	}
+
 
 	void Flip()
 	{

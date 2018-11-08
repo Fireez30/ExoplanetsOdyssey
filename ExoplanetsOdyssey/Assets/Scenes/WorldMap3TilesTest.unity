@@ -361,6 +361,8 @@ GameObject:
   - component: {fileID: 396126513}
   - component: {fileID: 396126512}
   - component: {fileID: 396126514}
+  - component: {fileID: 396126515}
+  - component: {fileID: 396126516}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -486,6 +488,7 @@ MonoBehaviour:
   rb: {fileID: 396126509}
   speed: 10
   facingRight: 1
+  maxVerticalSpeed: -20
 --- !u!114 &396126513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +519,37 @@ MonoBehaviour:
   ironAmount: 0
   oxygenAmount: 0
   tileAmounts: 
+--- !u!114 &396126515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 396126507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655099beaedd3ae48966ed13be1dc47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeakSpeed: 5
+  PI: {fileID: 396126514}
+  leak: 0
+--- !u!114 &396126516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 396126507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e0f0883e5192f4bae000cf77c4b75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 396126507}
+  OxyLeak: {fileID: 396126515}
+  PI: {fileID: 396126514}
+  HealthPoint: 0
+  AsphyxiaSpeed: 5
+  HelmetOn: 1
 --- !u!1 &449847666
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +639,8 @@ GameObject:
   - component: {fileID: 493730758}
   - component: {fileID: 493730757}
   - component: {fileID: 493730756}
+  - component: {fileID: 493730763}
+  - component: {fileID: 493730764}
   m_Layer: 0
   m_Name: LeftPlayer
   m_TagString: Player
@@ -641,6 +677,7 @@ MonoBehaviour:
   rb: {fileID: 493730760}
   speed: 10
   facingRight: 1
+  maxVerticalSpeed: -20
 --- !u!114 &493730758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +797,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &493730763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 493730755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655099beaedd3ae48966ed13be1dc47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeakSpeed: 5
+  PI: {fileID: 493730756}
+  leak: 0
+--- !u!114 &493730764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 493730755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e0f0883e5192f4bae000cf77c4b75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 493730755}
+  OxyLeak: {fileID: 493730763}
+  PI: {fileID: 493730756}
+  HealthPoint: 0
+  AsphyxiaSpeed: 5
+  HelmetOn: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,6 +1471,8 @@ GameObject:
   - component: {fileID: 1334438771}
   - component: {fileID: 1334438770}
   - component: {fileID: 1334438769}
+  - component: {fileID: 1334438776}
+  - component: {fileID: 1334438777}
   m_Layer: 0
   m_Name: RightPlayer
   m_TagString: Player
@@ -1439,6 +1509,7 @@ MonoBehaviour:
   rb: {fileID: 1334438773}
   speed: 10
   facingRight: 1
+  maxVerticalSpeed: -20
 --- !u!114 &1334438771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,6 +1629,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1334438776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1334438768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655099beaedd3ae48966ed13be1dc47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeakSpeed: 5
+  PI: {fileID: 1334438769}
+  leak: 0
+--- !u!114 &1334438777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1334438768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e0f0883e5192f4bae000cf77c4b75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Character: {fileID: 1334438768}
+  OxyLeak: {fileID: 1334438776}
+  PI: {fileID: 1334438769}
+  HealthPoint: 0
+  AsphyxiaSpeed: 5
+  HelmetOn: 1
 --- !u!1 &1410618097
 GameObject:
   m_ObjectHideFlags: 0
