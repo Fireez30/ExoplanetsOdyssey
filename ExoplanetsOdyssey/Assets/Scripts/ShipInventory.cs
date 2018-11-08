@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ShipInventory : MonoBehaviour {
 
-    public int fuelAmount;
-    public int ironAmount;
-    public int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
+    private int fuelAmount;
+    private int ironAmount;
+    private int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
 
-    public int engineState;                                                             // 0 - 100%
-    public int tankState;                                                               //0 - 100%
-    public int oxygenState;                                                             //0 - 100%
+    private int engineState;                                                             // 0 - 100%
+    private int tankState;                                                               //0 - 100%
+    private int oxygenState;                                                             //0 - 100%
 
     void Start () {
 
@@ -20,7 +20,7 @@ public class ShipInventory : MonoBehaviour {
             string[] baseQuantity = new string[3];
             baseQuantity[0] = "0;0;0";//fuel, iron , playeroxygen
             baseQuantity[1] = "0;0;0;0";//tiles (not useful for this script)
-            baseQuantity[2] = "0;100;100;100";//shipoxygen, engine tank and oxygen State
+            baseQuantity[2] = "0;100;100;100";//shipoxygen, engine fuel tank and oxygen tank State
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", baseQuantity);
         }
         else

@@ -23,7 +23,7 @@ public class PlayerInventory : MonoBehaviour {
             string[] baseQuantity = new string[3];
             baseQuantity[0] = "0;0;0";                                                                  //fuel, iron , playeroxygen
             baseQuantity[1] = "0;0;0;0";                                                                //tiles (not useful for this script)
-            baseQuantity[2] = "0;100;100;100";                                                          //shipoxygen, engine tank and oxygen State
+            baseQuantity[2] = "0;100;100;100";                                                          //shipoxygen, engine fuel tank and oxygen tank State
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", baseQuantity);
         }
         else

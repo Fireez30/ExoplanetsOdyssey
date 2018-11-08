@@ -8,7 +8,6 @@ public class SystemInteraction : MonoBehaviour {
 
     GameObject text;
     
-    private SystemsGenerator generator;                     //A priori inutile
     private int indexSystem;
     private Parameters param;
 
@@ -43,9 +42,4 @@ public class SystemInteraction : MonoBehaviour {
         indexSystem = i;
     }
 
-    //A priori inutile
-    public void setGenerator(SystemsGenerator g)
-    {
-        generator = g;
-    }
 }
