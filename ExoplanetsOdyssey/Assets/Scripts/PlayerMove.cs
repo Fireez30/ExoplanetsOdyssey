@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour {
 	void Flip()
 	{
 		facingRight = !facingRight;
-		transform.localScale *= -1;
+		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y);
 	}
 	
 }
