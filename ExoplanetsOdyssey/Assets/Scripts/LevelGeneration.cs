@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
+
+
+
+/*PROBABLEMENT DEVENU INUTILE : REMPLACE PAR TilesLevelGeneration QUI GERE LA TORICITE*/
+
+
+
+
+
 public class LevelGeneration : MonoBehaviour
 {
 

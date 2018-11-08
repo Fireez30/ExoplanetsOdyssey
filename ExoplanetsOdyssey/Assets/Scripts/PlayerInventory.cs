@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour {
     public int fuelAmount;
     public int ironAmount;
     public int oxygenAmount;
-    public List<int> tileAmounts;//index = tile type, value = amount in inventory
+    public List<int> tileAmounts;                                                                       //index = tile type, value = amount in inventory
 
 	// Use this for initialization
 	void Start () {
@@ -17,17 +17,17 @@ public class PlayerInventory : MonoBehaviour {
         fuelAmount = 0;
         ironAmount = 0;
         oxygenAmount = 0;
-        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/player.save"))
+        if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/player.save"))             //Si le fichier n'existe pas on le crée
         {
             System.IO.File.Create(Application.streamingAssetsPath + "/saves/player.save").Close();
             string[] baseQuantity = new string[3];
-            baseQuantity[0] = "0;0;0";//fuel, iron , playeroxygen
-            baseQuantity[1] = "0;0;0;0";//tiles (not useful for this script)
-            baseQuantity[2] = "0;100;100;100";//shipoxygen, engine tank and oxygen State
+            baseQuantity[0] = "0;0;0";                                                                  //fuel, iron , playeroxygen
+            baseQuantity[1] = "0;0;0;0";                                                                //tiles (not useful for this script)
+            baseQuantity[2] = "0;100;100;100";                                                          //shipoxygen, engine tank and oxygen State
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", baseQuantity);
         }
         else
-        {
+        {                                                                                               //Sinon on le lis
             string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/player.save");
 
             string[] tmp = lines[0].Split(';');
@@ -41,7 +41,7 @@ public class PlayerInventory : MonoBehaviour {
                 tileAmounts[i]=int.Parse(tmp2[i]);
             }
         }
-        GameObject ui = GameObject.Find("Canvas");
+        GameObject ui = GameObject.Find("Canvas");                                                      //On affiche le nombre de tiles que le joueur possède à l'initialisation de la scène de la planète
         if (ui)
         {
             UIScript canvas = ui.GetComponent<UIScript>();
@@ -55,6 +55,7 @@ public class PlayerInventory : MonoBehaviour {
         }
     }
 	
+    //Sauvegarde l'inventaire actuel du joueur (à appeler au retour dans le vaisseau)
 	public void computeChangesToFile()
     {
         string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/player.save");

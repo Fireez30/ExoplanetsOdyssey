@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
+
+
+
+
+/* DEVENU INUTILE : REMPLACE PAR TILESTHORICMODIF */
+
+
+
+
 public class TileModif : MonoBehaviour {
 
     public Tilemap tilemap;

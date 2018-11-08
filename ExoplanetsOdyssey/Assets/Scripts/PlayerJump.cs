@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*UPGRADE : A METTRE DANS PlayerMove POUR PAS AVOIR 500M SCRIPTS DE 10 LIGNES
+            AJOUTER UNE VITESSE DE CHUTE MAXIMALE POUR PAS PASSER A TRAVERS LE SOL LORS DE CHUTE TROP LONGUE*/
+
 public class PlayerJump : MonoBehaviour {
 
 	public Rigidbody2D rb;

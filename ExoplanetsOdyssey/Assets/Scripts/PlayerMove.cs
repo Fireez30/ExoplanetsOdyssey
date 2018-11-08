@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour {
     
 	// Update is called once per frame
 	void FixedUpdate () {
-		float move = Input.GetAxis("Horizontal");
+		float move = Input.GetAxis("Horizontal");                   //-1 si joueur appuie sur Q/<- ou 1 si le joueur appuie sur D/->
 		rb.velocity = new Vector2 (speed * move, rb.velocity.y);
 
 		if( rb.velocity.x > 0 && !facingRight )
@@ -26,9 +26,7 @@ public class PlayerMove : MonoBehaviour {
 	void Flip()
 	{
 		facingRight = !facingRight;
-		Vector3 scale = transform.localScale;
-		scale.x *= -1;
-		transform.localScale = scale;
+		transform.localScale *= -1;
 	}
 	
 }

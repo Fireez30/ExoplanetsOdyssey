@@ -6,20 +6,13 @@ public class ShipInventory : MonoBehaviour {
 
     public int fuelAmount;
     public int ironAmount;
-    public int shipOxygenAmount;// Not the same than in player inventory !!! Player inventory amount = part of this one
+    public int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
 
-    public int engineState;// 0 - 100%
-    public int tankState;//0 - 100%
-    public int oxygenState;//0 - 100%
+    public int engineState;                                                             // 0 - 100%
+    public int tankState;                                                               //0 - 100%
+    public int oxygenState;                                                             //0 - 100%
 
-    // Use this for initialization
     void Start () {
-        fuelAmount = 0;
-        ironAmount = 0;
-        shipOxygenAmount = 0;
-        engineState = 100;
-        tankState = 100;
-        oxygenState = 100;
 
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/player.save"))
         {
