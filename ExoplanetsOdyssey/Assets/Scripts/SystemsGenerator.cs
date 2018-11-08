@@ -48,9 +48,8 @@ public class SystemsGenerator : MonoBehaviour {
                     GameObject tmp = Instantiate(starTemplate, position, Quaternion.identity);                      //instantiate the GameObject
                     SystemInteraction interaction = tmp.GetComponent<SystemInteraction>();
                     interaction.setIndex(nbOfSystems-1);                                                            //Que le système généré connaisse son index pour retrouver les bonnes seeds de planètes via le GameManager
-                    interaction.setGenerator(this);                                                                 //A priori inutile
 
-                    float scale = Random.Range(0.8f, 1.2f);                                                         //must use a variable because random is ..
+                    float scale = Random.Range(0.8f, 1.2f);                                                         //scale of the system, to create different sizes and not just always the same
                     tmp.transform.localScale = new Vector3(scale * tmp.transform.localScale.x, scale * tmp.transform.localScale.y, 0);//Random scale the gameObject
                     int indexColor = Random.Range(0, starTypes.Count);                                                   //Pour avoir une couleure aléatoire
                     tmp.GetComponent<SpriteRenderer>().color = starTypes[indexColor];                               //Change its color

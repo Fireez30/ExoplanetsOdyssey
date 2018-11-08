@@ -1261,7 +1261,6 @@ MonoBehaviour:
   - {fileID: 1436181725}
   - {fileID: 1838423551}
   - {fileID: 1215554431}
-  MainCamera: {fileID: 519420028}
   player: {fileID: 396126507}
   worldWidht: 100
   worldHeight: 100
@@ -2205,7 +2204,7 @@ GameObject:
   - component: {fileID: 1781128672}
   m_Layer: 0
   m_Name: GM
-  m_TagString: GameManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

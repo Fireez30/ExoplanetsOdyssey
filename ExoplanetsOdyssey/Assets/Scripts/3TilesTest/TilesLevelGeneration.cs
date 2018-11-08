@@ -32,8 +32,10 @@ public class TilesLevelGeneration : MonoBehaviour {
     void Awake()
     {
         GM = GameObject.FindGameObjectWithTag("GameManager");
-        planetType = GM.GetComponent<Parameters>().planetType;
-        planeteSeed = GM.GetComponent<Parameters>().getSeedToGen();
+        //planetType = GM.GetComponent<Parameters>().planetType;
+        planetType = "classic";
+        //planeteSeed = GM.GetComponent<Parameters>().getSeedToGen();
+        planeteSeed = 1020546;
         rand = new System.Random(planeteSeed);                                              //setup a seeded random
         TileMapGen();                                                                       //creation of the different tilemaps
         if (player)                                                                         //setup players in the world
@@ -41,8 +43,8 @@ public class TilesLevelGeneration : MonoBehaviour {
             player.transform.Translate(mapBase.GetUpperBound(0) / 2, maxSurface+5, 0);      //middle position player
 
             /*SI JOUEURS DESYNCH, ÇA VIENT PROBABLEMENT DE LA*/
-            leftPlayer.transform.Translate(player.transform.position.x-worldWidth, player.transform.position.y, 0);//the left player is on the left map
-            rightPlayer.transform.Translate(player.transform.position.x + worldWidth, player.transform.position.y, 0);//the right player is on the right map
+            leftPlayer.transform.Translate(player.transform.position.x-worldWidth-2, player.transform.position.y, 0);//the left player is on the left map
+            rightPlayer.transform.Translate(player.transform.position.x + worldWidth+2, player.transform.position.y, 0);//the right player is on the right map
         }
         Camera.main.transform.Translate(player.transform.position.x, player.transform.position.y,0);
     }
