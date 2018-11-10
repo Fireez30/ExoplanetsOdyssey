@@ -362,12 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b84296787104204a8a89fa068ead49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelAmount: 0
-  ironAmount: 0
-  shipOxygenAmount: 0
-  engineState: 0
-  tankState: 0
-  oxygenState: 0
 --- !u!4 &822742390
 Transform:
   m_ObjectHideFlags: 0

@@ -13,13 +13,20 @@ public class shipInteraction : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
-        seedPlanets = param.getAllSeedsSystem();                                                        //Recupere les seeds des planetes du systèmes
-        for(int i =0;i<seedPlanets.Count;i++)                                                           //Positionne chaque planètes sur le tableau de bord
+        GameObject gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        if (gameManager != null)
         {
-            Vector3 pos = new Vector3(xMin + (i / (float)seedPlanets.Count) * (xMax - xMin), 2, 0);
-            GameObject temp = Instantiate(planetPrefab, pos, Quaternion.identity);
-            temp.GetComponent<Spaceship_Planet>().setIndexPlanet(i);                                    //Pour que chaque planète connaise son index au sein du système
+            param = gameManager.GetComponent<Parameters>();
+            if (param != null)
+            {
+                seedPlanets = param.getAllSeedsSystem();                                                        //Recupere les seeds des planetes du systèmes
+                for (int i = 0; i < seedPlanets.Count; i++)                                                           //Positionne chaque planètes sur le tableau de bord
+                {
+                    Vector3 pos = new Vector3(xMin + (i / (float)seedPlanets.Count) * (xMax - xMin), 2, 0);
+                    GameObject temp = Instantiate(planetPrefab, pos, Quaternion.identity);
+                    temp.GetComponent<Spaceship_Planet>().setIndexPlanet(i);                                    //Pour que chaque planète connaise son index au sein du système
+                }
+            }
         }
     }
 }
