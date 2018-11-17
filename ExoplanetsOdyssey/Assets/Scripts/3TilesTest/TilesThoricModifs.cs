@@ -150,7 +150,7 @@ public class TilesThoricModifs : MonoBehaviour
                 maps[2].SetTile(tilePos, tileList[currentIndex]);
                 int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];            //Décrémente le nombre de tile dans l'inventaire
                 canvas.UpdateNbTiles(0, nb);                                                            //Update le nombre dans l'UI
-                GM.GetComponent<PlanetModificationsSaver>().AddModification(gameObject.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);//send the modification to the modif saver
+                gameObject.GetComponent<PlanetModificationsSaver>().AddModification(gameObject.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);//send the modification to the modif saver
             }
         }
 

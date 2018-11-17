@@ -11,6 +11,8 @@ public class Spaceship_Planet : MonoBehaviour {
     private Parameters param;                   //Script dans le GameManager
     private int indexPlanet;
     private CSVReader csvReader;
+    private Image bar;
+    private Text loadtxt;
 
     [SerializeField]                           //A enlever parce que ce sera généré aléatoirement et pas défini par nous (juste le serialize)
     private string infoPlaceholder = "";
@@ -20,6 +22,9 @@ public class Spaceship_Planet : MonoBehaviour {
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         info = GameObject.Find("Canvas").GetComponentInChildren<Text>();
         csvReader = GameObject.Find("CSVReader").GetComponent<CSVReader>();
+        bar = GameObject.FindGameObjectWithTag("loadingimage").GetComponent<Image>();
+        loadtxt = GameObject.FindGameObjectWithTag("loadingtext").GetComponent<Text>();
+
         if (info == null)
             Debug.LogError("Texte non trouvé");
     }
@@ -29,11 +34,26 @@ public class Spaceship_Planet : MonoBehaviour {
         infoPlaceholder = csvReader.getPlanetInfo();
     }
 
-    private void OnMouseDown() {
+    private void OnMouseHover()
+    {
         info.text = infoPlaceholder;
-        Debug.Log("Du vaisseau à la planète");
+    }
+    private void OnMouseDown() {
         param.setCurrentPlanet(indexPlanet);
-        SceneManager.LoadScene(2);
+        StartCoroutine(LoadScene());
+    }
+
+    IEnumerator LoadScene()
+    {
+        AsyncOperation result = SceneManager.LoadSceneAsync(2);
+
+        while (!result.isDone)
+        {
+            float progress = Mathf.Clamp01(result.progress / 0.9f);
+            bar.fillAmount = progress;
+            loadtxt.text = "Chargement en cours : " + (progress * 100) + " %";
+            yield return null;
+        }
     }
 
     public void setIndexPlanet(int i) {
