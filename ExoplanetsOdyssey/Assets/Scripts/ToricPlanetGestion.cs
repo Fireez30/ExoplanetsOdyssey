@@ -21,7 +21,7 @@ public class ToricPlanetGestion : MonoBehaviour {
 	void Update () {
         if (Charas[1].position.x < 0 && !player.GetComponent<PlayerMove>().facingRight)             //If player cross left trigger and he is facing left
         {
-            Cameras[2].gameObject.SetActive(true);
+            Cameras[2].gameObject.SetActive(true);//camera droite
             Cameras[1].gameObject.SetActive(false);
             Cameras[0].gameObject.SetActive(false);                                                 //A priori inutile
             Charas[0].Translate(2 * worldWidht,0,0);                                                //left character has to go to the right now
@@ -30,12 +30,11 @@ public class ToricPlanetGestion : MonoBehaviour {
         }
 
         if (Charas[1].position.x >= worldWidht && player.GetComponent<PlayerMove>().facingRight)    //If player cross right trigger and he is facing right
-        {
-
-            Cameras[0].gameObject.SetActive(true);
+        {//cam 0 camera droite 
+            Cameras[2].gameObject.SetActive(true);
             Cameras[1].gameObject.SetActive(false);
-            Cameras[2].gameObject.SetActive(false);                                                 //A priori inutile
-            Charas[2].Translate(-2 * worldWidht, 0, 0);                                             //right player tp to left of the world
+            Cameras[0].gameObject.SetActive(false);                                                 //A priori inutile
+            Charas[2].Translate(-3 * worldWidht, 0, 0);                                             //right player tp to left of the world
             Charas.Sort(new TransformComparer());                                                   //sort players to easily get the left most one
             Cameras.Sort(new CameraComparer());
         }
