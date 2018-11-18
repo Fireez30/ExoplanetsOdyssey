@@ -7,28 +7,22 @@ public class SystemsGenerator : MonoBehaviour {
     public GameObject starTemplate;
     public int nbOfSystems;
     List<GameObject> stars;
-
+    public List<Sprite> starTypes;
     Vector3 sizeOfUniverse;
 
 	// Use this for initialization
 	void Start () {
-
+        List<int> indexs = new List<int>();
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/universe.map"))                        //Is it the first time we generate this system?
         {
             System.IO.File.Create(Application.streamingAssetsPath + "/saves/universe.map").Close();
 
             stars = new List<GameObject>();
             sizeOfUniverse = support.GetComponent<Renderer>().bounds.extents;                                       //Store bounds of the Prefab positions
-
-            List<Color> starTypes = new List<Color>();                                                              //Pour teinter les sprites, que ce soit moins monotone
-            starTypes.Add(Color.red);
-            starTypes.Add(new Color(32 / 255f, 176 / 255f, 232 / 255f));                                            //Light blue
-            starTypes.Add(Color.yellow);
-            starTypes.Add(new Color(1.0f, 0.64f, 0.0f));                                                            //Orange
+                                                //Orange
 
             string[] starnames = { "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Dzeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Khi", "Psi", "Omega" };
             List<int> usedIndex = new List<int>();                                                                  //Upgrade : placer les noms de systèmes dans une liste et retirer le nom sélectionné à l'étape actuelle
-
             while (nbOfSystems > 0)
             {
                 float posx = Random.Range(-sizeOfUniverse.x, sizeOfUniverse.x);                                     //Sélectionne une position aléatoire pour chacun de nos systèmes
@@ -51,8 +45,9 @@ public class SystemsGenerator : MonoBehaviour {
 
                     float scale = Random.Range(0.8f, 1.2f);                                                         //scale of the system, to create different sizes and not just always the same
                     tmp.transform.localScale = new Vector3(scale * tmp.transform.localScale.x, scale * tmp.transform.localScale.y, 0);//Random scale the gameObject
-                    int indexColor = Random.Range(0, starTypes.Count);                                                   //Pour avoir une couleure aléatoire
-                    tmp.GetComponent<SpriteRenderer>().color = starTypes[indexColor];                               //Change its color
+                    int indexSprite = Random.Range(0, starTypes.Count);//Pour avoir une couleure aléatoire
+                    indexs.Add(indexSprite);
+                    tmp.GetComponent<SpriteRenderer>().sprite = starTypes[indexSprite];                               //Change its color
                     int nameIndex = Random.Range(0, starnames.Length);
                     int cpt = 0;
                     while (usedIndex.Contains(nameIndex) && cpt < 26)
@@ -69,9 +64,8 @@ public class SystemsGenerator : MonoBehaviour {
             string[] lines = new string[stars.Count];                                                               //Write all stars in file to save
             for (int i = 0; i < stars.Count; i++)
             {
-                lines[i] = stars[i].transform.position.x + ";" + stars[i].transform.position.y + ";" + stars[i].transform.localScale.x + ";" + stars[i].transform.localScale.y + ";" + 
-                            stars[i].GetComponent<SpriteRenderer>().color.r.ToString() + ";" + stars[i].GetComponent<SpriteRenderer>().color.g.ToString() + ";" + stars[i].GetComponent<SpriteRenderer>().color.b.ToString() + ";" + 
-                            stars[i].name;                                                                          //Write positions (dont care of z) , scale (dont care of z) , and RGB from the color
+                lines[i] = stars[i].transform.position.x + ";" + stars[i].transform.position.y + ";" + stars[i].transform.localScale.x + ";" + stars[i].transform.localScale.y + ";" +
+                            indexs[i] + ";" + stars[i].name; //Write positions (dont care of z) , scale (dont care of z) , and index of the sprite
             }
 
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/universe.map", lines);
@@ -84,8 +78,8 @@ public class SystemsGenerator : MonoBehaviour {
                 string[] tmp = lines[i].Split(';');
                 GameObject GO = Instantiate(starTemplate, new Vector3(float.Parse(tmp[0]), float.Parse(tmp[1]), 0), Quaternion.identity);
                 GO.transform.localScale = new Vector3(float.Parse(tmp[2]), float.Parse(tmp[3]), 0);
-                GO.GetComponent<SpriteRenderer>().color = new Color(float.Parse(tmp[4]), float.Parse(tmp[5]), float.Parse(tmp[6]),1);
-                GO.name = tmp[7];
+                GO.GetComponent<SpriteRenderer>().sprite = starTypes[int.Parse(tmp[4])];
+                GO.name = tmp[5];
             }
         }
     }
