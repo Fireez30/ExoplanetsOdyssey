@@ -18,6 +18,7 @@ public class Parameters : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+        typePlanete = new Dictionary<int, string>();
         if (!Instance)                              //Structure Singleton
         {
             Instance = this;
