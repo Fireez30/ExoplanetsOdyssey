@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System
 
 /*Script du GameManager : génère les seeds des planètes et les atribu aux différents systèmes*/
 public class Parameters : MonoBehaviour {
@@ -58,5 +59,11 @@ public class Parameters : MonoBehaviour {
     public List<int> getAllSeedsSystem()
     {
         return seedsPlanetes[currentSystem];
+    }
+
+    public int getRandomInt(int max)
+    {
+        System.Random rd = new System.Random();
+        return rd.Next(max);
     }
 }
