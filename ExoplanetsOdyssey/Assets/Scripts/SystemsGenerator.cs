@@ -9,7 +9,6 @@ public class SystemsGenerator : MonoBehaviour {
     public int nbOfSystems;
     List<GameObject> stars;
     public List<Sprite> starTypes;
-    Vector3 sizeOfUniverse;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +18,6 @@ public class SystemsGenerator : MonoBehaviour {
             System.IO.File.Create(Application.streamingAssetsPath + "/saves/universe.map").Close();
 
             stars = new List<GameObject>();
-            sizeOfUniverse = support.GetComponent<Renderer>().bounds.extents;                                       //Store bounds of the Prefab positions
-                                                //Orange
 
             string[] starnames = { "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Dzeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Khi", "Psi", "Omega" };
             List<int> usedIndex = new List<int>();                                                                  //Upgrade : placer les noms de systèmes dans une liste et retirer le nom sélectionné à l'étape actuelle
