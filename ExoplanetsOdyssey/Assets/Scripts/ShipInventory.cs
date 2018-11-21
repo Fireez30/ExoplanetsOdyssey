@@ -8,9 +8,9 @@ public class ShipInventory : MonoBehaviour {
     private int ironAmount;
     private int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
 
-    private int engineState;                                                             // 0 - 100%
-    private int tankState;                                                               //0 - 100%
-    private int oxygenState;                                                             //0 - 100%
+    private int scannerState;                                                             // 0 - 1  0 = marche pas  1 = marche bien
+    private int fuelTankState;                                                               //0 - 1
+    private int oxygenTankState;                                                             //0 - 1
 
     void Start () {
 
@@ -20,7 +20,7 @@ public class ShipInventory : MonoBehaviour {
             string[] baseQuantity = new string[3];
             baseQuantity[0] = "0;0;0";//fuel, iron , playeroxygen
             baseQuantity[1] = "0;0;0;0";//tiles (not useful for this script)
-            baseQuantity[2] = "0;100;100;100";//shipoxygen, engine fuel tank and oxygen tank State
+            baseQuantity[2] = "0;1;1;1";//shipoxygen, scanner, fuel tank and oxygen tank State
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", baseQuantity);
         }
         else
@@ -33,9 +33,9 @@ public class ShipInventory : MonoBehaviour {
 
             string[] tmp2 = lines[2].Split(';');
             shipOxygenAmount = int.Parse(tmp2[0]);
-            engineState = int.Parse(tmp2[1]);
-            tankState = int.Parse(tmp2[2]);
-            oxygenState = int.Parse(tmp2[3]);
+            scannerState = int.Parse(tmp2[1]);
+            fuelTankState = int.Parse(tmp2[2]);
+            oxygenTankState = int.Parse(tmp2[3]);
         }
     }
 
@@ -44,8 +44,37 @@ public class ShipInventory : MonoBehaviour {
         string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/player.save");
         string[] tmp = lines[0].Split(';');
         lines[0] = fuelAmount + ";" + ironAmount + ";" + tmp[2];
-        lines[2] = shipOxygenAmount + ";" + engineState + ";" + tankState + ";" + oxygenState;
+        lines[2] = shipOxygenAmount + ";" + scannerState + ";" + fuelTankState + ";" + oxygenTankState;
         System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", lines);
     }
 
+    public int GetScannerState()
+    {
+        return scannerState;
+    }
+
+    public int GetFuelTankState()
+    {
+        return fuelTankState;
+    }
+
+    public int GetOxygenTankState()
+    {
+        return oxygenTankState;
+    }
+
+    public void SetScannerState(int etat)
+    {
+        scannerState = etat;
+    }
+
+    public void SetFuelTankState(int etat)
+    {
+        fuelTankState = etat;
+    }
+
+    public void SetOxygenTankState(int etat)
+    {
+        oxygenTankState = etat;
+    }
 }

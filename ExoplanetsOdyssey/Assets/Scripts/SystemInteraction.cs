@@ -6,28 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class SystemInteraction : MonoBehaviour {
 
-    GameObject text;
+    Text text;
     
     private int indexSystem;
     private Parameters param;
 
-	// Use this for initialization
-	void Awake () {
-        text = GameObject.FindGameObjectWithTag("SystemInfos");
+    private static int nb = 0;
+
+    // Use this for initialization
+    void Awake () {
+        text = GameObject.FindGameObjectWithTag("SystemInfos").GetComponent<Text>();
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
 	}
 	
 	// Affiche le nom du système quand on passe sa souris dessus
 	void OnMouseEnter () {
-        text.transform.position = Input.mousePosition;
+        Vector3 pos = gameObject.transform.position;
+        pos.z = 1;
+        text.transform.position = pos;
         text.GetComponent<Text>().text = gameObject.name;
-        text.SetActive(true);
+        text.enabled = true;
     }
 
     //Fait disparaitre le nom du système quand la souris n'est plus dessus
     void OnMouseExit()
     {
-        text.SetActive(false);
+        text.enabled = false;
     }
 
     private void OnMouseDown()

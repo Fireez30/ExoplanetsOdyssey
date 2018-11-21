@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 /*Script du GameManager : génère les seeds des planètes et les atribu aux différents systèmes*/
 public class Parameters : MonoBehaviour {
@@ -28,7 +29,10 @@ public class Parameters : MonoBehaviour {
                 seedsPlanetes.Add(new List<int>());
                 for (int i2 = 0; i2 < nbPlanete; i2++)
                 {
-                    seedsPlanetes[i].Add(rand.Next(-999999999, 999999999));
+                    int seed = rand.Next(-999999999, 999999999);
+                    seedsPlanetes[i].Add(seed);
+                    string info = generatePlanet(seed);
+                    typePlanete.Add(seed, info);
                 }
             }
         }
@@ -58,5 +62,73 @@ public class Parameters : MonoBehaviour {
     public List<int> getAllSeedsSystem()
     {
         return seedsPlanetes[currentSystem];
+    }
+
+    public int getRandomInt(int max)
+    {
+        System.Random rd = new System.Random();
+        return rd.Next(max);
+    }
+
+
+    /**
+     * Au cas ou
+     **/
+    public void generatePlanets()
+    {
+        string filePath = "";
+        string planetInfo = "";
+
+        int nbPlanets = nbSystem * nbPlanete;
+
+        StreamWriter sw = new StreamWriter(filePath);
+
+
+        sw.WriteLine(planetInfo);
+
+        sw.Flush();
+        sw.Close();
+    }
+
+    private string[] type = { "Rocheuse", "Gazeuse" };
+
+    private string generatePlanet(int seed)
+    {
+        string info = "";
+
+        if(seed < 0) //inhabitable
+        {
+            int mod = seed % 2;
+            if (mod == 0)
+                info += type[0];
+            else
+                info += type[1];
+
+            int temperature = seed % 300;
+            if(mod == 0) // t < 0
+                info += ",-";
+            info += temperature;
+
+        }
+        else // habitable
+        {
+            info += type[0];
+
+            int temp = seed % 300;
+            //normalisée = (originale - MIN) * (max - min) / (MAX - MIN) + min 
+            //[MIN, MAX] : interval d'origine 
+            //[min, max] : interval cible
+            int temperature = (temp * 20) / 300 + 20;
+            info += "," + temperature;
+        }
+
+
+
+        return info;
+    }
+
+    private bool isHabitable()
+    {
+        return false;
     }
 }
