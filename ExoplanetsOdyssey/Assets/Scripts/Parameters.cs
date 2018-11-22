@@ -15,15 +15,16 @@ public class Parameters : MonoBehaviour {
     private Dictionary<int, string> typePlanete;    //associe le type de planete a chaque seed
     public int currentSystem,currentPlanet;         //Système sélectionné par le joueur / Planète choisi par le joueur -> Permet de retrouver la seed de la planète dans seedsPlanetes
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
+    private int nbHabitable;
 
 	// Use this for initialization
 	void Awake () {
-        typePlanete = new Dictionary<int, string>();
         if (!Instance)                              //Structure Singleton
         {
             Instance = this;
             DontDestroyOnLoad(this);                //Conserver antre les scènes
             seedsPlanetes = new List<List<int>>();
+            typePlanete = new Dictionary<int, string>();
             rand = new System.Random(seedBase.GetHashCode());   //Random seedé
             for(int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
             {
@@ -35,6 +36,27 @@ public class Parameters : MonoBehaviour {
                     string info = generatePlanet(seed);
                     typePlanete.Add(seed, info);
                 }
+            }
+
+            while(nbHabitable < 10)
+            {
+                for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
+                {
+                    for (int i2 = 0; i2 < nbPlanete; i2++)
+                    {
+                        int seed = seedsPlanetes[i][i2];
+                        if (seed < 0)
+                        {
+                            int newSeed = rand.Next(-999999999, 999999999);
+                            seedsPlanetes[i][i2] = newSeed;
+                            string info = generatePlanet(newSeed);
+                            typePlanete.Remove(seed);
+                            typePlanete.Add(newSeed, info);
+                        }
+                    }
+                }
+                if (nbHabitable >= 10)
+                    break;
             }
         }
         else
@@ -113,6 +135,7 @@ public class Parameters : MonoBehaviour {
         }
         else // habitable
         {
+            ++nbHabitable;
             info += type[0];
 
             int temp = seed % 300;
