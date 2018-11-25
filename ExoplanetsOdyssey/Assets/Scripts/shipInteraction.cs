@@ -29,4 +29,17 @@ public class shipInteraction : MonoBehaviour {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

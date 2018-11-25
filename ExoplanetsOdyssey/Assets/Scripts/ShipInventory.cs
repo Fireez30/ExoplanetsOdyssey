@@ -8,7 +8,7 @@ public class ShipInventory : MonoBehaviour {
     private int ironAmount;
     private int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
 
-    private int scannerState;                                                             // 0 - 1
+    private int scannerState;                                                             // 0 - 1  0 = marche pas  1 = marche bien
     private int fuelTankState;                                                               //0 - 1
     private int oxygenTankState;                                                             //0 - 1
 
@@ -48,4 +48,33 @@ public class ShipInventory : MonoBehaviour {
         System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", lines);
     }
 
+    public int GetScannerState()
+    {
+        return scannerState;
+    }
+
+    public int GetFuelTankState()
+    {
+        return fuelTankState;
+    }
+
+    public int GetOxygenTankState()
+    {
+        return oxygenTankState;
+    }
+
+    public void SetScannerState(int etat)
+    {
+        scannerState = etat;
+    }
+
+    public void SetFuelTankState(int etat)
+    {
+        fuelTankState = etat;
+    }
+
+    public void SetOxygenTankState(int etat)
+    {
+        oxygenTankState = etat;
+    }
 }
