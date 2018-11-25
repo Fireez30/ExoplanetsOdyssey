@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class SystemsGenerator : MonoBehaviour {
     public GameObject support;
+    public GameObject ship;
     public GameObject starTemplate;
     public Canvas canvas;
     public int nbOfSystems;
     List<GameObject> stars;
     public List<Sprite> starTypes;
-
+    public GameObject gamemanager;
 	// Use this for initialization
 	void Start () {
         List<int> indexs = new List<int>();
+        nbOfSystems = gamemanager.GetComponent<Parameters>().nbSystem;
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/universe.map"))                        //Is it the first time we generate this system?
         {
             System.IO.File.Create(Application.streamingAssetsPath + "/saves/universe.map").Close();
@@ -38,6 +40,7 @@ public class SystemsGenerator : MonoBehaviour {
                 {
                     Vector3 position = new Vector3(posx, posy, 0);
                     GameObject tmp = Instantiate(starTemplate, position, Quaternion.identity);                      //instantiate the GameObject
+
                     SystemInteraction interaction = tmp.GetComponent<SystemInteraction>();
                     interaction.setIndex(nbOfSystems-1);                                                            //Que le système généré connaisse son index pour retrouver les bonnes seeds de planètes via le GameManager
 
@@ -80,5 +83,12 @@ public class SystemsGenerator : MonoBehaviour {
                 GO.name = tmp[5];
             }
         }
+
+        int c = gamemanager.GetComponent<Parameters>().currentSystem;
+        if (c != -1)
+        {
+            ship.transform.position = stars[c].transform.position;
+        }
+
     }
 }

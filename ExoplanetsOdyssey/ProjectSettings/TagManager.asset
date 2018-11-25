@@ -9,6 +9,8 @@ TagManager:
   - SystemInfos
   - loadingimage
   - loadingtext
+  - universewintext
+  - cout
   layers:
   - Default
   - TransparentFX

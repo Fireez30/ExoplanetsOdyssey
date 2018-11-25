@@ -12,7 +12,8 @@ public class Parameters : MonoBehaviour {
 
     private List<List<int>> seedsPlanetes;          //Stocke toutes les seeds de nos planètes, rangé par système List[indexSystem][indexPlanete] 
     private Dictionary<int, string> typePlanete;    //associe le type de planete a chaque seed
-    public int currentSystem,currentPlanet;         //Système sélectionné par le joueur / Planète choisi par le joueur -> Permet de retrouver la seed de la planète dans seedsPlanetes
+    public int currentSystem = -1;
+    public int currentPlanet;         //Système sélectionné par le joueur / Planète choisi par le joueur -> Permet de retrouver la seed de la planète dans seedsPlanetes
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
 
 	// Use this for initialization
