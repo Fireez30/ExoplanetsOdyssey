@@ -62,7 +62,7 @@ public class Parameters : MonoBehaviour {
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
     

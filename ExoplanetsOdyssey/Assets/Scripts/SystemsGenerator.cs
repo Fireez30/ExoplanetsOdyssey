@@ -10,7 +10,6 @@ public class SystemsGenerator : MonoBehaviour {
     public int nbOfSystems;
     List<GameObject> stars;
     public List<Sprite> starTypes;
-    public GameObject gamemanager;
     public List<string> starNames;
     public int xMin, xMax, yMin, yMax;
 
@@ -19,11 +18,11 @@ public class SystemsGenerator : MonoBehaviour {
     void Start () {
         Debug.Log("Start gen systeme");
         List<int> indexs = new List<int>();
-        GM = gamemanager.GetComponent<Parameters>();
+        GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
+        stars = new List<GameObject>();
         nbOfSystems = GM.nbSystem;
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/universe.map"))                        //Is it the first time we generate this system?
         {
-            stars = new List<GameObject>();
             Debug.Log("Pas de fichier de sauvegarde");
             for (int i=0; i<nbOfSystems;i++)
             {
@@ -45,8 +44,8 @@ public class SystemsGenerator : MonoBehaviour {
                 Debug.Log("Position choisie");
                 Vector3 position = new Vector3(posx, posy, 0);
                 GameObject tmp = Instantiate(starTemplate, position, Quaternion.identity);                      //instantiate the GameObject
-                SystemInteraction interaction = tmp.GetComponent<SystemInteraction>();
-                interaction.setIndex(i);                                                            //Que le système généré connaisse son index pour retrouver les bonnes seeds de planètes via le GameManager
+                tmp.GetComponent<SystemInteraction>().setIndex(i);
+                //Que le système généré connaisse son index pour retrouver les bonnes seeds de planètes via le GameManager
 
                 Debug.Log("Après instantiation");
                 float scale = Random.Range(0.8f, 1.2f);                                                         //scale of the system, to create different sizes and not just always the same
@@ -79,8 +78,8 @@ public class SystemsGenerator : MonoBehaviour {
                 GO.transform.localScale = new Vector3(float.Parse(tmp[2]), float.Parse(tmp[3]), 0);
                 GO.GetComponent<SpriteRenderer>().sprite = starTypes[int.Parse(tmp[4])];
                 GO.name = tmp[5];
-                SystemInteraction interaction = GO.GetComponent<SystemInteraction>();
-                interaction.setIndex(i);
+                GO.GetComponent<SystemInteraction>().setIndex(i);
+                stars.Add(GO);
             }
         }
 
