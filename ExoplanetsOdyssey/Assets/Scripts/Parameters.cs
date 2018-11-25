@@ -39,7 +39,7 @@ public class Parameters : MonoBehaviour {
                 }
             }
 
-            while(nbHabitable < 10)
+           /* while(nbHabitable < 10)
             {
                 for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
                 {
@@ -58,7 +58,7 @@ public class Parameters : MonoBehaviour {
                 }
                 if (nbHabitable >= 10)
                     break;
-            }
+            }*/
         }
         else
         {
@@ -90,9 +90,18 @@ public class Parameters : MonoBehaviour {
 
     public int getRandomInt(int max)
     {
-        System.Random rd = new System.Random();
-        return rd.Next(max);
+        return rand.Next(max);
     }
+    public int getRandomInt(int min, int max)
+    {
+        return rand.Next(min, max);
+    }
+
+    public float getRandomFloat(double minimum, double maximum)
+    {
+        return (float)(rand.NextDouble() * (maximum - minimum) + minimum);
+    }
+
 
 
     /**

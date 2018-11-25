@@ -11,57 +11,52 @@ public class SystemsGenerator : MonoBehaviour {
     List<GameObject> stars;
     public List<Sprite> starTypes;
     public GameObject gamemanager;
-	// Use this for initialization
-	void Start () {
+    public List<string> starNames;
+    public int xMin, xMax, yMin, yMax;
+
+    private Parameters GM;
+
+    void Start () {
+        Debug.Log("Start gen systeme");
         List<int> indexs = new List<int>();
-        nbOfSystems = gamemanager.GetComponent<Parameters>().nbSystem;
+        GM = gamemanager.GetComponent<Parameters>();
+        nbOfSystems = GM.nbSystem;
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/universe.map"))                        //Is it the first time we generate this system?
         {
-            System.IO.File.Create(Application.streamingAssetsPath + "/saves/universe.map").Close();
-            Debug.Log("File has been created");
             stars = new List<GameObject>();
-
-            string[] starnames = { "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Dzeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Khi", "Psi", "Omega" };
-            List<int> usedIndex = new List<int>();                                                                  //Upgrade : placer les noms de systèmes dans une liste et retirer le nom sélectionné à l'étape actuelle
-            while (nbOfSystems > 0)
+            Debug.Log("Pas de fichier de sauvegarde");
+            for (int i=0; i<nbOfSystems;i++)
             {
-                Debug.Log(nbOfSystems+" systems to create !");
-                float posx = Random.Range(-canvas.transform.position.x, canvas.transform.position.x);                                     //Sélectionne une position aléatoire pour chacun de nos systèmes
-                float posy = Random.Range(-canvas.transform.position.y, canvas.transform.position.y);
-                bool flag = true;
-                for (int i = 0; i < stars.Count; i++)
+                Debug.Log("Création systeme "+i+" sur "+nbOfSystems);
+                float posx = GM.getRandomFloat(xMin, xMax);                                     //Sélectionne une position aléatoire pour chacun de nos systèmes
+                float posy = GM.getRandomFloat(yMin,yMax);
+                int i2 = 0;
+                while(i2<stars.Count && posx == stars[i2].transform.position.x && posy == stars[i2].transform.position.y)
                 {
-                    if (stars[i].transform.position.x == posx && stars[i].transform.position.y == posy)             //If the position is not already used
+                    if(posx == stars[i2].transform.position.x && posy == stars[i2].transform.position.y)
                     {
-                        flag = false;
+                        posx = GM.getRandomFloat(xMin,xMax);                                     //Sélectionne une position aléatoire pour chacun de nos systèmes
+                        posy = GM.getRandomFloat(yMin,yMax);
+                        i2 = 0;
                     }
+                    else
+                        i2++;
                 }
+                Debug.Log("Position choisie");
+                Vector3 position = new Vector3(posx, posy, 0);
+                GameObject tmp = Instantiate(starTemplate, position, Quaternion.identity);                      //instantiate the GameObject
+                SystemInteraction interaction = tmp.GetComponent<SystemInteraction>();
+                interaction.setIndex(i);                                                            //Que le système généré connaisse son index pour retrouver les bonnes seeds de planètes via le GameManager
 
-                if (flag)                                                                                           //if its not used
-                {
-                    Debug.Log("nice position chose !");
-                    Vector3 position = new Vector3(posx, posy, 0);
-                    GameObject tmp = Instantiate(starTemplate, position, Quaternion.identity);                      //instantiate the GameObject
-                    Debug.Log("has been instantied");
-                    SystemInteraction interaction = tmp.GetComponent<SystemInteraction>();
-                    interaction.setIndex(nbOfSystems-1);                                                            //Que le système généré connaisse son index pour retrouver les bonnes seeds de planètes via le GameManager
-
-                    float scale = Random.Range(0.8f, 1.2f);                                                         //scale of the system, to create different sizes and not just always the same
-                    tmp.transform.localScale = new Vector3(scale * tmp.transform.localScale.x, scale * tmp.transform.localScale.y, 0);//Random scale the gameObject
-                    int indexSprite = Random.Range(0, starTypes.Count);//Pour avoir une couleure aléatoire
-                    indexs.Add(indexSprite);
-                    tmp.GetComponent<SpriteRenderer>().sprite = starTypes[indexSprite];                               //Change its color
-                    int nameIndex = Random.Range(0, starnames.Length);
-                    int cpt = 0;
-                    while (usedIndex.Contains(nameIndex) && cpt < 26)
-                    {
-                        nameIndex = Random.Range(0, starnames.Length);
-                        cpt++;
-                    }
-                    tmp.name = starnames[nameIndex];
-                    stars.Add(tmp);
-                    nbOfSystems--;
-                }
+                Debug.Log("Après instantiation");
+                float scale = Random.Range(0.8f, 1.2f);                                                         //scale of the system, to create different sizes and not just always the same
+                tmp.transform.localScale = new Vector3(scale * tmp.transform.localScale.x, scale * tmp.transform.localScale.y, 0);//Random scale the gameObject
+                int indexSprite = Random.Range(0, starTypes.Count);//Pour avoir une couleure aléatoire
+                indexs.Add(indexSprite);
+                tmp.GetComponent<SpriteRenderer>().sprite = starTypes[indexSprite];                               //Change its color
+                tmp.name = starNames[Random.Range(0, starNames.Count)];
+                starNames.Remove(tmp.name);
+                stars.Add(tmp);
             }
 
             string[] lines = new string[stars.Count];                                                               //Write all stars in file to save
@@ -70,7 +65,8 @@ public class SystemsGenerator : MonoBehaviour {
                 lines[i] = stars[i].transform.position.x + ";" + stars[i].transform.position.y + ";" + stars[i].transform.localScale.x + ";" + stars[i].transform.localScale.y + ";" +
                             indexs[i] + ";" + stars[i].name + stars[i].GetComponent<SystemInteraction>().indexSystem; //Write positions (dont care of z) , scale (dont care of z) , and index of the sprite
             }
-
+            System.IO.File.Create(Application.streamingAssetsPath + "/saves/universe.map").Close();
+            Debug.Log("File has been created");
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/universe.map", lines);
         }
         else                                                                                                        //if file already exist, recreate the scene
@@ -84,11 +80,11 @@ public class SystemsGenerator : MonoBehaviour {
                 GO.GetComponent<SpriteRenderer>().sprite = starTypes[int.Parse(tmp[4])];
                 GO.name = tmp[5];
                 SystemInteraction interaction = GO.GetComponent<SystemInteraction>();
-                interaction.setIndex(int.Parse(tmp[6]));
+                interaction.setIndex(i);
             }
         }
 
-        int c = gamemanager.GetComponent<Parameters>().currentSystem;
+        int c = GM.currentSystem;
         if (c != -1)
         {
             ship.transform.position = stars[c].transform.position;
