@@ -18,13 +18,14 @@ public class SystemsGenerator : MonoBehaviour {
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/universe.map"))                        //Is it the first time we generate this system?
         {
             System.IO.File.Create(Application.streamingAssetsPath + "/saves/universe.map").Close();
-
+            Debug.Log("File has been created");
             stars = new List<GameObject>();
 
             string[] starnames = { "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Dzeta", "Eta", "Theta", "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Khi", "Psi", "Omega" };
             List<int> usedIndex = new List<int>();                                                                  //Upgrade : placer les noms de systèmes dans une liste et retirer le nom sélectionné à l'étape actuelle
             while (nbOfSystems > 0)
             {
+                Debug.Log(nbOfSystems+" systems to create !");
                 float posx = Random.Range(-canvas.transform.position.x, canvas.transform.position.x);                                     //Sélectionne une position aléatoire pour chacun de nos systèmes
                 float posy = Random.Range(-canvas.transform.position.y, canvas.transform.position.y);
                 bool flag = true;
@@ -38,9 +39,10 @@ public class SystemsGenerator : MonoBehaviour {
 
                 if (flag)                                                                                           //if its not used
                 {
+                    Debug.Log("nice position chose !");
                     Vector3 position = new Vector3(posx, posy, 0);
                     GameObject tmp = Instantiate(starTemplate, position, Quaternion.identity);                      //instantiate the GameObject
-
+                    Debug.Log("has been instantied");
                     SystemInteraction interaction = tmp.GetComponent<SystemInteraction>();
                     interaction.setIndex(nbOfSystems-1);                                                            //Que le système généré connaisse son index pour retrouver les bonnes seeds de planètes via le GameManager
 
@@ -66,7 +68,7 @@ public class SystemsGenerator : MonoBehaviour {
             for (int i = 0; i < stars.Count; i++)
             {
                 lines[i] = stars[i].transform.position.x + ";" + stars[i].transform.position.y + ";" + stars[i].transform.localScale.x + ";" + stars[i].transform.localScale.y + ";" +
-                            indexs[i] + ";" + stars[i].name; //Write positions (dont care of z) , scale (dont care of z) , and index of the sprite
+                            indexs[i] + ";" + stars[i].name + stars[i].GetComponent<SystemInteraction>().indexSystem; //Write positions (dont care of z) , scale (dont care of z) , and index of the sprite
             }
 
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/universe.map", lines);
@@ -81,6 +83,8 @@ public class SystemsGenerator : MonoBehaviour {
                 GO.transform.localScale = new Vector3(float.Parse(tmp[2]), float.Parse(tmp[3]), 0);
                 GO.GetComponent<SpriteRenderer>().sprite = starTypes[int.Parse(tmp[4])];
                 GO.name = tmp[5];
+                SystemInteraction interaction = GO.GetComponent<SystemInteraction>();
+                interaction.setIndex(int.Parse(tmp[6]));
             }
         }
 

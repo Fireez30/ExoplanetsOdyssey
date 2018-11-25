@@ -34,3 +34,4 @@ sysinfo.txt
 *.csproj
 ExoplanetsOdyssey/*.csproj
 ExoplanetsOdyssey/*.cache
+*.sln
