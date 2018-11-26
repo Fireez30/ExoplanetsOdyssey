@@ -11,6 +11,7 @@ TagManager:
   - loadingtext
   - universewintext
   - cout
+  - ship
   layers:
   - Default
   - TransparentFX

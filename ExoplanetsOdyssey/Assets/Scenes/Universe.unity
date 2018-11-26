@@ -361,40 +361,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 147846, guid: e2a563409f05b26429e07cb45c0d2ea2,
     type: 2}
   m_PrefabInternal: {fileID: 1379291159}
---- !u!114 &649874526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 649874525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab2499534e104746917d5a9df7b20be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 50
-  rb: {fileID: 649874527}
-  timerConsoCarbu: 4
---- !u!50 &649874527
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 649874525}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1.5
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &704358106
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +484,35 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 51fbeb56867bf164095985e87ca7170b, type: 3}
   - {fileID: 21300000, guid: ecb1047773a3c2946a9681b3efeee706, type: 3}
   - {fileID: 21300000, guid: 34f34ae36eb3d854386f09ff52caf60d, type: 3}
-  gamemanager: {fileID: 1767470802}
+  starNames:
+  - Alpha
+  - Beta
+  - Gamma
+  - Delta
+  - Epsilon
+  - Dzeta
+  - Eta
+  - Theta
+  - Iota
+  - Kappa
+  - Lambda
+  - Mu
+  - Nu
+  - Xi
+  - Omicron
+  - Pi
+  - Rho
+  - Sigma
+  - Tau
+  - Upsilon
+  - Phi
+  - Khi
+  - Psi
+  - Omega
+  xMin: -8
+  xMax: 8
+  yMin: -4
+  yMax: 4
 --- !u!4 &894676525
 Transform:
   m_ObjectHideFlags: 0
@@ -660,30 +654,6 @@ Prefab:
     - target: {fileID: 420902, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 420902, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2.1148205
-      objectReference: {fileID: 0}
-    - target: {fileID: 420902, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2.0394413
-      objectReference: {fileID: 0}
-    - target: {fileID: 21296622, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
-      propertyPath: m_SortingOrder
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 21296622, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
-      propertyPath: m_SortingLayerID
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 21296622, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
-      propertyPath: m_SortingLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 147846, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
@@ -986,6 +956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1767470804}
   - component: {fileID: 1767470803}
+  - component: {fileID: 1767470805}
   m_Layer: 0
   m_Name: GM
   m_TagString: GameManager
@@ -1010,6 +981,9 @@ MonoBehaviour:
   planetType: classic
   currentSystem: -1
   currentPlanet: 0
+  maxFuel: 100
+  maxOxygen: 100
+  maxIron: 100
 --- !u!4 &1767470804
 Transform:
   m_ObjectHideFlags: 0
@@ -1023,6 +997,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1767470805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1767470802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b84296787104204a8a89fa068ead49c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelAmount: 0
+  ironAmount: 0
+  shipOxygenAmount: 0
 --- !u!1 &1866041726
 GameObject:
   m_ObjectHideFlags: 0

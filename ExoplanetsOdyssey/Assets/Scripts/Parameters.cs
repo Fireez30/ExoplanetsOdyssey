@@ -18,6 +18,10 @@ public class Parameters : MonoBehaviour {
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
     private int nbHabitable;
 
+    public int maxFuel;
+    public int maxOxygen;
+    public int maxIron;
+
 	// Use this for initialization
 	void Awake () {
         if (!Instance)                              //Structure Singleton
@@ -39,7 +43,7 @@ public class Parameters : MonoBehaviour {
                 }
             }
 
-            while(nbHabitable < 10)
+           /* while(nbHabitable < 10)
             {
                 for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
                 {
@@ -58,11 +62,11 @@ public class Parameters : MonoBehaviour {
                 }
                 if (nbHabitable >= 10)
                     break;
-            }
+            }*/
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
     
@@ -90,9 +94,18 @@ public class Parameters : MonoBehaviour {
 
     public int getRandomInt(int max)
     {
-        System.Random rd = new System.Random();
-        return rd.Next(max);
+        return rand.Next(max);
     }
+    public int getRandomInt(int min, int max)
+    {
+        return rand.Next(min, max);
+    }
+
+    public float getRandomFloat(double minimum, double maximum)
+    {
+        return (float)(rand.NextDouble() * (maximum - minimum) + minimum);
+    }
+
 
 
     /**
