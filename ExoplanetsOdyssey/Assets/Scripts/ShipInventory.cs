@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ShipInventory : MonoBehaviour {
 
-    private int fuelAmount;
-    private int ironAmount;
-    private int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
+    public int fuelAmount;
+    public int ironAmount;
+    public int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
 
     private int scannerState;                                                             // 0 - 1  0 = marche pas  1 = marche bien
     private int fuelTankState;                                                               //0 - 1
     private int oxygenTankState;                                                             //0 - 1
 
-    void Start () {
+    public void ReadFile()
+    {
 
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/player.save"))
         {
@@ -37,6 +38,10 @@ public class ShipInventory : MonoBehaviour {
             fuelTankState = int.Parse(tmp2[2]);
             oxygenTankState = int.Parse(tmp2[3]);
         }
+    }
+
+    void Start () {
+        ReadFile();
     }
 
     public void computeChangesToFile()

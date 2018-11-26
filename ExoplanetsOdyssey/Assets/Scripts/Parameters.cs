@@ -18,6 +18,10 @@ public class Parameters : MonoBehaviour {
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
     private int nbHabitable;
 
+    public int maxFuel;
+    public int maxOxygen;
+    public int maxIron;
+
 	// Use this for initialization
 	void Awake () {
         if (!Instance)                              //Structure Singleton

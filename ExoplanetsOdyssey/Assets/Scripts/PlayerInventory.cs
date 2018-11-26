@@ -65,5 +65,6 @@ public class PlayerInventory : MonoBehaviour {
             lines[1] += tileAmounts[i]+";";
         lines[1] += tileAmounts[tileAmounts.Count - 1];
         System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", lines);
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().ReadFile();
     }
 }
