@@ -10,12 +10,11 @@ public class shipMovement : MonoBehaviour {
     //public float timerConsoCarbu;
 
     public int moveCost;
-    private int timer = 2;
 
     public bool moving = false;
     public Vector3 heading;
-    int nbpas;
     Transform theTarget;
+
 	// Update is called once per frame
 	void FixedUpdate () {
   /*      float moveH = Input.GetAxis("Horizontal"), moveV = Input.GetAxis("Vertical");                                                                //-1 si joueur appuie sur Q/<- ou 1 si le joueur appuie sur D/->
@@ -46,7 +45,6 @@ public class shipMovement : MonoBehaviour {
     public void MoveTo(Transform target)
     {
         heading = target.position - gameObject.transform.position;
-        nbpas = (int)heading.magnitude;
         theTarget = target;
         StartCoroutine(Move());
     }
