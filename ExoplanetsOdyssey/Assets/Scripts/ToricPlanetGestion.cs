@@ -18,7 +18,7 @@ public class ToricPlanetGestion : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (Charas[1].position.x < 0 && !player.GetComponent<PlayerMove>().facingRight)             //If player cross left trigger and he is facing left
         {
             Cameras[2].gameObject.SetActive(true);//camera droite

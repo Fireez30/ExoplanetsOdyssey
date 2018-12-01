@@ -36,7 +36,7 @@ public class shipMovement : MonoBehaviour {
         if (moving)
         {
             heading = theTarget.position - gameObject.transform.position;
-            transform.Translate(heading * Time.deltaTime * speed);
+            transform.Translate(heading * Time.fixedDeltaTime * speed);
         }
 
     }

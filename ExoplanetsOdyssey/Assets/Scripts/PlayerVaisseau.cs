@@ -11,7 +11,7 @@ public class PlayerVaisseau : MonoBehaviour {
 		
 	}
 	
-	void Update () {
+	void FixedUpdate () {
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
         transform.Rotate(0, rotation, 0);
     }

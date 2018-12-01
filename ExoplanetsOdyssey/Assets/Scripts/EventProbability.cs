@@ -11,15 +11,6 @@ public class EventProbability : MonoBehaviour {
     public float probaFuel = 5f;
     public float probaScan = 5f;
 
-    // Use this for initialization
-    void Start () {
-        
-    }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 
     void checkProbaBreak()
     {

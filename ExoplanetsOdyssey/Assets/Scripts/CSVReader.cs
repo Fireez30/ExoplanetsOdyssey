@@ -8,7 +8,7 @@ public class CSVReader : MonoBehaviour {
 
     private string[] infos;
 
-	void Start () {
+	void Awake () {
         if(csvFile != null)
             infos = csvFile.text.Split('\n');
 	}

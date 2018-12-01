@@ -13,11 +13,6 @@ public class OxygenLeak : MonoBehaviour {
 	void Start () {
 		InvokeRepeating ("Loss", 1, 1); // premier 1 = fonction se déclanche 1 s après l'appel, second 1 = appel toute les 1 secondes
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	void Loss() {
 		if(leak == true)

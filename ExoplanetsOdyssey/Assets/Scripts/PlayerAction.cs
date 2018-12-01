@@ -26,7 +26,7 @@ public class PlayerAction : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if(HelmetOn == false)
 		{
 			OxyLeak.leak = true;
