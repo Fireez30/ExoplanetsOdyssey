@@ -30,13 +30,8 @@ public class SystemInteraction : MonoBehaviour {
     {
         Debug.Log("Mouse entered");
         //Vector3 pos = gameObject.transform.position;
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (indexSystem != param.currentSystem)//check if mouse is on a different system
         {
-            Debug.Log("Ray fired");
-            if (hit.transform.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())//check if mouse is on a different system
-            {
                 //if it's
                 Debug.Log("We are not the same");
                 Vector3 pos = Input.mousePosition;
@@ -77,7 +72,6 @@ public class SystemInteraction : MonoBehaviour {
                 system.text = gameObject.name;
                 cost.text = costvalue + "";
                 fenetre.SetActive(true);
-            }
         }
     }
 

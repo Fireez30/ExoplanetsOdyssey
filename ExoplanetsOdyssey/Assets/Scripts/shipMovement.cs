@@ -10,7 +10,6 @@ public class shipMovement : MonoBehaviour {
     //public float timerConsoCarbu;
 
     public int moveCost;
-
     public bool moving = false;
     public Vector3 heading;
     Transform theTarget;
