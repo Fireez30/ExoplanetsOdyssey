@@ -9,12 +9,19 @@ public class CSVReader : MonoBehaviour {
     private string[] infos;
 
 	void Start () {
-        infos = csvFile.text.Split('\n');
+        if(csvFile != null)
+            infos = csvFile.text.Split('\n');
 	}
 	
 	public string getPlanetInfo()
     {
-        int r = Random.Range(0, infos.Length);
-        return infos[r];
+        if(infos != null) {
+            if (infos.Length > 0)
+            {
+                int r = Random.Range(0, infos.Length);
+                return infos[r];
+            }
+        }
+        return "";
     }
 }

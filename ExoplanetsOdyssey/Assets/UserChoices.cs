@@ -40,4 +40,10 @@ public struct Choice
 {
     public int systemIndex;
     public int planetIndex;
+
+    public Choice(int systemIndex, int planetIndex)
+    {
+        this.systemIndex = systemIndex;
+        this.planetIndex = planetIndex;
+    }
 }

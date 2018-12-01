@@ -13,6 +13,7 @@ public class Spaceship_Planet : MonoBehaviour {
     private CSVReader csvReader;
     private Image bar;
     private Text loadtxt;
+    private int seed;
 
     [SerializeField]                           //A enlever parce que ce sera généré aléatoirement et pas défini par nous (juste le serialize)
     private string infoPlaceholder = "";
@@ -31,7 +32,8 @@ public class Spaceship_Planet : MonoBehaviour {
 
     void Start()
     {
-        infoPlaceholder = csvReader.getPlanetInfo();
+        infoPlaceholder = param.getTypes()[seed];
+        Debug.Log("Info : " + infoPlaceholder);
     }
 
     private void OnMouseHover()
@@ -58,5 +60,9 @@ public class Spaceship_Planet : MonoBehaviour {
 
     public void setIndexPlanet(int i) {
         indexPlanet = i;
+    }
+
+    public void setSeed(int s) {
+        seed = s;
     }
 }

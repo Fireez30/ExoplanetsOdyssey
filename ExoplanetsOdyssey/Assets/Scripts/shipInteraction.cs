@@ -25,6 +25,7 @@ public class shipInteraction : MonoBehaviour {
                     Vector3 pos = new Vector3(xMin + (i / (float)seedPlanets.Count) * (xMax - xMin), 2, 0);
                     GameObject temp = Instantiate(planetPrefab, pos, Quaternion.identity);
                     temp.GetComponent<Spaceship_Planet>().setIndexPlanet(i);                                    //Pour que chaque planète connaise son index au sein du système
+                    temp.GetComponent<Spaceship_Planet>().setSeed(seedPlanets[i]);
                 }
             }
         }

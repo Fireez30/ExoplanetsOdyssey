@@ -18,11 +18,14 @@ public class Parameters : MonoBehaviour {
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
     private int nbHabitable;
 
+    private List<Choice> habitables;
+
     public int maxFuel;
     public int maxOxygen;
     public int maxIron;
+		
+	public bool firstMove;
 
-    public bool firstMove; // used to make firstMove free
 	// Use this for initialization
 	void Awake () {
         if (!Instance)                              //Structure Singleton
@@ -31,6 +34,7 @@ public class Parameters : MonoBehaviour {
             DontDestroyOnLoad(this);                //Conserver antre les scènes
             seedsPlanetes = new List<List<int>>();
             typePlanete = new Dictionary<int, string>();
+            habitables = new List<Choice>();
             rand = new System.Random(seedBase.GetHashCode());   //Random seedé
             for(int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
             {
@@ -39,32 +43,33 @@ public class Parameters : MonoBehaviour {
                 {
                     int seed = rand.Next(-999999999, 999999999);
                     seedsPlanetes[i].Add(seed);
-                    string info = generatePlanet(seed);
+                    string info = generatePlanet(seed, i, i2);
                     typePlanete.Add(seed, info);
                 }
             }
 
-            /* while(nbHabitable < 10)
-             {
-                 for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
-                 {
-                     for (int i2 = 0; i2 < nbPlanete; i2++)
-                     {
-                         int seed = seedsPlanetes[i][i2];
-                         if (seed < 0)
-                         {
-                             int newSeed = rand.Next(-999999999, 999999999);
-                             seedsPlanetes[i][i2] = newSeed;
-                             string info = generatePlanet(newSeed);
-                             typePlanete.Remove(seed);
-                             typePlanete.Add(newSeed, info);
-                         }
-                     }
-                 }
-                 if (nbHabitable >= 10)
-                     break;
-             }*/
-            firstMove = true;
+            while(nbHabitable < 10)
+            {
+                for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
+                {
+                    for (int i2 = 0; i2 < nbPlanete; i2++)
+                    {
+                        int seed = seedsPlanetes[i][i2];
+                        if (seed < 0)
+                        {
+                            int newSeed = rand.Next(-999999999, 999999999);
+                            seedsPlanetes[i][i2] = newSeed;
+                            string info = generatePlanet(newSeed, i, i2);
+                            typePlanete.Remove(seed);
+                            typePlanete.Add(newSeed, info);
+                        }
+                       
+                    }
+                }
+                if (nbHabitable >= 10)
+                    break;
+            }
+						firstMove = true;
         }
         else
         {
@@ -131,7 +136,7 @@ public class Parameters : MonoBehaviour {
 
     private string[] type = { "Rocheuse", "Gazeuse" };
 
-    private string generatePlanet(int seed)
+    private string generatePlanet(int seed, int numSysteme, int numPlanet)
     {
         string info = "";
 
@@ -142,11 +147,13 @@ public class Parameters : MonoBehaviour {
                 info += type[0];
             else
                 info += type[1];
-
+            
+            info += ",";
             int temperature = seed % 300;
             if(mod == 0) // t < 0
-                info += ",-";
-            info += temperature;
+                info += Mathf.Abs(temperature);
+            else
+                info += temperature;
 
         }
         else // habitable
@@ -160,6 +167,7 @@ public class Parameters : MonoBehaviour {
             //[min, max] : interval cible
             int temperature = (temp * 20) / 300 + 20;
             info += "," + temperature;
+            habitables.Add(new Choice(numSysteme, numPlanet));
         }
 
 
@@ -170,5 +178,10 @@ public class Parameters : MonoBehaviour {
     private bool isHabitable()
     {
         return false;
+    }
+
+    public Dictionary<int, string> getTypes()
+    {
+        return typePlanete;
     }
 }
