@@ -24,47 +24,62 @@ public class SystemInteraction : MonoBehaviour {
         system = GameObject.FindGameObjectWithTag("universewintext").GetComponentInChildren<Text>();
         ship = GameObject.FindGameObjectWithTag("ship");
     }
-	
-	// Affiche le nom du système quand on passe sa souris dessus
-	void OnMouseEnter () {
+
+    // Affiche le nom du système quand on passe sa souris dessus
+    void OnMouseEnter()
+    {
+        Debug.Log("Mouse entered");
         //Vector3 pos = gameObject.transform.position;
-        Vector3 pos = Input.mousePosition;
-        pos.z = 1;
-        if (Input.mousePosition.y > Screen.height/2)
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            if (Input.mousePosition.x > Screen.width / 2)
+            Debug.DrawLine(ray.origin, hit.point);
+            Debug.Log("Ray fired");
+            if (hit.transform.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())//check if mouse is on a different system
             {
-                pos.x -= offset;
-                pos.y -= offset;
-            }
-            else
-            {
-                pos.x += offset;
-                pos.y -= offset;
+                //if it's
+                Debug.Log("We are not the same");
+                Vector3 pos = Input.mousePosition;
+                pos.z = 1;
+                if (Input.mousePosition.y > Screen.height / 2)
+                {
+                    if (Input.mousePosition.x > Screen.width / 2)
+                    {
+                        pos.x -= offset;
+                        pos.y -= offset;
+                    }
+                    else
+                    {
+                        pos.x += offset;
+                        pos.y -= offset;
+                    }
+                }
+                else
+                {
+                    if (Input.mousePosition.x > Screen.width / 2)
+                    {
+                        pos.x -= offset;
+                        pos.y += offset;
+                    }
+                    else
+                    {
+                        pos.x += offset;
+                        pos.y += offset;
+                    }
+                }
+                costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem);
+                if (costvalue == 0){ costvalue = 1; }
+                fenetre.transform.position = Camera.main.ScreenToWorldPoint(pos);
+                if (param.firstMove)
+                {
+                    costvalue = 0;
+                }
+                system.text = gameObject.name;
+                cost.text = costvalue + "";
+                fenetre.SetActive(true);
             }
         }
-        else
-        {
-            if (Input.mousePosition.x > Screen.width / 2)
-            {
-                pos.x -= offset;
-                pos.y += offset;
-            }
-            else
-            {
-                pos.x += offset;
-                pos.y += offset;
-            }
-        }
-        costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem);
-        fenetre.transform.position = Camera.main.ScreenToWorldPoint(pos);
-        if (param.firstMove)
-        {
-            costvalue = 0;
-        }
-        system.text = gameObject.name;
-        cost.text = costvalue+"";
-        fenetre.SetActive(true);
     }
 
     //Fait disparaitre le nom du système quand la souris n'est plus dessus
