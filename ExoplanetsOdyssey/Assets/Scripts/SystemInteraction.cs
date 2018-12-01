@@ -34,7 +34,6 @@ public class SystemInteraction : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Debug.DrawLine(ray.origin, hit.point);
             Debug.Log("Ray fired");
             if (hit.transform.gameObject.GetInstanceID() != this.gameObject.GetInstanceID())//check if mouse is on a different system
             {
@@ -91,22 +90,34 @@ public class SystemInteraction : MonoBehaviour {
 
     private void OnMouseDown()
     {
+        if (!ship.GetComponent<shipMovement>().moving)
+        {
+            if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
+            {
+                ship.GetComponent<shipMovement>().MoveTo(this.gameObject.transform);
+                StartCoroutine(Transport());
+            }
+            else
+            {
+                cost.color = Color.red;
+            }
+        }
+    }
+
+    private IEnumerator Transport()
+    {
+        yield return new WaitUntil(() => !ship.GetComponent<shipMovement>().getMoving());
         if (param.firstMove)//first move is free
         {
             param.setCurrentSystem(indexSystem);
             param.firstMove = false;
             SceneManager.LoadScene(1);
-            return;
-
         }
-        if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
-       {
+        else
+        {
             param.setCurrentSystem(indexSystem);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount -= costvalue;
-            SceneManager.LoadScene(1);                                              //Vers le vaisseau
-        }
-        else {
-            cost.color = Color.red;
+            SceneManager.LoadScene(1); //Vers le vaisseau
         }
     }
 

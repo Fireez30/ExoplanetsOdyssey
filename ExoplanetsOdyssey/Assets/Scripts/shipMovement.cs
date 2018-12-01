@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 public class shipMovement : MonoBehaviour {
 
     public float speed;
-    public Rigidbody2D rb;
-    public float timerConsoCarbu;
+    //public Rigidbody2D rb;
+    //public float timerConsoCarbu;
 
     public int moveCost;
-    private float timer = 0;
+    private int timer = 2;
 
+    public bool moving = false;
+    public Vector3 heading;
+    int nbpas;
+    Transform theTarget;
 	// Update is called once per frame
 	void FixedUpdate () {
   /*      float moveH = Input.GetAxis("Horizontal"), moveV = Input.GetAxis("Vertical");                                                                //-1 si joueur appuie sur Q/<- ou 1 si le joueur appuie sur D/->
@@ -31,8 +35,32 @@ public class shipMovement : MonoBehaviour {
             }
         }
         */
+        if (moving)
+        {
+            heading = theTarget.position - gameObject.transform.position;
+            transform.Translate(heading * Time.deltaTime * speed);
+        }
 
+    }
 
+    public void MoveTo(Transform target)
+    {
+        heading = target.position - gameObject.transform.position;
+        nbpas = (int)heading.magnitude;
+        theTarget = target;
+        StartCoroutine(Move());
+    }
+
+    public bool getMoving()
+    {
+        return moving;
+    }
+
+    IEnumerator Move()
+    {
+        moving = true;
+        yield return new WaitUntil(() => (transform.position.x - theTarget.position.x < 0.1 && transform.position.y - theTarget.position.y < 0.1));
+        moving = false;
     }
 
     public int calculateCost(int indexSystem)
