@@ -22,6 +22,7 @@ public class Parameters : MonoBehaviour {
     public int maxOxygen;
     public int maxIron;
 
+    public bool firstMove; // used to make firstMove free
 	// Use this for initialization
 	void Awake () {
         if (!Instance)                              //Structure Singleton
@@ -43,26 +44,27 @@ public class Parameters : MonoBehaviour {
                 }
             }
 
-           /* while(nbHabitable < 10)
-            {
-                for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
-                {
-                    for (int i2 = 0; i2 < nbPlanete; i2++)
-                    {
-                        int seed = seedsPlanetes[i][i2];
-                        if (seed < 0)
-                        {
-                            int newSeed = rand.Next(-999999999, 999999999);
-                            seedsPlanetes[i][i2] = newSeed;
-                            string info = generatePlanet(newSeed);
-                            typePlanete.Remove(seed);
-                            typePlanete.Add(newSeed, info);
-                        }
-                    }
-                }
-                if (nbHabitable >= 10)
-                    break;
-            }*/
+            /* while(nbHabitable < 10)
+             {
+                 for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
+                 {
+                     for (int i2 = 0; i2 < nbPlanete; i2++)
+                     {
+                         int seed = seedsPlanetes[i][i2];
+                         if (seed < 0)
+                         {
+                             int newSeed = rand.Next(-999999999, 999999999);
+                             seedsPlanetes[i][i2] = newSeed;
+                             string info = generatePlanet(newSeed);
+                             typePlanete.Remove(seed);
+                             typePlanete.Add(newSeed, info);
+                         }
+                     }
+                 }
+                 if (nbHabitable >= 10)
+                     break;
+             }*/
+            firstMove = true;
         }
         else
         {

@@ -58,27 +58,40 @@ public class SystemInteraction : MonoBehaviour {
         }
         costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem);
         fenetre.transform.position = Camera.main.ScreenToWorldPoint(pos);
+        if (param.firstMove)
+        {
+            costvalue = 0;
+        }
         system.text = gameObject.name;
-        cost.text = ""+costvalue;
+        cost.text = costvalue+"";
         fenetre.SetActive(true);
     }
 
     //Fait disparaitre le nom du système quand la souris n'est plus dessus
     void OnMouseExit()
     {
+        cost.color = Color.white;
         fenetre.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        if (costvalue < GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
+        if (param.firstMove)//first move is free
+        {
+            param.setCurrentSystem(indexSystem);
+            param.firstMove = false;
+            SceneManager.LoadScene(1);
+            return;
+
+        }
+        if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
        {
             param.setCurrentSystem(indexSystem);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount -= costvalue;
             SceneManager.LoadScene(1);                                              //Vers le vaisseau
         }
         else {
-            //user feedback
+            cost.color = Color.red;
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChoiceWindow : MonoBehaviour {
     public GameObject fenetrechoix;
     bool active = false;
-    int actual;
+    public int actual = -1;
 
     public void showChoiceWindow()
     {

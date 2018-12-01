@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 114327426017484048}
   m_Layer: 5
   m_Name: Cout
-  m_TagString: cout
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 114652438787608584}
   m_Layer: 5
   m_Name: "quantit\xE9"
-  m_TagString: Untagged
+  m_TagString: cout
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

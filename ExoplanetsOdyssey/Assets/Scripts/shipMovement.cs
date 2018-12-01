@@ -37,14 +37,20 @@ public class shipMovement : MonoBehaviour {
 
     public int calculateCost(int indexSystem)
     {
-        float distance = (this.gameObject.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).magnitude;
-        moveCost = 0;
-        //calculate the moveCost here
-        if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().GetFuelTankState() == 0)//if fuel tank not working
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray,out hit, Mathf.Infinity))
         {
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().setCurrentSystem(indexSystem);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
-            SceneManager.LoadScene(1);                                              //Vers le vaisseau
-            moveCost += moveCost / 10;//
+            if (hit.transform.gameObject != null)
+            {
+                float distance = (this.gameObject.transform.position - hit.transform.position).magnitude;//world distance
+                moveCost = ((int)distance);//change move cost
+                if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().GetFuelTankState() == 0)//if fuel tank not working
+                {                                          //Vers le vaisseau
+                    moveCost += moveCost / 10;//if tank damaged, +10% cost
+                }
+            }
+
         }
 
         return moveCost;
