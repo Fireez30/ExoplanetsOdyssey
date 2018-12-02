@@ -35,7 +35,7 @@ public class RandomEventWindow : MonoBehaviour {
         this.gameObject.SetActive(false);
     }
 
-    void UpdateLights()
+    public void UpdateLights()
     {
         if  (p.GetFuelTankState() == 0 && FuelSlot.GetComponent<SpriteRenderer>().sprite != red)
         {
@@ -66,11 +66,11 @@ public class RandomEventWindow : MonoBehaviour {
 
         if (p.GetScannerState() == 0 || p.GetOxygenTankState() == 0 || p.GetFuelTankState() == 0)
         {
-            display.text = "Ouch ! Il semblerait qu'au moins un de vos appareils soit endommagé ! Voici l'état du vaisseau :";
+            display.text = "Ouch ! Il semblerait qu'au moins un de vos appareils soit endommagé !";
         }
         else
         {
-            display.text = "Il n'y a eu aucun soucis durant le voyage jusqu'à cette étoile. Tous les appareils fonctionnent bien.";
+            display.text = "Il n'y a eu aucun soucis durant le voyage jusqu'à cette étoile.";
         }
     }
 }

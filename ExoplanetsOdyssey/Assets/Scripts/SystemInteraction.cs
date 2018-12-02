@@ -93,6 +93,8 @@ public class SystemInteraction : MonoBehaviour {
             {
                 ship.GetComponent<shipMovement>().MoveTo(this.gameObject.transform);
                 StartCoroutine(Transport());
+                eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+                eventW.gameObject.transform.position = new Vector3(eventW.gameObject.transform.position.x, eventW.gameObject.transform.position.y, 0);
             }
             else
             {
@@ -103,8 +105,7 @@ public class SystemInteraction : MonoBehaviour {
 
     private IEnumerator Transport()
     {
-        eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        eventW.gameObject.transform.position = new Vector3(eventW.gameObject.transform.position.x, eventW.gameObject.transform.position.y, 0);
+        eventW.UpdateLights();
         yield return new WaitUntil(() => !ship.GetComponent<shipMovement>().getMoving() && eventW.GetOk());
         if (param.firstMove)//first move is free
         {
