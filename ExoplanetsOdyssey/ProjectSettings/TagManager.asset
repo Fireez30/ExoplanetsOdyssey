@@ -12,6 +12,7 @@ TagManager:
   - universewintext
   - cout
   - ship
+  - eventdisplay
   layers:
   - Default
   - TransparentFX

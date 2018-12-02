@@ -16,6 +16,8 @@ public class SystemInteraction : MonoBehaviour {
     private int offset = 30;
     private static int nb = 0;
     GameObject ship;
+
+    RandomEventWindow eventW;
     // Use this for initialization
     void Awake () {
         fenetre = GameObject.FindGameObjectWithTag("SystemInfos");
@@ -23,6 +25,7 @@ public class SystemInteraction : MonoBehaviour {
         cost = GameObject.FindGameObjectWithTag("cout").GetComponent<Text>();
         system = GameObject.FindGameObjectWithTag("universewintext").GetComponentInChildren<Text>();
         ship = GameObject.FindGameObjectWithTag("ship");
+        eventW = GameObject.FindGameObjectWithTag("eventdisplay").GetComponent<RandomEventWindow>();
     }
 
     // Affiche le nom du système quand on passe sa souris dessus
@@ -100,7 +103,9 @@ public class SystemInteraction : MonoBehaviour {
 
     private IEnumerator Transport()
     {
-        yield return new WaitUntil(() => !ship.GetComponent<shipMovement>().getMoving());
+        eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        eventW.gameObject.transform.position = new Vector3(eventW.gameObject.transform.position.x, eventW.gameObject.transform.position.y, 0);
+        yield return new WaitUntil(() => !ship.GetComponent<shipMovement>().getMoving() && eventW.GetOk());
         if (param.firstMove)//first move is free
         {
             param.setCurrentSystem(indexSystem);
