@@ -13,6 +13,7 @@ TagManager:
   - cout
   - ship
   - eventdisplay
+  - planet
   layers:
   - Default
   - TransparentFX

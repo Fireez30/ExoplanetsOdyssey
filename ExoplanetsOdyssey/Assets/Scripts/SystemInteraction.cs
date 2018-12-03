@@ -109,13 +109,13 @@ public class SystemInteraction : MonoBehaviour {
         yield return new WaitUntil(() => !ship.GetComponent<shipMovement>().getMoving() && eventW.GetOk());
         if (param.firstMove)//first move is free
         {
-            param.setCurrentSystem(indexSystem);
+            param.setCurrentSystem(indexSystem,gameObject.name);
             param.firstMove = false;
             SceneManager.LoadScene(1);
         }
         else
         {
-            param.setCurrentSystem(indexSystem);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
+            param.setCurrentSystem(indexSystem,gameObject.name);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount -= costvalue;
             SceneManager.LoadScene(1); //Vers le vaisseau
         }

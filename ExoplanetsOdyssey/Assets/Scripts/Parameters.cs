@@ -14,11 +14,13 @@ public class Parameters : MonoBehaviour {
     private List<List<int>> seedsPlanetes;          //Stocke toutes les seeds de nos planètes, rangé par système List[indexSystem][indexPlanete] 
     private Dictionary<int, string> typePlanete;    //associe le type de planete a chaque seed
     public int currentSystem = -1;
+    public string currentSystemName; //pour l'affichage final de l'utilisateur
     public int currentPlanet;         //Système sélectionné par le joueur / Planète choisi par le joueur -> Permet de retrouver la seed de la planète dans seedsPlanetes
+    public string currentPlanetName; //pour l'affichage final a l'utilisateur
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
-    private int nbHabitable;
+    public int nbHabitable;
 
-    private List<Choice> habitables;
+    public List<Choice> habitables;
 
     public int maxFuel;
     public int maxOxygen;
@@ -83,14 +85,16 @@ public class Parameters : MonoBehaviour {
         return seedsPlanetes[currentSystem][currentPlanet];
     }
 
-    public void setCurrentSystem(int i)
+    public void setCurrentSystem(int i,string name)
     {
         currentSystem = i;
+        currentSystemName = name;
     }
 
-    public void setCurrentPlanet(int i)
+    public void setCurrentPlanet(int i,string name)
     {
         currentPlanet = i;
+        currentPlanetName = name;
     }
 
     //Récupère toutes les seeds des planètes d'un système

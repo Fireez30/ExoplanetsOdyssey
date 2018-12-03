@@ -41,7 +41,8 @@ public class Spaceship_Planet : MonoBehaviour {
         info.text = infoPlaceholder;
     }
     private void OnMouseDown() {
-        param.setCurrentPlanet(indexPlanet);
+        GameObject[] planets = GameObject.FindGameObjectsWithTag("planet");
+        param.setCurrentPlanet(indexPlanet,planets[indexPlanet].name);
         StartCoroutine(LoadScene());
     }
 
