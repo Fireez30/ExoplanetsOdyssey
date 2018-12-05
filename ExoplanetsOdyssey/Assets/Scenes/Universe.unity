@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 226167679}
   - component: {fileID: 226167678}
   m_Layer: 5
-  m_Name: FuelText
+  m_Name: ScannerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 580676903}
   - component: {fileID: 580676902}
   m_Layer: 5
-  m_Name: FuelText
+  m_Name: OxygenText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FuelSlot: {fileID: 1128975494}
   OxygenSlot: {fileID: 1167459309}
-  ScannerSlot: {fileID: 0}
+  ScannerSlot: {fileID: 1409849145}
   red: {fileID: 21300000, guid: 4ef08baefff6b8145be79f7938fb3c5c, type: 3}
   green: {fileID: 21300000, guid: 9486ce5fa1651a740b2aa378c65052e6, type: 3}
   display: {fileID: 311956104}
@@ -1573,7 +1573,7 @@ GameObject:
   - component: {fileID: 1409849146}
   - component: {fileID: 1409849147}
   m_Layer: 5
-  m_Name: EngineState
+  m_Name: ScannerState
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1793,6 +1793,7 @@ GameObject:
   - component: {fileID: 1767470803}
   - component: {fileID: 1767470805}
   - component: {fileID: 1767470806}
+  - component: {fileID: 1767470807}
   m_Layer: 0
   m_Name: GM
   m_TagString: GameManager
@@ -1819,6 +1820,8 @@ MonoBehaviour:
   currentSystemName: 
   currentPlanet: 0
   currentPlanetName: 
+  nbHabitable: 0
+  habitables: []
   maxFuel: 100
   maxOxygen: 100
   maxIron: 100
@@ -1847,9 +1850,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b84296787104204a8a89fa068ead49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelAmount: 100
+  fuelAmount: 10
   ironAmount: 0
   shipOxygenAmount: 0
+  oxygenTankState: 0
 --- !u!114 &1767470806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1862,6 +1866,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choices: []
+--- !u!114 &1767470807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1767470802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e4de3f7b9a15042905f6035c7ab35e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  probaOxy: 5
+  probaFuel: 5
+  probaScan: 5
 --- !u!1001 &2077899751
 Prefab:
   m_ObjectHideFlags: 0

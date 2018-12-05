@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class SystemInteraction : MonoBehaviour {
 
     GameObject fenetre;
+    EventProbability ep;
     
     public int indexSystem;
     private Parameters param;
@@ -26,6 +27,8 @@ public class SystemInteraction : MonoBehaviour {
         system = GameObject.FindGameObjectWithTag("universewintext").GetComponentInChildren<Text>();
         ship = GameObject.FindGameObjectWithTag("ship");
         eventW = GameObject.FindGameObjectWithTag("eventdisplay").GetComponent<RandomEventWindow>();
+
+        ep = GameObject.FindGameObjectWithTag("GameManager").GetComponent<EventProbability>();
     }
 
     // Affiche le nom du système quand on passe sa souris dessus
@@ -91,6 +94,7 @@ public class SystemInteraction : MonoBehaviour {
         {
             if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
             {
+                ep.checkProbaBreak();
                 ship.GetComponent<shipMovement>().MoveTo(this.gameObject.transform);
                 StartCoroutine(Transport());
                 eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));

@@ -8,9 +8,13 @@ public class ShipInventory : MonoBehaviour {
     public int ironAmount;
     public int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
 
-    private int scannerState;                                                             // 0 - 1  0 = marche pas  1 = marche bien
+    private int scannerState;                                                                // 0 - 1  0 = marche pas  1 = marche bien
     private int fuelTankState;                                                               //0 - 1
     private int oxygenTankState;                                                             //0 - 1
+
+    private int ressourceRepareScanner = 10;
+    private int ressourceRepareFuelTank = 10;
+    private int ressourceRepareOxygenTank = 10;
 
     public void ReadFile()
     {
@@ -81,5 +85,32 @@ public class ShipInventory : MonoBehaviour {
     public void SetOxygenTankState(int etat)
     {
         oxygenTankState = etat;
+    }
+
+    public void repareScanner()
+    {
+        if( GetScannerState() == 0 && ironAmount - ressourceRepareScanner >= 0 )
+        {
+            ironAmount -= ressourceRepareScanner;
+            SetScannerState(1);
+        }
+    }
+
+    public void repareFuelTank()
+    {
+        if (GetFuelTankState() == 0 && ironAmount - ressourceRepareFuelTank >= 0)
+        {
+            ironAmount -= ressourceRepareFuelTank;
+            SetFuelTankState(1);
+        }
+    }
+
+    public void repareOxygenTank()
+    {
+        if (GetOxygenTankState() == 0 && ironAmount - ressourceRepareOxygenTank >= 0)
+        {
+            ironAmount -= ressourceRepareOxygenTank;
+            SetOxygenTankState(1);
+        }
     }
 }
