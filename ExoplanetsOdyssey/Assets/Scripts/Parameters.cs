@@ -119,27 +119,6 @@ public class Parameters : MonoBehaviour {
         return (float)(rand.NextDouble() * (maximum - minimum) + minimum);
     }
 
-
-
-    /**
-     * Au cas ou
-     **/
-    public void generatePlanets()
-    {
-        string filePath = "";
-        string planetInfo = "";
-
-        int nbPlanets = nbSystem * nbPlanete;
-
-        StreamWriter sw = new StreamWriter(filePath);
-
-
-        sw.WriteLine(planetInfo);
-
-        sw.Flush();
-        sw.Close();
-    }
-
     private string[] type = { "Rocheuse", "Gazeuse" };
 
     private string generatePlanet(int seed, int numSysteme, int numPlanet)
@@ -161,6 +140,29 @@ public class Parameters : MonoBehaviour {
             else
                 info += temperature;
 
+            int masse = seed % 8000;
+            int r = rand.Next(1, 3);
+            string puissance;
+            if (r == 1)
+                puissance = "*10^20";
+            else if (r == 2)
+                puissance = "*10^24";
+            else
+                puissance = "*10^28";
+
+            info += "," + masse / 1000.0f + puissance;
+            info += seed % 2 == 0 ? ",présence d'atmosphère" : ", pas d'atmosphère";
+
+            int prox = (seed / 10000) % 4;
+            if (prox == 0)
+                info += ",environnement proche calme";
+            else if (prox == 1)
+                info += ", amas globulaire proche";
+            else if (prox == 2)
+                info += ", forte présence de rayons gamma";
+            else
+                info += ", trou noir à proximité";
+
         }
         else // habitable
         {
@@ -173,6 +175,14 @@ public class Parameters : MonoBehaviour {
             //[min, max] : interval cible
             int temperature = (temp * 20) / 300 + 20;
             info += "," + temperature;
+
+            int masse = seed % 8000;
+            string puissance = "*10^24";
+
+            info += "," + masse / 1000.0f + puissance;
+
+            info += ",présence d'atmosphère";
+            info += ", environnement proche calme";
             habitables.Add(new Choice(numSysteme, numPlanet));
         }
 
