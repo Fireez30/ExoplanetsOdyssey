@@ -1822,6 +1822,7 @@ MonoBehaviour:
   currentPlanetName: 
   nbHabitable: 0
   habitables: []
+  shipSceneFirstVisit: 0
   maxFuel: 100
   maxOxygen: 100
   maxIron: 100
@@ -1853,7 +1854,6 @@ MonoBehaviour:
   fuelAmount: 10
   ironAmount: 0
   shipOxygenAmount: 0
-  oxygenTankState: 0
 --- !u!114 &1767470806
 MonoBehaviour:
   m_ObjectHideFlags: 0
