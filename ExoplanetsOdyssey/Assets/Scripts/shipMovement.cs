@@ -56,7 +56,7 @@ public class shipMovement : MonoBehaviour {
     IEnumerator Move()
     {
         moving = true;
-        yield return new WaitUntil(() => ((transform.position - theTarget.position).magnitude < 0.1));
+        yield return new WaitUntil(() => ((transform.position - theTarget.position).magnitude <= 0.2));
         moving = false;
     }
 

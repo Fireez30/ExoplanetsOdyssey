@@ -35,6 +35,7 @@ public class SystemInteraction : MonoBehaviour {
     void OnMouseEnter()
     {
         Debug.Log("Mouse entered");
+        ship.GetComponent<shipMovement>().calculateCost(indexSystem);
         //Vector3 pos = gameObject.transform.position;
         if (indexSystem != param.currentSystem)//check if mouse is on a different system
         {
@@ -90,21 +91,25 @@ public class SystemInteraction : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!ship.GetComponent<shipMovement>().moving)
-        {
-            if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
+
+            if (!ship.GetComponent<shipMovement>().moving)
             {
-                ep.checkProbaBreak();
-                ship.GetComponent<shipMovement>().MoveTo(this.gameObject.transform);
-                StartCoroutine(Transport());
-                eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-                eventW.gameObject.transform.position = new Vector3(eventW.gameObject.transform.position.x, eventW.gameObject.transform.position.y, 0);
+                if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
+                {
+                    if (indexSystem != param.currentSystem)//check if mouse is on a different system
+                    {
+                        ep.checkProbaBreak();
+                        eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+                        eventW.gameObject.transform.position = new Vector3(eventW.gameObject.transform.position.x, eventW.gameObject.transform.position.y, 0);
+                    }
+                    ship.GetComponent<shipMovement>().MoveTo(this.gameObject.transform);
+                    StartCoroutine(Transport());
+                }
+                else
+                {
+                    cost.color = Color.red;
+                }
             }
-            else
-            {
-                cost.color = Color.red;
-            }
-        }
     }
 
     private IEnumerator Transport()

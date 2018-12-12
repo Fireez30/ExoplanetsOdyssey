@@ -22,6 +22,7 @@ public class Parameters : MonoBehaviour {
 
     public List<Choice> habitables;
 
+    public bool shipSceneFirstVisit; //set this to true when visited ship scene for the first time ! 
     public int maxFuel;
     public int maxOxygen;
     public int maxIron;
@@ -35,6 +36,7 @@ public class Parameters : MonoBehaviour {
             Instance = this;
             DontDestroyOnLoad(this);                //Conserver antre les scènes
             seedsPlanetes = new List<List<int>>();
+            shipSceneFirstVisit = true;
             typePlanete = new Dictionary<int, string>();
             habitables = new List<Choice>();
             rand = new System.Random(seedBase.GetHashCode());   //Random seedé

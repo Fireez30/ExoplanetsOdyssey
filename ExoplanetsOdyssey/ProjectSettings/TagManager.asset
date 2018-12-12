@@ -14,6 +14,7 @@ TagManager:
   - ship
   - eventdisplay
   - planet
+  - planettype
   layers:
   - Default
   - TransparentFX

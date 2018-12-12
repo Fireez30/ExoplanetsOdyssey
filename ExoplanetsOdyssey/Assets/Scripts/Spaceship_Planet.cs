@@ -21,7 +21,7 @@ public class Spaceship_Planet : MonoBehaviour {
 
     void Awake () {
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
-        info = GameObject.Find("Canvas").GetComponentInChildren<Text>();
+        info = GameObject.FindGameObjectWithTag("planettype").GetComponent<Text>();
         csvReader = GameObject.Find("CSVReader").GetComponent<CSVReader>();
         bar = GameObject.FindGameObjectWithTag("loadingimage").GetComponent<Image>();
         loadtxt = GameObject.FindGameObjectWithTag("loadingtext").GetComponent<Text>();
@@ -32,13 +32,13 @@ public class Spaceship_Planet : MonoBehaviour {
 
     void Start()
     {
-        infoPlaceholder = param.getTypes()[seed];
-        Debug.Log("Info : " + infoPlaceholder);
+        infoPlaceholder = "Type : "+param.getTypes()[seed].Split(',')[0];   
     }
 
-    private void OnMouseHover()
+    private void OnMouseOver()
     {
         info.text = infoPlaceholder;
+        Debug.Log("Info : " + infoPlaceholder);
     }
     private void OnMouseDown() {
         GameObject[] planets = GameObject.FindGameObjectsWithTag("planet");
