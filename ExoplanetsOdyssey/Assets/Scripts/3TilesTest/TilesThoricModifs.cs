@@ -82,8 +82,8 @@ public class TilesThoricModifs : MonoBehaviour
                 switch (nameTile)
                 {
                     case "ground": timeBreak = 0.2f; break;
-                    case "Redstuff": timeBreak = 0.5f; break;
-                    case "BlueStuff": timeBreak = 0.8f; break;
+                    case "metal": timeBreak = 0.5f; break;
+                    case "carburant": timeBreak = 0.8f; break;
                     default: timeBreak = -1; break;                                                    //Si tileBreak == -1, alors on ne peux pas casser la tile
                 }
             }

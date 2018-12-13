@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: BlueStuff
+  m_Name: metal
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300002, guid: 4d139f222e0034d4dbb7a39f6eec3f7f, type: 3}
+  m_DefaultSprite: {fileID: 21300056, guid: dc5c3d5d404f89c45aee0ef4fcefa4fc, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules: []
