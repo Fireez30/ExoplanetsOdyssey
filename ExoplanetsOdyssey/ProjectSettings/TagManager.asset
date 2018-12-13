@@ -15,6 +15,7 @@ TagManager:
   - eventdisplay
   - planet
   - planettype
+  - planettemperature
   layers:
   - Default
   - TransparentFX

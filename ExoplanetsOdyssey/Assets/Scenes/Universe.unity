@@ -503,7 +503,7 @@ RectTransform:
   - {fileID: 633539032}
   - {fileID: 1263689300}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -736,7 +736,7 @@ Transform:
   m_LocalScale: {x: 19.301516, y: 10.069124, z: 4.637792}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &894676523
 GameObject:
@@ -816,7 +816,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1024577993
 GameObject:
@@ -1558,7 +1558,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 420902, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a563409f05b26429e07cb45c0d2ea2, type: 2}
@@ -1703,7 +1703,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1541645413
 GameObject:
@@ -1780,106 +1780,8 @@ Transform:
   m_LocalScale: {x: 1, y: 2.8125, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1767470802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1767470804}
-  - component: {fileID: 1767470803}
-  - component: {fileID: 1767470805}
-  - component: {fileID: 1767470806}
-  - component: {fileID: 1767470807}
-  m_Layer: 0
-  m_Name: GM
-  m_TagString: GameManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1767470803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1767470802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ed64e329419bd4cac7afe7af405b10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seedBase: nouvelle seed
-  nbSystem: 10
-  nbPlanete: 3
-  planetType: classic
-  currentSystem: -1
-  currentSystemName: 
-  currentPlanet: 0
-  currentPlanetName: 
-  nbHabitable: 0
-  habitables: []
-  shipSceneFirstVisit: 0
-  maxFuel: 100
-  maxOxygen: 100
-  maxIron: 100
-  firstMove: 0
---- !u!4 &1767470804
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1767470802}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1756067, y: 0.837889, z: 0.43787497}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1767470805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1767470802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b84296787104204a8a89fa068ead49c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fuelAmount: 10
-  ironAmount: 0
-  shipOxygenAmount: 0
---- !u!114 &1767470806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1767470802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1db743e9ea30f842bd0965a69caa212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  choices: []
---- !u!114 &1767470807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1767470802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65e4de3f7b9a15042905f6035c7ab35e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  probaOxy: 5
-  probaFuel: 5
-  probaScan: 5
 --- !u!1001 &2077899751
 Prefab:
   m_ObjectHideFlags: 0
