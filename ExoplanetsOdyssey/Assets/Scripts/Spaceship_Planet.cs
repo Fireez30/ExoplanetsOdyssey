@@ -33,7 +33,7 @@ public class Spaceship_Planet : MonoBehaviour {
 
     void Start()
     {
-        infoPlaceholder = param.getTypes()[seed];   
+        infoPlaceholder = param.getInfo(seed);   
     }
 
     private void OnMouseOver()

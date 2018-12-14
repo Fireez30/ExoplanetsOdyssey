@@ -140,7 +140,7 @@ public class Parameters : MonoBehaviour {
             else
                 info += temperature;
 
-            int masse = seed % 8000;
+            int masse = Mathf.Abs(seed % 8000);
             int r = rand.Next(1, 3);
             string puissance;
             if (r == 1)
@@ -173,6 +173,7 @@ public class Parameters : MonoBehaviour {
             //normalisée = (originale - MIN) * (max - min) / (MAX - MIN) + min 
             //[MIN, MAX] : interval d'origine 
             //[min, max] : interval cible
+            //entre 20 et 40
             int temperature = (temp * 20) / 300 + 20;
             info += "," + temperature;
 
@@ -185,9 +186,6 @@ public class Parameters : MonoBehaviour {
             info += ", environnement proche calme";
             habitables.Add(new Choice(numSysteme, numPlanet));
         }
-
-
-
         return info;
     }
 
@@ -199,5 +197,18 @@ public class Parameters : MonoBehaviour {
     public Dictionary<int, string> getTypes()
     {
         return typePlanete;
+    }
+
+    public int getSeed(int numSystem, int numPlanet)
+    {
+        return seedsPlanetes[numSystem][numPlanet];
+    }
+
+    public string getInfo(int seed)
+    {
+        string info;
+        if (!typePlanete.TryGetValue(seed, out info))
+            return null;
+        return info;
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComparaisonHabitables : MonoBehaviour {
 
@@ -9,13 +11,32 @@ public class ComparaisonHabitables : MonoBehaviour {
     List<string> lines;
     int planetNumber;
     public int nbCorrects;
+
+    private Parameters param;
+    private Text t;
+
 	// Use this for initialization
 	void Awake () {
+        param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         choices = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserChoices>().choices;
-        reals = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().habitables;
-        planetNumber = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().nbHabitable;
+        reals = param.habitables;
+        planetNumber = param.nbHabitable;
+        ComputeLines();
     }
-	
+
+    void Start()
+    {
+        t = transform.GetComponent<Text>();
+        foreach (string s in lines)
+            t.text += s + '\n';
+    }
+
+    void Update()
+    {
+        //scroll
+        t.transform.localPosition = new Vector2(t.transform.localPosition.x, t.transform.position.y * Time.deltaTime);
+    }
+
     void ComputeLines()
     {
         lines.Add("Félicitations vous avez choisi les " + planetNumber + " planètes que vous considérez habitables.");
@@ -40,12 +61,29 @@ public class ComparaisonHabitables : MonoBehaviour {
             else
             {
                 string s = "La planète " + c.planetName + " du système " + c.systemName + " n'est pas une planète habitable, pour les raisons suivantes : ";
-                s += "test";
-                //ajouter ici les test et construction du texte pour EXPLIQUER le choix a l'utilisateur
+
+                int seed = param.getSeed(c.systemIndex, c.planetIndex);
+                string[] infos = param.getInfo(seed).Split(',');
+
+                if (infos[0] == "Gazeuse")
+                    s += "elle est gazeuse \n";
+                if (20 > Int32.Parse(infos[1]))
+                    s += "elle est trop froide : " + infos[1] + "°\n";
+                else if (40 < Int32.Parse(infos[1]))
+                    s += "elle est trop chaude : " + infos[1] + "°\n";
+                if (Int32.Parse(infos[2].Split('^')[1]) == 20)
+                    s += "elle est trop légère\n";
+                else if (Int32.Parse(infos[2].Split('^')[1]) == 28)
+                    s += "elle est trop lourde\n";
+                if (infos[3].Contains("pas"))
+                    s += "il n'y a pas d'atmosphère\n";
+                if (!infos[4].Contains("calme"))
+                    s += infos[4];
+
+
                 lines.Add(s);
             }
         }
-
         lines.Add("Au final vous avez fais " + nbCorrects + " choix corrects sur " + planetNumber);
         //ajouter les félicitations tout ca tout ca
     }
