@@ -566,6 +566,7 @@ MonoBehaviour:
   BreathSpeed: 1
   AsphyxiaSpeed: 5
   HelmetOn: 1
+  Img: {fileID: 581478503}
 --- !u!1 &449847666
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +861,7 @@ MonoBehaviour:
   BreathSpeed: 1
   AsphyxiaSpeed: 5
   HelmetOn: 1
+  Img: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,7 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.97351444, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1452,7 +1454,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1142203349
@@ -1961,6 +1963,7 @@ MonoBehaviour:
   BreathSpeed: 1
   AsphyxiaSpeed: 5
   HelmetOn: 1
+  Img: {fileID: 0}
 --- !u!1 &1410618097
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,7 +3159,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Oxyg\xE8ne : "
+  m_Text: 
 --- !u!222 &1988564059
 CanvasRenderer:
   m_ObjectHideFlags: 0

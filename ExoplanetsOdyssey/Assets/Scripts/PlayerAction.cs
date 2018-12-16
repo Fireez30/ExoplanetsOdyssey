@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAction : MonoBehaviour {
 
@@ -15,6 +16,8 @@ public class PlayerAction : MonoBehaviour {
 	public int AsphyxiaSpeed = 5;
 
 	public bool HelmetOn = true;
+
+    public GameObject Img;
 
 	// Use this for initialization
 	void Start () {
@@ -33,8 +36,22 @@ public class PlayerAction : MonoBehaviour {
 		}
 		else{ OxyLeak.leak = false; }
 
-		TakeOff();		
-	}
+		TakeOff();
+
+        Img.GetComponent<Image>().fillAmount = (float)PI.oxygenAmount/100;
+        if( PI.oxygenAmount >= 50 )
+        {
+            Img.GetComponent<Image>().color = new Color32(255,255,255,255);
+        }
+        else if( PI.oxygenAmount < 50 && PI.oxygenAmount >= 25 )
+        {
+            Img.GetComponent<Image>().color = new Color32(255,255,0,255);
+        }
+        else if ( PI.oxygenAmount < 25 )
+        {
+            Img.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+        }
+    }
 
 	void Asphyxia() {
 		if(PI.oxygenAmount == 0)

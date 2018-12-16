@@ -8,7 +8,7 @@ public class ShipInventory : MonoBehaviour {
     public int ironAmount;
     public int shipOxygenAmount;                                                        // Not the same than in player inventory !!! Player inventory amount = part of this one
 
-    private int scannerState;                                                                // 0 - 1  0 = marche pas  1 = marche bien
+    private int scannerState;                                                                //0 - 1  0 = marche pas  1 = marche bien
     private int fuelTankState;                                                               //0 - 1
     private int oxygenTankState;                                                             //0 - 1
 
