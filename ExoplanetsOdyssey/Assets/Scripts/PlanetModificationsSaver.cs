@@ -11,8 +11,7 @@ public class PlanetModificationsSaver : MonoBehaviour {
 
 	void Awake () {
         actualPlanetModifs = new List<TileChange>();
-        //actualSeed = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().getSeedToGen();
-        actualSeed = 1020546;
+        actualSeed = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().getSeedToGen();
     }
     
     public void computeChangesInFile()

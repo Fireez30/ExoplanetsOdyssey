@@ -567,6 +567,7 @@ MonoBehaviour:
   AsphyxiaSpeed: 5
   HelmetOn: 1
   Img: {fileID: 581478503}
+  SP: {fileID: 1150747469}
 --- !u!1 &449847666
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +863,7 @@ MonoBehaviour:
   AsphyxiaSpeed: 5
   HelmetOn: 1
   Img: {fileID: 0}
+  SP: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,6 +1686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actualPlanetModifs: []
+  actualSeed: 0
 --- !u!1 &1215554430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,6 +1967,7 @@ MonoBehaviour:
   AsphyxiaSpeed: 5
   HelmetOn: 1
   Img: {fileID: 0}
+  SP: {fileID: 0}
 --- !u!1 &1410618097
 GameObject:
   m_ObjectHideFlags: 0

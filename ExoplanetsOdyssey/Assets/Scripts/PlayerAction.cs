@@ -19,18 +19,24 @@ public class PlayerAction : MonoBehaviour {
 
     public GameObject Img;
 
-	// Use this for initialization
-	void Start () {
+    Parameters param;
+    public int seed;
+
+    // Use this for initialization
+    void Start () {
 		HealthPoint = 100;
 		// Je sépare les deux pour plus de flexibilité si jamais faut regler
 		InvokeRepeating("Asphyxia", 1, 4); // premier 1 = fonction se déclanche 1 s après l'appel, second 1 = appel toute les 1 secondes
 		InvokeRepeating("Breath", 1, 4); // premier 1 = fonction se déclanche 1 s après l'appel, second 1 = appel toute les 1 secondes
 
-	}
+        param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
+        seed = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().getSeedToGen();
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if(HelmetOn == false)
+        
+		if(HelmetOn == false && CheckAtmosphere(seed) == false)
 		{
 			OxyLeak.leak = true;
 		}
@@ -51,6 +57,8 @@ public class PlayerAction : MonoBehaviour {
         {
             Img.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
         }
+
+
     }
 
 	void Asphyxia() {
@@ -82,4 +90,15 @@ public class PlayerAction : MonoBehaviour {
 			//animation de remettage de casque si false -> true ou inverse sinon
 		}
 	}
+
+    bool CheckAtmosphere(int seed)
+    {
+        string infoPlaceholder = param.getInfo(seed);
+        string[] infos = infoPlaceholder.Split(',');
+        string atmos = infos[3];
+        if (atmos.Equals(" pas d'atmosphère")) { return false; }
+        else { return true; }
+        // présence d'atmosphère  ->  true
+        // pas d'atmosphère  ->  false
+    }
 }
