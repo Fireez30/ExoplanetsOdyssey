@@ -86,4 +86,13 @@ public struct Choice
         this.planetName = "";
         this.systemName = "";
     }
+    public override bool Equals(object obj)
+    {
+        if (!(obj is Choice))
+            return false;
+
+        Choice c = (Choice)obj;
+        return c.systemIndex == this.systemIndex && c.planetIndex == this.planetIndex;
+
+    }
 }

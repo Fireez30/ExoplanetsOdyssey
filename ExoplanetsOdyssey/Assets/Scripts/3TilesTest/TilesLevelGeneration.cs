@@ -19,7 +19,7 @@ public class TilesLevelGeneration : MonoBehaviour {
     private int maxSurface;                                                                 //Ordonnée de la tile la plus haute générée
     private System.Random rand;                                                             //Random utilisé pour la génération de la planète
     private int[,] mapBase;                                                                 //Double tableau qui sert à générer la map, avant de gen la tilemap
-    private GameObject GM;                                                                  //GameObject avec les scripts qui se conservent entre les scènes
+    private Parameters GM;                                                                  //GameObject avec les scripts qui se conservent entre les scènes
     private string planetType;                                                              //Type de la planète (rocheuse, gazeuse, normal)
     private int planeteSeed;                                                                //Seed de la planète (générée lors du lancement du jeu)
 
@@ -31,11 +31,10 @@ public class TilesLevelGeneration : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        GM = GameObject.FindGameObjectWithTag("GameManager");
+        GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         //planetType = GM.GetComponent<Parameters>().planetType;
         planetType = "classic";
-        //planeteSeed = GM.GetComponent<Parameters>().getSeedToGen();
-        planeteSeed = 1020546;
+        planeteSeed = GM.getSeedToGen();
         rand = new System.Random(planeteSeed);                                              //setup a seeded random
         TileMapGen();                                                                       //creation of the different tilemaps
         if (player)                                                                         //setup players in the world
@@ -83,6 +82,10 @@ public class TilesLevelGeneration : MonoBehaviour {
                 else if (map[x, y] == 3)
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 2));//set the iron tile (index 2 in the palette)
+                }
+                else if (map[x, y] == 4)
+                {
+                    tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 4));//set the water tile (index 4 in the palette)
                 }
                 else if (map[x, y] == 0)
                 {
@@ -161,6 +164,8 @@ public class TilesLevelGeneration : MonoBehaviour {
     //randomly generate ressources
     public void SetRessourcesInMap(int[,] map, int chance)
     {
+        bool habitable = GM.isCurrentHabitable();
+        Debug.Log("Habitable ? " + habitable);
         for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= map.GetUpperBound(1); y++)
@@ -173,8 +178,15 @@ public class TilesLevelGeneration : MonoBehaviour {
                 }
                 if (rand.Next(500) < chance && map[x, y] == 1)                                  //On gen une ressource
                 {
-                    int type = rand.Next(2);                                                    //On sélectionne quelle ressource on génère
-                    map[x, y] = type + 2;
+                    int type;
+                    if (!habitable)
+                        type = rand.Next(2);                                                    //On sélectionne quelle ressource on génère
+                    else
+                        type = rand.Next(3);
+                    if(type <2)
+                        map[x, y] = type + 2;
+                    else
+                        map[x, y] = 4;
                 }
                 chance = memChance;
             }

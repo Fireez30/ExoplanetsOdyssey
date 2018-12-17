@@ -35,50 +35,51 @@ public class SystemInteraction : MonoBehaviour {
     // Affiche le nom du système quand on passe sa souris dessus
     void OnMouseEnter()
     {
-        Debug.Log("Mouse entered");
         //Vector3 pos = gameObject.transform.position;
         if (indexSystem != param.currentSystem)//check if mouse is on a different system
         {
-                //if it's
-                Debug.Log("We are not the same");
-                Vector3 pos = Input.mousePosition;
-                pos.z = 1;
-                if (Input.mousePosition.y > Screen.height / 2)
+            Vector3 pos = Input.mousePosition;
+            pos.z = 1;
+            if (Input.mousePosition.y > Screen.height / 2)
+            {
+                if (Input.mousePosition.x > Screen.width / 2)
                 {
-                    if (Input.mousePosition.x > Screen.width / 2)
-                    {
-                        pos.x -= offset;
-                        pos.y -= offset;
-                    }
-                    else
-                    {
-                        pos.x += offset;
-                        pos.y -= offset;
-                    }
+                    pos.x -= offset;
+                    pos.y -= offset;
                 }
                 else
                 {
-                    if (Input.mousePosition.x > Screen.width / 2)
-                    {
-                        pos.x -= offset;
-                        pos.y += offset;
-                    }
-                    else
-                    {
-                        pos.x += offset;
-                        pos.y += offset;
-                    }
+                    pos.x += offset;
+                    pos.y -= offset;
                 }
-                costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem);
-                if (costvalue == 0){ costvalue = 1; }
-                fenetre.transform.position = Camera.main.ScreenToWorldPoint(pos);
-                if (param.firstMove)
+            }
+            else
+            {
+                if (Input.mousePosition.x > Screen.width / 2)
                 {
-                    costvalue = 0;
+                    pos.x -= offset;
+                    pos.y += offset;
                 }
-                system.text = gameObject.name;
-                cost.text = costvalue + "";
-                fenetre.SetActive(true);
+                else
+                {
+                    pos.x += offset;
+                    pos.y += offset;
+                }
+            }
+            
+            fenetre.transform.position = Camera.main.ScreenToWorldPoint(pos);
+            if (param.firstMove)
+            {
+                costvalue = 0;
+            }
+            else
+            {
+                costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem);
+                if (costvalue == 0) costvalue = 1; 
+            }
+            system.text = gameObject.name;
+            cost.text = costvalue + "";
+            fenetre.SetActive(true);
         }
     }
 

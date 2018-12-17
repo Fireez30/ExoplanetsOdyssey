@@ -164,7 +164,6 @@ public class Parameters : MonoBehaviour {
                 info += ", forte présence de rayons gamma";
             else
                 info += ", trou noir à proximité";
-
         }
         else // habitable
         {
@@ -191,9 +190,9 @@ public class Parameters : MonoBehaviour {
         return info;
     }
 
-    private bool isHabitable()
+    public bool isCurrentHabitable()
     {
-        return false;
+        return habitables.Contains(new Choice(currentSystem,currentPlanet));
     }
 
     public Dictionary<int, string> getTypes()

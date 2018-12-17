@@ -17,7 +17,7 @@ public class PlayerAction : MonoBehaviour {
 
 	public bool HelmetOn = true;
 
-    public GameObject Img;
+    public Image Img;
 
     Parameters param;
     public int seed;
@@ -44,18 +44,18 @@ public class PlayerAction : MonoBehaviour {
 
 		TakeOff();
 
-        Img.GetComponent<Image>().fillAmount = (float)PI.oxygenAmount/100;
+        Img.fillAmount = (float)PI.oxygenAmount/100;
         if( PI.oxygenAmount >= 50 )
         {
-            Img.GetComponent<Image>().color = new Color32(255,255,255,255);
+            Img.color = new Color32(255,255,255,255);
         }
         else if( PI.oxygenAmount < 50 && PI.oxygenAmount >= 25 )
         {
-            Img.GetComponent<Image>().color = new Color32(255,255,0,255);
+            Img.color = new Color32(255,255,0,255);
         }
         else if ( PI.oxygenAmount < 25 )
         {
-            Img.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+            Img.color = new Color32(255, 0, 0, 255);
         }
 
 
