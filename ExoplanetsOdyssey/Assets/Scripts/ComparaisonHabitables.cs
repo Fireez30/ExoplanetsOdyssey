@@ -14,9 +14,10 @@ public class ComparaisonHabitables : MonoBehaviour {
 
     private Parameters param;
     private Text t;
+    private float time = 0;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         choices = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserChoices>().choices;
         reals = param.habitables;
@@ -26,7 +27,7 @@ public class ComparaisonHabitables : MonoBehaviour {
 
     void Start()
     {
-        t = transform.GetComponent<Text>();
+        t = GameObject.Find("Text").GetComponent<Text>();
         foreach (string s in lines)
             t.text += s + '\n';
     }
@@ -34,7 +35,8 @@ public class ComparaisonHabitables : MonoBehaviour {
     void Update()
     {
         //scroll
-        t.transform.localPosition = new Vector2(t.transform.localPosition.x, t.transform.position.y * Time.deltaTime);
+        time += Time.deltaTime;
+        t.transform.position = new Vector2(t.transform.position.x, t.transform.position.y + time * 0.3f);
     }
 
     void ComputeLines()
