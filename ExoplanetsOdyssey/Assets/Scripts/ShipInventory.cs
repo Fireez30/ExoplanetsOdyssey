@@ -46,6 +46,7 @@ public class ShipInventory : MonoBehaviour {
 
     void Start () {
         ReadFile();
+        shipOxygenAmount = 1000;    // 
     }
 
     public void computeChangesToFile()

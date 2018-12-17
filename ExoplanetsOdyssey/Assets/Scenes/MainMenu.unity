@@ -393,6 +393,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114781128401588550, guid: 6a26bba63d496fe489bedc75f3b62e84,
+        type: 2}
+      propertyPath: shipOxygenAmount
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a26bba63d496fe489bedc75f3b62e84, type: 2}
   m_IsPrefabAsset: 0

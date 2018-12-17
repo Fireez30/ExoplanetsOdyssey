@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerInventory : MonoBehaviour {
 
+    public ShipInventory SI;
     public int fuelAmount;
     public int ironAmount;
     public int oxygenAmount;
@@ -12,11 +13,14 @@ public class PlayerInventory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        SI = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>();
+
         for (int i = 0; i < 4; i++)
-            tileAmounts.Add(0);
+        tileAmounts.Add(0);
         fuelAmount = 0;
         ironAmount = 0;
-        oxygenAmount = 0;
+        // oxygenAmount = 0;
+        SI.shipOxygenAmount -= oxygenAmount;
         if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/player.save"))             //Si le fichier n'existe pas on le crée
         {
             System.IO.File.Create(Application.streamingAssetsPath + "/saves/player.save").Close();
@@ -53,6 +57,7 @@ public class PlayerInventory : MonoBehaviour {
         {
             Debug.LogError("Aucun canvas trouvé dans la scène de la planète - PlayerInventory line 44");
         }
+        OxygenIntake();
     }
 	
     //Sauvegarde l'inventaire actuel du joueur (à appeler au retour dans le vaisseau)
@@ -66,5 +71,32 @@ public class PlayerInventory : MonoBehaviour {
         lines[1] += tileAmounts[tileAmounts.Count - 1];
         System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", lines);
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().ReadFile();
+    }
+
+    public void OxygenIntake()
+    {
+        oxygenAmount = 100;
+        if (SI.shipOxygenAmount >= 100)
+        {
+            if (gameObject.name == "Character")
+            {
+                SI.shipOxygenAmount -= 100;
+            }
+            oxygenAmount = 100;
+        }
+        else
+        {
+            oxygenAmount = SI.shipOxygenAmount;
+            SI.shipOxygenAmount = 0;
+        }
+    }
+
+    public void oxyBackToShip()
+    {
+        if (gameObject.name == "Character")
+        {
+            SI.shipOxygenAmount += oxygenAmount;
+            oxygenAmount = 0;
+        }
     }
 }
