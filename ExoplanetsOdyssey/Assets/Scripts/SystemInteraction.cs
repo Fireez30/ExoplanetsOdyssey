@@ -115,7 +115,14 @@ public class SystemInteraction : MonoBehaviour {
     private IEnumerator Transport()
     {
         eventW.UpdateLights();
-        yield return new WaitUntil(() => !ship.GetComponent<shipMovement>().getMoving() && eventW.GetOk());
+        yield return new WaitUntil(() => !ship.GetComponent<shipMovement>().getMoving());
+        if (indexSystem != param.currentSystem)//check if mouse is on a different system
+        {
+            ep.checkProbaBreak();
+            eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            eventW.gameObject.transform.position = new Vector3(eventW.gameObject.transform.position.x, eventW.gameObject.transform.position.y, 0);
+            yield return new WaitUntil(() => eventW.GetOk());
+        }  
         if (param.firstMove)//first move is free
         {
             param.setCurrentSystem(indexSystem,gameObject.name);
