@@ -35,7 +35,6 @@ public class SystemInteraction : MonoBehaviour {
     void OnMouseEnter()
     {
         Debug.Log("Mouse entered");
-        ship.GetComponent<shipMovement>().calculateCost(indexSystem);
         //Vector3 pos = gameObject.transform.position;
         if (indexSystem != param.currentSystem)//check if mouse is on a different system
         {
@@ -91,8 +90,9 @@ public class SystemInteraction : MonoBehaviour {
 
     private void OnMouseDown()
     {
-
-            if (!ship.GetComponent<shipMovement>().moving)
+        Debug.Log("MOUSE DOWN LOL");
+        costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem); 
+        if (!ship.GetComponent<shipMovement>().moving)
             {
                 if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
                 {
