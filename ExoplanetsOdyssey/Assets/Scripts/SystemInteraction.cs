@@ -115,8 +115,8 @@ public class SystemInteraction : MonoBehaviour {
             ep.checkProbaBreak();
             eventW.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             eventW.gameObject.transform.position = new Vector3(eventW.gameObject.transform.position.x, eventW.gameObject.transform.position.y, 0);
-        }
-        yield return new WaitUntil(() => eventW.GetOk());
+            yield return new WaitUntil(() => eventW.GetOk());
+        }  
         if (param.firstMove)//first move is free
         {
             param.setCurrentSystem(indexSystem,gameObject.name);
