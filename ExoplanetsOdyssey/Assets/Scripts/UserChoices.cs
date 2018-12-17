@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UserChoices : MonoBehaviour
 {
 
     public List<Choice> choices;
-
+    public GameObject endWindows;
+    private bool signalFin;
+    
     // Use this for initialization
     void Awake()
     {
         choices = new List<Choice>();
+        endWindows = GameObject.FindGameObjectWithTag("fenetrefin");
+        signalFin = false;
     }
 
     public void addChoice(int planet)
@@ -26,13 +31,34 @@ public class UserChoices : MonoBehaviour
         c2.planetIndex = planet;
         c2.planetName = this.gameObject.GetComponent<Parameters>().currentPlanetName;
         choices.Add(c2);//add the actual planet as a choice
+
+        if (choices.Count == GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().nbHabitable)
+        {
+            endWindows.gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            endWindows.gameObject.transform.position = new Vector3(endWindows.gameObject.transform.position.x, endWindows.gameObject.transform.position.y, 0);
+            StartCoroutine(AttenteFin());
+        }
     }
 
-    public void removeChoice(int index)
+
+    public IEnumerator AttenteFin()
     {
-        if (!choices[index].Equals(null))
+        yield return new WaitUntil(() => signalFin);
+        SceneManager.LoadScene(4);//scene fin
+    }
+
+    public void setFin()
+    {
+        signalFin = true;
+    }
+    
+    public void removeChoice(int planet)
+    {
+        foreach (Choice c in choices)//Cycle through already made choice
         {
-            choices.RemoveAt(index);
+            if (c.systemIndex == this.gameObject.GetComponent<Parameters>().currentSystem && c.planetIndex == planet
+            ) //if choice already done
+                choices.Remove(c);
         }
     }
 }

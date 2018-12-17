@@ -1,32 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class ChoiceWindow : MonoBehaviour {
     public GameObject fenetrechoix;
     bool active = false;
-    public int actual = -1;
+    public List<int> actual;
 
+    public void Awake()
+    {
+        actual = new List<int>();
+    }
+    
     public void showChoiceWindow()
     {
-        if (!active)
-            active = true;
-        else
-            active = false;
-
+        active = !active;
         fenetrechoix.SetActive(active);
 
     }
 
     public void SetChoice(int i)
     {
-        actual = i;
+        if (i == -1)
+        {
+            actual.Clear();
+            actual.Add(-1);
+        }
+        else if (!actual.Contains(i))
+        {
+            actual.Add(i);
+        }
     }
 
     public void SendChoice()
     {
-        if (actual != -1)
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserChoices>().addChoice(actual);
+        UserChoices gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserChoices>();
+        if (actual.Count == 1 && actual[0] == -1)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                gm.removeChoice(i);
+            }
+        }
+        else
+        {
+            foreach (int ac in actual)
+            {
+                gm.addChoice(ac);
+            }
+        }
+
         showChoiceWindow();
     }
 }

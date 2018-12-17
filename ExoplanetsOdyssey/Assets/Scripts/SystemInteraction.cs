@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -90,8 +91,16 @@ public class SystemInteraction : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        Debug.Log("MOUSE DOWN LOL");
-        costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem); 
+        costvalue = ship.GetComponent<shipMovement>().calculateCost(indexSystem);
+        if ((indexSystem != param.currentSystem) || param.firstMove == false)
+        {
+            if (costvalue == 0){ costvalue = 1; }
+        }
+
+        if (param.firstMove)
+        {
+            costvalue = 0;
+        }
         if (!ship.GetComponent<shipMovement>().moving)
             {
                 if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
