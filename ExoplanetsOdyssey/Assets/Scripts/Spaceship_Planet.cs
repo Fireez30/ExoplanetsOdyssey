@@ -57,7 +57,15 @@ public class Spaceship_Planet : MonoBehaviour {
     private void OnMouseDown() {
         GameObject[] planets = GameObject.FindGameObjectsWithTag("planet");
         param.setCurrentPlanet(indexPlanet,planets[indexPlanet].name);
-        StartCoroutine(LoadScene());
+        if (true) //type = gazeuse
+        {
+            //start couroutine dans gameManager
+            param.ToGazeuse();
+        }
+        else
+        {
+            StartCoroutine(LoadScene());
+        }
     }
 
     IEnumerator LoadScene()

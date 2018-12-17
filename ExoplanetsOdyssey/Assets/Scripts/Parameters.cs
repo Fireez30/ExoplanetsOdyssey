@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 /*Script du GameManager : génère les seeds des planètes et les atribu aux différents systèmes*/
 public class Parameters : MonoBehaviour {
@@ -27,7 +28,8 @@ public class Parameters : MonoBehaviour {
     public int maxFuel;
     public int maxOxygen;
     public int maxIron;
-		
+
+    public bool comeFromGazeuse;
 	public bool firstMove;
 
 	// Use this for initialization
@@ -101,6 +103,12 @@ public class Parameters : MonoBehaviour {
         currentPlanetName = name;
     }
 
+    public void ToGazeuse()
+    {
+        comeFromGazeuse = true;
+        SceneManager.LoadScene(1);
+    }
+    
     //Récupère toutes les seeds des planètes d'un système
     public List<int> getAllSeedsSystem()
     {
