@@ -567,7 +567,7 @@ MonoBehaviour:
   BreathSpeed: 1
   AsphyxiaSpeed: 5
   HelmetOn: 1
-  Img: {fileID: 581478503}
+  Img: {fileID: 581478505}
   seed: 0
 --- !u!1 &449847666
 GameObject:
