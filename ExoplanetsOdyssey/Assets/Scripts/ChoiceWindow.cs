@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChoiceWindow : MonoBehaviour {
     public GameObject fenetrechoix;
@@ -20,6 +22,29 @@ public class ChoiceWindow : MonoBehaviour {
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().windowsOpened = active;
     }
 
+    public void HandleChoice(bool o,int id)
+    {
+        if (o)
+        {
+            switch (id)
+            {
+                case -1:
+                    actual.Clear();
+                    break;
+                default:
+                    if (!actual.Contains(id))
+                    {
+                        actual.Add(id);
+                    }
+                    break;               
+            }
+        }
+        else
+        {
+            actual.Remove(id);
+        }
+    }
+    
     public void SetChoice(int i)
     {
         if (i == -1)
