@@ -72,7 +72,7 @@ public class shipMovement : MonoBehaviour {
                 moveCost = ((int)distance);//change move cost
                 if (GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().GetFuelTankState() == 0)//if fuel tank not working
                 {                                          //Vers le vaisseau
-                    moveCost += moveCost / 10;//if tank damaged, +10% cost
+                    moveCost *= 2;//if tank damaged, +10% cost
                 }
             }
 

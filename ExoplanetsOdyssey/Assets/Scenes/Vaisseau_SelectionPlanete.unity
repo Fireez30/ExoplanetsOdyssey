@@ -5247,7 +5247,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Vous avez tent\xE9 d'att\xE9rir sur une plan\xE8te Gazeuse. Vous vous en
-    \xEAtes sortis de justesse ! Mais ce n'est peut-\xEAtre pas le cas pour vos \xE9quipements."
+    \xEAtes sorti de justesse ! Mais ce n'est peut-\xEAtre pas le cas pour vos \xE9quipements."
 --- !u!222 &1830416961
 CanvasRenderer:
   m_ObjectHideFlags: 0
