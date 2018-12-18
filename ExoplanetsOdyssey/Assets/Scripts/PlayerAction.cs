@@ -8,7 +8,6 @@ public class PlayerAction : MonoBehaviour {
 	public GameObject Character;
 	public OxygenLeak OxyLeak;
 	public PlayerInventory PI;
-	public int HealthPoint;
 	public int BreathSpeed = 1;
 	public int AsphyxiaSpeed = 5;
 	public bool HelmetOn = true;
@@ -20,7 +19,6 @@ public class PlayerAction : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		HealthPoint = 100;
 		// Je sépare les deux pour plus de flexibilité si jamais faut regler
 		InvokeRepeating("Asphyxia", 1, 4); // premier 1 = fonction se déclanche 1 s après l'appel, second 1 = appel toute les 1 secondes
 		InvokeRepeating("Breath", 1, 4); // premier 1 = fonction se déclanche 1 s après l'appel, second 1 = appel toute les 1 secondes
@@ -59,14 +57,9 @@ public class PlayerAction : MonoBehaviour {
     }
 
 	void Asphyxia() {
-		if(PI.oxygenAmount == 0)
+		if(PI.oxygenAmount <= 0)
 		{
-			HealthPoint -= AsphyxiaSpeed;
-			if(HealthPoint < 0)
-			{
-				HealthPoint = 0;
-				//Dead();
-			}
+			// trigger Dead
 		}
 	}
 

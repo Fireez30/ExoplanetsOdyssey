@@ -34,7 +34,7 @@ public class EventProbability : MonoBehaviour {
             }
         }
 
-        if (F < probaFuel)
+        else if (F < probaFuel)
         {
             if (SI.GetFuelTankState() == 1)
             {
@@ -42,7 +42,7 @@ public class EventProbability : MonoBehaviour {
             }
         }
 
-        if (S < probaScan)
+        else if (S < probaScan)
         {
             if (SI.GetScannerState() == 1)
             {
