@@ -9,6 +9,7 @@ public class shipInteraction : MonoBehaviour {
     public int xMin, xMax, y;
     public List<Sprite> allSprites;
     public GameObject gazeuseWindows;
+    public RefreshShipLeds refreshLeds;
 
     private List<int> seedPlanets;
     private Parameters param;
@@ -41,16 +42,17 @@ public class shipInteraction : MonoBehaviour {
                 {
                     s.SetScannerState(0);
                 }
-                else if (de == 1 && s.GetScannerState() == 1)
+                else if (de == 1 && s.GetFuelTankState() == 1)
                 {
-                    s.SetScannerState(0);
+                    s.SetFuelTankState(0);
                 }
-                else if (de == 2 && s.GetScannerState() == 1)
+                else if (de == 2 && s.GetOxygenTankState() == 1)
                 {
-                    s.SetScannerState(0);
+                    s.SetOxygenTankState(0);
                 }
             }
         }
+        refreshLeds.Refresh();
     }
 
 
