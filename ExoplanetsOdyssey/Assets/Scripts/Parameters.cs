@@ -24,7 +24,7 @@ public class Parameters : MonoBehaviour {
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
     public bool windowsOpened;          //Si une fenetre est ouverte  ne peut pas cliquer sur une planete
     public List<Choice> habitables;
-
+    public List<List<int>> planetSpritesIndexes;
     public bool shipSceneFirstVisit; //set this to true when visited ship scene for the first time ! 
     public bool universeSceneFirstVisit;
     public int maxFuel;
@@ -41,6 +41,7 @@ public class Parameters : MonoBehaviour {
             Instance = this;
             DontDestroyOnLoad(this);                //Conserver antre les scènes
             seedsPlanetes = new List<List<int>>();
+            planetSpritesIndexes = new List<List<int>>();
             shipSceneFirstVisit = true;
             universeSceneFirstVisit = true;
             windowsOpened = false;
@@ -50,9 +51,11 @@ public class Parameters : MonoBehaviour {
             rand = new System.Random(seedBase.GetHashCode());   //Random seedé
             for(int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
             {
+                planetSpritesIndexes.Add(new List<int>());
                 seedsPlanetes.Add(new List<int>());
                 for (int i2 = 0; i2 < nbPlanete; i2++)
                 {
+                    planetSpritesIndexes[i].Add(-1);
                     int seed = rand.Next(-999999999, 999999999);
                     seedsPlanetes[i].Add(seed);
                     string info = generatePlanet(seed, i, i2);

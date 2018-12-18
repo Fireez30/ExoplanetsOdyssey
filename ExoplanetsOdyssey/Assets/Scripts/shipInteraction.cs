@@ -29,7 +29,17 @@ public class shipInteraction : MonoBehaviour {
                     GameObject temp = Instantiate(planetPrefab, pos, Quaternion.identity);
                     temp.GetComponent<Spaceship_Planet>().setIndexPlanet(i);                                    //Pour que chaque planète connaise son index au sein du système
                     temp.GetComponent<Spaceship_Planet>().setSeed(seedPlanets[i]);
-                    temp.GetComponent<SpriteRenderer>().sprite = allSprites[Random.Range(0, allSprites.Count)];
+                    if (param.planetSpritesIndexes[param.currentSystem][i] == -1)
+                    {
+                        var index = Random.Range(0, allSprites.Count);
+                        param.planetSpritesIndexes[param.currentSystem][i] = index;
+                        temp.GetComponent<SpriteRenderer>().sprite = allSprites[index];
+                    }
+                    else
+                    {
+                        temp.GetComponent<SpriteRenderer>().sprite = allSprites[param.planetSpritesIndexes[param.currentSystem][i]];
+                    }
+                   
                 }
             }
             if (param.comeFromGazeuse)
