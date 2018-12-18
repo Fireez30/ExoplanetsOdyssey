@@ -56,12 +56,12 @@ public class ComparaisonHabitables : MonoBehaviour {
 
             if (flag)
             {
-                lines.Add("La planète " + c.planetName + " du système " + c.systemName + " est en effet une planète habitable");
+                lines.Add("La planète " + (choices.IndexOf(c) + 1) + " du système " + c.systemName + " est en effet une planète habitable");
                 nbCorrects++;
             }
             else
             {
-                string s = "La planète " + c.planetName + " du système " + c.systemName + " n'est pas une planète habitable, pour les raisons suivantes : ";
+                string s = "La planète " + (choices.IndexOf(c) + 1) + " du système " + c.systemName + " n'est pas une planète habitable, pour les raisons suivantes : ";
 
                 int seed = param.getSeed(c.systemIndex, c.planetIndex);
                 string[] infos = param.getInfo(seed).Split(',');
@@ -83,8 +83,6 @@ public class ComparaisonHabitables : MonoBehaviour {
                     s += "il n'y a pas d'atmosphère\n";
                 if (!infos[4].Contains("calme"))
                     s += infos[4];
-
-
                 lines.Add(s);
             }
         }
@@ -93,7 +91,7 @@ public class ComparaisonHabitables : MonoBehaviour {
         float pourcentage = (float)nbCorrects / (float)planetNumber;
 
         if (pourcentage <= 0.3f)
-            lines.Add("Ah, il va falloir s'entrainer un peu plus, pourquoi ne pas faire une nouvelle partie ?");
+            lines.Add("\n Il va falloir s'entrainer un peu plus, pourquoi ne pas faire une nouvelle partie ?");
         else if (pourcentage <= 0.7f && pourcentage > 0.3f)
             lines.Add("Bravo, tu as résolu certains des mystères de l'espace, même si certains restent encore à découvrir !");
         else
