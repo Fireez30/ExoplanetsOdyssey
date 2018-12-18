@@ -56,11 +56,11 @@ public class ComparaisonHabitables : MonoBehaviour {
 
             if (flag)
             {
-                lines.Add("La planète " + (choices.IndexOf(c) + 1) + " du système " + c.systemName + " est en effet une planète habitable\n");
+                lines.Add("La planète " + (choices.IndexOf(c) + 1) + " du système " + c.systemName + " est en effet une planète habitable");
                 lines.Add("C'est une planète rocheuse");
                 lines.Add("Sa température est comprise entre 0 et 80 degrés Celsius");
                 lines.Add("Elle a une masse de l'ordre de 10^24");
-                lines.Add("On note une présence d'atmosphère respirable");
+                lines.Add("On note une présence d'atmosphère respirable\n");
                 //lines.Add("Son voisinage cosmique est calme");
                 nbCorrects++;
             }
