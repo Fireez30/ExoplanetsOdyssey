@@ -176,7 +176,7 @@ public class Parameters : MonoBehaviour {
         string infos = "";
 
         infos += "Rocheuse,";
-        infos += pRand.Next(-40, 100)+",";
+        infos += pRand.Next(0, 80)+",";
         var masse = pRand.Next(3, 10);
         infos += masse + "*10^24,";
         infos += "présence d'atmosphère,";
