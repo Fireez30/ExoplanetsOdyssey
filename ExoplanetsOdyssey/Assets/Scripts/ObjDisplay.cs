@@ -11,14 +11,14 @@ public class ObjDisplay : MonoBehaviour
     void Awake()
     {
         List<Choice> obj = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserChoices>().choices;
-        t.text = "Planète choisies : " + obj.Count + "/5";
+        t.text = "Planètes choisies : " + obj.Count + "/5";
         t.color = Color.white;
     }
 
     public void Refresh()
     {
         List<Choice> obj = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserChoices>().choices;
-        t.text = "Planète choisies : " + obj.Count + "/5";
+        t.text = "Planètes choisies : " + obj.Count + "/5";
         t.color = Color.white;
     }
 }

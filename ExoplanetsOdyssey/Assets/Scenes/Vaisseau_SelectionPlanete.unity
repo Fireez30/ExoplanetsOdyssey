@@ -180,8 +180,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Les informations r\xE9colt\xE9es > par votre scanner s'affichera ici !
-    Passez votre souris sur une plan\xE8te pour la scanner"
+  m_Text: "Les informations r\xE9colt\xE9es > par votre scanner s'afficheront ici
+    ! Passez votre souris sur une plan\xE8te pour la scanner"
 --- !u!222 &1994218
 CanvasRenderer:
   m_ObjectHideFlags: 0

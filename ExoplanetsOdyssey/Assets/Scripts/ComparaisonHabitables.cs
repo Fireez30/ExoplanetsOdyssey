@@ -60,8 +60,8 @@ public class ComparaisonHabitables : MonoBehaviour {
                 lines.Add("C'est une planète rocheuse");
                 lines.Add("Sa température est comprise entre 0 et 80 degrés Celsius");
                 lines.Add("Elle a une masse de l'ordre de 10^24");
-                lines.Add("On note une présence d'atmosphère");
-                lines.Add("Son voisinage cosmique est calme");
+                lines.Add("On note une présence d'atmosphère respirable");
+                //lines.Add("Son voisinage cosmique est calme");
                 nbCorrects++;
             }
             else
@@ -86,8 +86,8 @@ public class ComparaisonHabitables : MonoBehaviour {
                     s += "- La planète est trop lourde\n";
                 if (infos[3].Contains("pas"))
                     s += "- La planète n'a pas d'atmosphère\n";
-                if (!infos[4].Contains("calme"))
-                    s += infos[4];
+                //if (!infos[4].Contains("calme"))
+                //    s += infos[4];
 
 
                 lines.Add(s);

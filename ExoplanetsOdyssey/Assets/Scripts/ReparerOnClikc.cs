@@ -40,6 +40,6 @@ public class ReparerOnClikc : MonoBehaviour
         }
 
 		ironAmout.GetComponent<UpdateAffichageFer>().Refresh();
-		panel.GetComponent<RefreshShipLeds>().Refresh();
+		panel.GetComponent<RefreshShipLeds>().Refresh(); //useless mais pas grave
 	}
 }
