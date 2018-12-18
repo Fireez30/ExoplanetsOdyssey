@@ -16,6 +16,7 @@ public class Spaceship_Planet : MonoBehaviour {
     private int seed;
     private ShipInventory inv;
     private Text temp;
+    private Text mass;
     [SerializeField]                           //A enlever parce que ce sera généré aléatoirement et pas défini par nous (juste le serialize)
     private string infoPlaceholder = "";
 
@@ -24,6 +25,7 @@ public class Spaceship_Planet : MonoBehaviour {
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         info = GameObject.FindGameObjectWithTag("planettype").GetComponent<Text>();
         temp = GameObject.FindGameObjectWithTag("planettemperature").GetComponent<Text>();
+        mass = GameObject.FindGameObjectWithTag("planetemasse").GetComponent<Text>();
         csvReader = GameObject.Find("CSVReader").GetComponent<CSVReader>();
         bar = GameObject.FindGameObjectWithTag("loadingimage").GetComponent<Image>();
         inv = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>();
@@ -44,12 +46,14 @@ public class Spaceship_Planet : MonoBehaviour {
         {
             info.text = "ERROR";
             temp.text = "ERROR";
+            mass.text = "ERROR";
         }
         else
         {
             string[] infos = infoPlaceholder.Split(',');
             info.text = infos[0];
             temp.text = infos[1] + "°";
+            mass.text = infos[2] + "kg";
         }
 
        // Debug.Log("Info : " + infoPlaceholder);
