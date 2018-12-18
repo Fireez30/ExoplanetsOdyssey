@@ -50,7 +50,7 @@ public class ChoiceWindow : MonoBehaviour {
                 gm.addChoice(ac);
             }
         }
-
+        actual.Clear();
         showChoiceWindow();
     }
 }

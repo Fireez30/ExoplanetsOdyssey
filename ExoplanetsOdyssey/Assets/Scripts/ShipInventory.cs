@@ -27,8 +27,8 @@ public class ShipInventory : MonoBehaviour {
             baseQuantity[1] = "0;0;0;0";//tiles (not useful for this script)
             baseQuantity[2] = "1000;1;1;1";//shipoxygen, scanner, fuel tank and oxygen tank State
             System.IO.File.WriteAllLines(Application.streamingAssetsPath + "/saves/player.save", baseQuantity);
-            fuelAmount = 0;
-            ironAmount = 0;
+            fuelAmount = 4;
+            ironAmount = 10;
             shipOxygenAmount = 1000;
             scannerState = 1;
             fuelTankState = 1;

@@ -22,6 +22,7 @@ public class ComparaisonHabitables : MonoBehaviour {
         choices = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UserChoices>().choices;
         reals = param.habitables;
         planetNumber = param.nbHabitable;
+        lines = new List<string>();
         ComputeLines();
     }
 
