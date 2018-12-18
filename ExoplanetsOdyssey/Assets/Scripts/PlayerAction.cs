@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerAction : MonoBehaviour {
 
@@ -59,7 +60,7 @@ public class PlayerAction : MonoBehaviour {
 	void Asphyxia() {
 		if(PI.oxygenAmount <= 0)
 		{
-			// trigger Dead
+            SceneManager.LoadScene(4);
 		}
 	}
 

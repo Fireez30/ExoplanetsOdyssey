@@ -24,8 +24,7 @@ public class EventProbability : MonoBehaviour {
         O = p.getRandomInt(0,100);     // Oxygen
         F = p.getRandomInt(0,100);     // Fuel
         S = p.getRandomInt(0,100);     // Scanner
-        Debug.Log("O= " + O + " F= "+F+" S= "+S);
-        Debug.Log("probaOxy = " + probaOxy + " probaFuel = "+probaFuel + " probaScan = "+probaScan);
+
         if (O < probaOxy )
         {
             if ( SI.GetOxygenTankState() == 1)
