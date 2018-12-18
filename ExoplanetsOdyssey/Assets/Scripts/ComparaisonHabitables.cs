@@ -87,6 +87,15 @@ public class ComparaisonHabitables : MonoBehaviour {
             }
         }
         lines.Add("Au final vous avez fais " + nbCorrects + " choix corrects sur " + planetNumber);
-        //ajouter les félicitations tout ca tout ca
+
+        float pourcentage = (float)nbCorrects / (float)planetNumber;
+
+        if (pourcentage <= 0.3f)
+            lines.Add("Ah, il va falloir s'entrainer un peu plus, pourquoi ne pas faire une nouvelle partie ?");
+        else if (pourcentage <= 0.7f && pourcentage > 0.3f)
+            lines.Add("Bravo, tu as résolu certains des mystères de l'espace, même si certains restent encore à découvrir !");
+        else
+            lines.Add("Félicitations, les planètes n'ont plus de secrets pour toi !");
+
     }
 }

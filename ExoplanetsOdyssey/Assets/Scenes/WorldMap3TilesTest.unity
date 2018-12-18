@@ -864,7 +864,7 @@ MonoBehaviour:
   BreathSpeed: 1
   AsphyxiaSpeed: 5
   HelmetOn: 1
-  Img: {fileID: 0}
+  Img: {fileID: 581478505}
   seed: 0
 --- !u!1 &519420028
 GameObject:
@@ -1235,7 +1235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -33.299988, y: 114.3}
+  m_AnchoredPosition: {x: -33.30005, y: 114.3}
   m_SizeDelta: {x: 67.390015, y: 196.98999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &971651327
@@ -1673,6 +1673,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
   - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
   - {fileID: 11400000, guid: aec06497cee8a6642a33137ef12ad22b, type: 2}
+  - {fileID: 11400000, guid: 0321d870ba723754d89938aebe903de2, type: 2}
   currentIndex: 0
   player: {fileID: 396126507}
   canvas: {fileID: 1142203354}
@@ -1968,7 +1969,7 @@ MonoBehaviour:
   BreathSpeed: 1
   AsphyxiaSpeed: 5
   HelmetOn: 1
-  Img: {fileID: 0}
+  Img: {fileID: 581478505}
   seed: 0
 --- !u!1 &1410618097
 GameObject:
@@ -2839,7 +2840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1781128671
 Transform:
   m_ObjectHideFlags: 0
@@ -2859,7 +2860,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1781128669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6df4754e7531194287440aaef6fbe9c, type: 3}
   m_Name: 
@@ -2870,6 +2871,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
   - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
   - {fileID: 11400000, guid: aec06497cee8a6642a33137ef12ad22b, type: 2}
+  - {fileID: 11400000, guid: 0321d870ba723754d89938aebe903de2, type: 2}
   currentIndex: 0
   player: {fileID: 396126507}
   canvas: {fileID: 1142203354}
