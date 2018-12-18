@@ -74,9 +74,10 @@ public class ComparaisonHabitables : MonoBehaviour {
                     s += "elle est trop froide : " + infos[1] + "°\n";
                 else if (80 < Int32.Parse(infos[1]))
                     s += "elle est trop chaude : " + infos[1] + "°\n";
+
                 if (Int32.Parse(infos[2].Split('^')[1]) == 20)
                     s += "elle est trop légère\n";
-                else if (Int32.Parse(infos[2].Split('^')[1]) <= 24 && float.Parse(infos[2].Split('^')[0]) < 2.5f)
+                else if (Int32.Parse(infos[2].Split('^')[1]) <= 24 && Double.Parse(infos[2].Split('^')[0].Split('*')[0]) < 2.5)
                     s += "elle est trop légère";
                 else if (Int32.Parse(infos[2].Split('^')[1]) == 28)
                     s += "elle est trop lourde\n";
