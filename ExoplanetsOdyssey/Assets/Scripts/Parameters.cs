@@ -33,6 +33,7 @@ public class Parameters : MonoBehaviour {
 
     public bool comeFromGazeuse;
 	public bool firstMove;
+    public bool tutorial;
 
 	// Use this for initialization
 	void Awake () {
@@ -76,6 +77,7 @@ public class Parameters : MonoBehaviour {
                 }
             }
 			firstMove = true;
+            tutorial = false;
         }
         else
         {
