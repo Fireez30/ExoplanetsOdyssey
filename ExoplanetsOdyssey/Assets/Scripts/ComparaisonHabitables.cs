@@ -14,7 +14,6 @@ public class ComparaisonHabitables : MonoBehaviour {
 
     private Parameters param;
     private Text t;
-    private float time = 0;
 
     // Use this for initialization
     void Awake () {
@@ -36,8 +35,7 @@ public class ComparaisonHabitables : MonoBehaviour {
     void Update()
     {
         //scroll
-        time += Time.deltaTime;
-        t.transform.position = new Vector2(t.transform.position.x, t.transform.position.y + time * 0.3f);
+        t.transform.position = new Vector2(t.transform.position.x, t.transform.position.y + 0.5f);
     }
 
     void ComputeLines()
