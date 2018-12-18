@@ -406,7 +406,7 @@ Prefab:
     - target: {fileID: 114289117819953966, guid: 6a26bba63d496fe489bedc75f3b62e84,
         type: 2}
       propertyPath: seedBase
-      value: test seed
+      value: aezegaga
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a26bba63d496fe489bedc75f3b62e84, type: 2}
