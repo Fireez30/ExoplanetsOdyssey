@@ -14,7 +14,7 @@ public class Parameters : MonoBehaviour {
     public int nbSystem, nbPlanete;                 //Nb systèmes / Nb planètes à générer par systèmes
     public string planetType;
     public int nbHabitable;
-
+    public int nbExtraHabitable;
     private List<List<int>> seedsPlanetes;          //Stocke toutes les seeds de nos planètes, rangé par système List[indexSystem][indexPlanete] 
     private Dictionary<int, string> typePlanete;    //associe le type de planete a chaque seed
     public int currentSystem = -1;
@@ -43,6 +43,7 @@ public class Parameters : MonoBehaviour {
             seedsPlanetes = new List<List<int>>();
             shipSceneFirstVisit = true;
             universeSceneFirstVisit = true;
+            nbExtraHabitable = nbHabitable;
             typePlanete = new Dictionary<int, string>();
             habitables = new List<Choice>();
             rand = new System.Random(seedBase.GetHashCode());   //Random seedé
@@ -58,10 +59,10 @@ public class Parameters : MonoBehaviour {
                 }
             }
 
-            while(habitables.Count < nbHabitable)
+            while(habitables.Count < nbHabitable + nbExtraHabitable)
             {
-                int sys = rand.Next(0, nbSystem - 1); //prochain system test
-                int pla = rand.Next(0, nbPlanete - 1);//prochaine planet test
+                int sys = rand.Next(0, nbSystem); //prochain system test
+                int pla = rand.Next(0, nbPlanete);//prochaine planet test
                 if (testHabitabilite(typePlanete[seedsPlanetes[sys][pla]]) == false)
                 {
                     int s = seedsPlanetes[sys][pla];
@@ -134,7 +135,7 @@ public class Parameters : MonoBehaviour {
         else
             info += type[1]+",";
 
-        var temp = planetRand.Next(-270,300); //temperature 1
+        var temp = planetRand.Next(-270,301); //temperature 1
         info += temp+",";
 
          var masse = planetRand.Next(1,10);
@@ -162,7 +163,7 @@ public class Parameters : MonoBehaviour {
          else
              info += ", trou noir à proximité";
 
-         if (habitables.Count < nbHabitable && testHabitabilite(info)) // et test habitabilité
+         if (habitables.Count < (nbHabitable + nbExtraHabitable)  && testHabitabilite(info)) // et test habitabilité
          {
             habitables.Add(new Choice(numSysteme, numPlanet));
          }
@@ -176,7 +177,7 @@ public class Parameters : MonoBehaviour {
         string infos = "";
 
         infos += "Rocheuse,";
-        infos += pRand.Next(-40, 100)+",";
+        infos += pRand.Next(0, 80)+",";
         var masse = pRand.Next(3, 10);
         infos += masse + "*10^24,";
         infos += "présence d'atmosphère,";
@@ -193,7 +194,7 @@ public class Parameters : MonoBehaviour {
             flag = false;
         
         var temp = int.Parse(criteres[1]);
-        if (temp > 100 || temp < -40)
+        if (temp > 80 || temp < 0)
             flag = false;
 
         var masse = criteres[2];
