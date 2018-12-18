@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Runtime.InteropServices;
 using UnityEngine.SceneManagement;
 
 /*Script du GameManager : génère les seeds des planètes et les atribu aux différents systèmes*/
@@ -56,28 +58,19 @@ public class Parameters : MonoBehaviour {
                 }
             }
 
-            while(nbHabitable < 10)
+            while(habitables.Count < 10)
             {
-                for (int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
+                int sys = rand.Next(0, nbSystem - 1); //prochain system test
+                int pla = rand.Next(0, nbPlanete - 1);//prochaine planet test
+                if (testHabitabilite(typePlanete[seedsPlanetes[sys][pla]]) == false)
                 {
-                    for (int i2 = 0; i2 < nbPlanete; i2++)
-                    {
-                        int seed = seedsPlanetes[i][i2];
-                        if (seed < 0)
-                        {
-                            int newSeed = rand.Next(-999999999, 999999999);
-                            seedsPlanetes[i][i2] = newSeed;
-                            string info = generatePlanet(newSeed, i, i2);
-                            typePlanete.Remove(seed);
-                            typePlanete.Add(newSeed, info);
-                        }
-                       
-                    }
+                    int s = seedsPlanetes[sys][pla];
+                    string i = genPlaneteHabitable(s);
+                    typePlanete[s] = i;
+                    habitables.Add(new Choice(sys,pla));
                 }
-                if (nbHabitable >= 10)
-                    break;
             }
-						firstMove = true;
+			firstMove = true;
         }
         else
         {
@@ -133,69 +126,88 @@ public class Parameters : MonoBehaviour {
 
     private string generatePlanet(int seed, int numSysteme, int numPlanet)
     {
+        System.Random planetRand = new System.Random(seed.GetHashCode());
         string info = "";
+        var testType = planetRand.Next(0, 1);//Gen type planètes
+        if (testType == 0) //inhabitable 0
+            info += type[0]+",";
+        else
+            info += type[1]+",";
 
-        if(seed < 0) //inhabitable
-        {
-            int mod = seed % 2;
-            if (mod == 0)
-                info += type[0];
-            else
-                info += type[1];
-            
-            info += ",";
-            int temperature = seed % 300;
-            if(mod == 0) // t < 0
-                info += Mathf.Abs(temperature);
-            else
-                info += temperature;
+        var temp = planetRand.Next(-270,300); //temperature 1
+        info += temp+",";
 
-            int masse = Mathf.Abs(seed % 8000);
-            int r = rand.Next(1, 3);
-            string puissance;
-            if (r == 1)
-                puissance = "*10^20";
-            else if (r == 2)
-                puissance = "*10^24";
-            else
-                puissance = "*10^28";
+         var masse = planetRand.Next(1,9);
+         int r = planetRand.Next(1, 3);
+         string puissance;
+         if (r == 1)
+             puissance = "*10^20";
+         else if (r == 2)
+             puissance = "*10^24";//habitable si > 2.5x10^24 et < 1x10^28
+         else
+             puissance = "*10^28";
 
-            info += "," + masse / 1000.0f + puissance;
-            info += seed % 2 == 0 ? ",présence d'atmosphère" : ", pas d'atmosphère";
+         info +=  masse + puissance; //push la masse 2
 
-            int prox = (seed / 10000) % 4;
-            if (prox == 0)
-                info += ",environnement proche calme";
-            else if (prox == 1)
-                info += ", amas globulaire proche";
-            else if (prox == 2)
-                info += ", forte présence de rayons gamma";
-            else
-                info += ", trou noir à proximité";
-        }
-        else // habitable
-        {
-            ++nbHabitable;
-            info += type[0];
+         var a = planetRand.Next(0, 1);
+         info += (a == 0) ? ",présence d'atmosphère" : ", pas d'atmosphère";
 
-            int temp = seed % 300;
-            //normalisée = (originale - MIN) * (max - min) / (MAX - MIN) + min 
-            //[MIN, MAX] : interval d'origine 
-            //[min, max] : interval cible
-            //entre 20 et 40
-            int temperature = (temp * 20) / 300 + 20;
-            info += "," + temperature;
+         var prox = planetRand.Next(0,3);
+         if (prox == 0)
+             info += ",environnement proche calme";
+         else if (prox == 1)
+             info += ", amas globulaire proche";
+         else if (prox == 2)
+             info += ", forte présence de rayons gamma";
+         else
+             info += ", trou noir à proximité";
 
-            int masse = seed % 8000;
-            string puissance = "*10^24";
-
-            info += "," + masse / 1000.0f + puissance;
-
-            info += ",présence d'atmosphère";
-            info += ", environnement proche calme";
+         if (habitables.Count < nbHabitable && testHabitabilite(info)) // et test habitabilité
+         {
             habitables.Add(new Choice(numSysteme, numPlanet));
-        }
+         }
+       
         return info;
+    }
+
+    public string genPlaneteHabitable(int seed)
+    {
+        System.Random pRand = new System.Random(seed.GetHashCode());
+        string infos = "";
+
+        infos += "Rocheuse,";
+        infos += pRand.Next(-40, 100)+",";
+        var masse = pRand.Next(3, 9);
+        infos += masse + "*10^24,";
+        infos += "présence d'atmosphère,";
+        infos += "environnement proche calme";
+
+        return infos;
+    }
+    
+    public bool testHabitabilite(string infos)
+    {
+        string[] criteres = infos.Split(',');
+        bool flag = true;
+        if (criteres[0] == "Gazeuse")
+            flag = false;
+        
+        var temp = int.Parse(criteres[1]);
+        if (temp > 100 || temp < -40)
+            flag = false;
+
+        var masse = criteres[2];
+        if (masse[0] < 2.5)
+            flag = false;
+        else if (masse.Remove(0, 1) != "*10^24")
+            flag = false;
+
+        var atm = criteres[3];
+        if (atm == " pas d'atmosphère")
+            flag = false;
+        
+        //ajouter test présence proche si utilisé
+        return flag;
     }
 
     public bool isCurrentHabitable()
