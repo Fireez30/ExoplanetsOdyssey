@@ -6,21 +6,17 @@ using UnityEngine.UI;
 public class PlayerAction : MonoBehaviour {
 
 	public GameObject Character;
-
 	public OxygenLeak OxyLeak;
-
 	public PlayerInventory PI;
-
 	public int HealthPoint;
 	public int BreathSpeed = 1;
 	public int AsphyxiaSpeed = 5;
-
 	public bool HelmetOn = true;
-
     public Image Img;
+    public int seed;
 
     Parameters param;
-    public int seed;
+    SpriteRenderer casque;
 
     // Use this for initialization
     void Start () {
@@ -31,6 +27,7 @@ public class PlayerAction : MonoBehaviour {
 
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         seed = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().getSeedToGen();
+        casque = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 	
 	// Update is called once per frame
@@ -87,6 +84,7 @@ public class PlayerAction : MonoBehaviour {
 		if( Input.GetKeyDown(KeyCode.T) ) 
 		{
 			HelmetOn = !HelmetOn;
+            casque.enabled = HelmetOn;
 			//animation de remettage de casque si false -> true ou inverse sinon
 		}
 	}
