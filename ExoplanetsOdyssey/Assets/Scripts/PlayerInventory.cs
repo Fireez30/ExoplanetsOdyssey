@@ -91,16 +91,12 @@ public class PlayerInventory : MonoBehaviour {
         }
     }
 
-    public void ressourcesBackToShip()
+    public void oxyBackToShip()
     {
         if (gameObject.name == "Character")
         {
-            SI.fuelAmount += fuelAmount;
-            SI.ironAmount += ironAmount;
             SI.shipOxygenAmount += oxygenAmount;
             oxygenAmount = 0;
-            fuelAmount = 0;
-            ironAmount = 0;
         }
     }
 }
