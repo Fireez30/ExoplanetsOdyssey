@@ -6,9 +6,10 @@ public class ActivateRepFenetre : MonoBehaviour
 {
 
 	public GameObject wind;
-
+	
 	public void ChangerEtat()
 	{
-		wind.SetActive(!wind.activeSelf);
+		wind.SetActive(!wind.activeSelf);		
+		GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().windowsOpened = wind.activeSelf;
 	}
 }

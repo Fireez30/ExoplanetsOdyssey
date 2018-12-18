@@ -101,6 +101,7 @@ public class Parameters : MonoBehaviour {
     public void ToGazeuse()
     {
         comeFromGazeuse = true;
+        windowsOpened = true;
         SceneManager.LoadScene(2);
     }
     
