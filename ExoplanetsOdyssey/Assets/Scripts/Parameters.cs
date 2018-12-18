@@ -13,6 +13,7 @@ public class Parameters : MonoBehaviour {
     public static Parameters Instance;              //Pour avoir un singleton
     public int nbSystem, nbPlanete;                 //Nb systèmes / Nb planètes à générer par systèmes
     public string planetType;
+    public int nbHabitable;
 
     private List<List<int>> seedsPlanetes;          //Stocke toutes les seeds de nos planètes, rangé par système List[indexSystem][indexPlanete] 
     private Dictionary<int, string> typePlanete;    //associe le type de planete a chaque seed
@@ -21,7 +22,6 @@ public class Parameters : MonoBehaviour {
     public int currentPlanet;         //Système sélectionné par le joueur / Planète choisi par le joueur -> Permet de retrouver la seed de la planète dans seedsPlanetes
     public string currentPlanetName; //pour l'affichage final a l'utilisateur
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
-    public int nbHabitable;
 
     public List<Choice> habitables;
 
@@ -58,7 +58,7 @@ public class Parameters : MonoBehaviour {
                 }
             }
 
-            while(habitables.Count < 10)
+            while(habitables.Count < nbHabitable)
             {
                 int sys = rand.Next(0, nbSystem - 1); //prochain system test
                 int pla = rand.Next(0, nbPlanete - 1);//prochaine planet test
@@ -128,7 +128,7 @@ public class Parameters : MonoBehaviour {
     {
         System.Random planetRand = new System.Random(seed.GetHashCode());
         string info = "";
-        var testType = planetRand.Next(0, 1);//Gen type planètes
+        var testType = planetRand.Next(0, 2);//Gen type planètes
         if (testType == 0) //inhabitable 0
             info += type[0]+",";
         else
@@ -137,8 +137,8 @@ public class Parameters : MonoBehaviour {
         var temp = planetRand.Next(-270,300); //temperature 1
         info += temp+",";
 
-         var masse = planetRand.Next(1,9);
-         int r = planetRand.Next(1, 3);
+         var masse = planetRand.Next(1,10);
+         int r = planetRand.Next(1, 4);
          string puissance;
          if (r == 1)
              puissance = "*10^20";
@@ -149,10 +149,10 @@ public class Parameters : MonoBehaviour {
 
          info +=  masse + puissance; //push la masse 2
 
-         var a = planetRand.Next(0, 1);
+         var a = planetRand.Next(0, 2);
          info += (a == 0) ? ",présence d'atmosphère" : ", pas d'atmosphère";
 
-         var prox = planetRand.Next(0,3);
+         var prox = planetRand.Next(0,4);
          if (prox == 0)
              info += ",environnement proche calme";
          else if (prox == 1)
@@ -177,7 +177,7 @@ public class Parameters : MonoBehaviour {
 
         infos += "Rocheuse,";
         infos += pRand.Next(-40, 100)+",";
-        var masse = pRand.Next(3, 9);
+        var masse = pRand.Next(3, 10);
         infos += masse + "*10^24,";
         infos += "présence d'atmosphère,";
         infos += "environnement proche calme";

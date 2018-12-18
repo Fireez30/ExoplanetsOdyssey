@@ -57,7 +57,8 @@ public class Spaceship_Planet : MonoBehaviour {
     private void OnMouseDown() {
         GameObject[] planets = GameObject.FindGameObjectsWithTag("planet");
         param.setCurrentPlanet(indexPlanet,planets[indexPlanet].name);
-        if (true) //type = gazeuse
+        string[] infos = infoPlaceholder.Split(',');
+        if (infos[0]=="Gazeuse") //type = gazeuse
         {
             //start couroutine dans gameManager
             param.ToGazeuse();

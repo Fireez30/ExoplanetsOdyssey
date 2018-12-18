@@ -8,6 +8,7 @@ public class shipInteraction : MonoBehaviour {
     public GameObject planetPrefab;
     public int xMin, xMax, y;
     public List<Sprite> allSprites;
+    public GameObject gazeuseWindows;
 
     private List<int> seedPlanets;
     private Parameters param;
@@ -28,6 +29,25 @@ public class shipInteraction : MonoBehaviour {
                     temp.GetComponent<Spaceship_Planet>().setIndexPlanet(i);                                    //Pour que chaque planète connaise son index au sein du système
                     temp.GetComponent<Spaceship_Planet>().setSeed(seedPlanets[i]);
                     temp.GetComponent<SpriteRenderer>().sprite = allSprites[Random.Range(0, allSprites.Count)];
+                }
+            }
+            if (param.comeFromGazeuse)
+            {
+                param.comeFromGazeuse = false;
+                gazeuseWindows.SetActive(true);
+                ShipInventory s = param.gameObject.GetComponent<ShipInventory>();
+                var de = param.getRandomInt(0, 3);
+                if (de == 0 && s.GetScannerState() == 1)
+                {
+                    s.SetScannerState(0);
+                }
+                else if (de == 1 && s.GetScannerState() == 1)
+                {
+                    s.SetScannerState(0);
+                }
+                else if (de == 2 && s.GetScannerState() == 1)
+                {
+                    s.SetScannerState(0);
                 }
             }
         }
