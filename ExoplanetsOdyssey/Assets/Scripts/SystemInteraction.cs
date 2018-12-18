@@ -127,7 +127,7 @@ public class SystemInteraction : MonoBehaviour {
         {
             param.setCurrentSystem(indexSystem,gameObject.name);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
             GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount -= costvalue;
-            SceneManager.LoadScene(1); //Vers le vaisseau
+            SceneManager.LoadScene(2); //Vers le vaisseau
         }
     }
 
