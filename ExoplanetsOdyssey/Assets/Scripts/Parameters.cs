@@ -206,6 +206,9 @@ public class Parameters : MonoBehaviour {
         var atm = criteres[3];
         if (atm == " pas d'atmosphère")
             flag = false;
+
+        if (!criteres[4].Contains("calme"))
+            flag = false;
         
         //ajouter test présence proche si utilisé
         return flag;
