@@ -17,6 +17,7 @@ TagManager:
   - planettype
   - planettemperature
   - fenetrefin
+  - planetemasse
   layers:
   - Default
   - TransparentFX
