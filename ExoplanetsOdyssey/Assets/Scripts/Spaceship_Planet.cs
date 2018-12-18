@@ -75,7 +75,7 @@ public class Spaceship_Planet : MonoBehaviour {
 
     IEnumerator LoadScene()
     {
-        AsyncOperation result = SceneManager.LoadSceneAsync(2);
+        AsyncOperation result = SceneManager.LoadSceneAsync(3);
 
         while (!result.isDone)
         {

@@ -7,6 +7,6 @@ public class ShipBeam : MonoBehaviour
 {
     public void Beam()                          //add coroutine for animation
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }

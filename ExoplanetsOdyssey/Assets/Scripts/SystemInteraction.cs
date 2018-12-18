@@ -121,7 +121,7 @@ public class SystemInteraction : MonoBehaviour {
         {
             param.setCurrentSystem(indexSystem,gameObject.name);
             param.firstMove = false;
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
         else
         {

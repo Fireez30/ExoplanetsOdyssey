@@ -100,7 +100,7 @@ public class Parameters : MonoBehaviour {
     public void ToGazeuse()
     {
         comeFromGazeuse = true;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     
     //Récupère toutes les seeds des planètes d'un système

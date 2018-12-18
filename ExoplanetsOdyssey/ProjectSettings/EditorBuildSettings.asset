@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 832bc4c738e58034eaf6f9c58d8200a5
+  - enabled: 1
     path: Assets/Scenes/Universe.unity
     guid: b06ce928302c8c54990f3d0499c675c9
   - enabled: 1
@@ -14,9 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorldMap3TilesTest.unity
     guid: 566652b48d424b0438dc4ee219da0f66
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 832bc4c738e58034eaf6f9c58d8200a5
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 6c04adb8b38ad0346bc1af0bb048c8f9
