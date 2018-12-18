@@ -37,6 +37,7 @@ public class SystemInteraction : MonoBehaviour {
     {
         Vector3 pos = Input.mousePosition;
         pos.z = 1;
+
         if (Input.mousePosition.y > Screen.height / 2)
         {
             if (Input.mousePosition.x > Screen.width / 2)
@@ -97,6 +98,8 @@ public class SystemInteraction : MonoBehaviour {
                         ep.checkProbaBreak();                    
                     }
                     ship.MoveTo(this.gameObject.transform);
+                    GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount -= costvalue;
+                    GameObject.Find("FuelDisplay").GetComponent<FuelDisplay>().Refresh();
                     StartCoroutine(Transport());
                 }
                 else
@@ -126,7 +129,6 @@ public class SystemInteraction : MonoBehaviour {
         else
         {
             param.setCurrentSystem(indexSystem,gameObject.name);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount -= costvalue;
             SceneManager.LoadScene(2); //Vers le vaisseau
         }
     }

@@ -12,4 +12,10 @@ public class FuelDisplay : MonoBehaviour {
         t.text = "Carburant : " + fuel;
         t.color = Color.white;
 	}
+
+    public void Refresh()
+    {
+        int fuel = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount;
+        t.text = "Carburant : " + fuel;
+    }
 }

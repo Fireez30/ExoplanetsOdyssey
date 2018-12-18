@@ -2074,8 +2074,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Voici la portion de galaxie que vous devez explorer ! Vous devriez trouver
-    facilement les plan\xE8tes ici. Surveillez bien votre jauge de carburant !"
+  m_Text: "Capitaine! Vous avez \xE9t\xE9 envoy\xE9 par les votres pour assurer la
+    survie de la race humaine, votre mission : Trouver 5 plan\xE8tes habitables pour
+    l'Homme dans cette partie de l'univers. Surveillez bien votre carburant, bonne
+    chance!"
 --- !u!222 &1498155870
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2276,7 +2278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -75, y: 14.249984}
+  m_AnchoredPosition: {x: -75, y: 14.249985}
   m_SizeDelta: {x: 155.71, y: 28.899994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1732769510
