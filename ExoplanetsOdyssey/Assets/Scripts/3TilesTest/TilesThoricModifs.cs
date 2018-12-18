@@ -158,23 +158,22 @@ public class TilesThoricModifs : MonoBehaviour
         {
             if (currentIndex != 0)
             {
-                currentIndex--;
+                //currentIndex--;
             }
-            else
-                currentIndex = tileList.Count - 1;
+
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))                                                       //Change la tile sélectionné dans l'inventaire du joueur (vers la droite)
         {
-            currentIndex = (currentIndex +1)%tileList.Count;
+            //currentIndex = (currentIndex +1)%tileList.Count;
         }
 
         /*DEBUG ONLY*/
         if (Input.GetKeyDown(KeyCode.R))                                                                //Reload la planète + sauvegarde changement fait à la planète
         {
-            GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
-            player.GetComponent<PlayerInventory>().computeChangesToFile();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+          //  GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
+          //  player.GetComponent<PlayerInventory>().computeChangesToFile();
+          //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

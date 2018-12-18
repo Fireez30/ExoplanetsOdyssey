@@ -109,29 +109,28 @@ public class TileModif : MonoBehaviour {
         {
             if (currentIndex != 0)
             {
-                currentIndex--;
+               // currentIndex--;
             }
-            else
-                currentIndex = tileList.Count - 1;
+                //currentIndex = tileList.Count - 1;
         }
         
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (currentIndex < tileList.Count - 1)
             {
-                currentIndex++;
+               // currentIndex++;
             }
             else
             {
-                currentIndex = 0;
+                //currentIndex = 0;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
-            player.GetComponent<PlayerInventory>().computeChangesToFile();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //    GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
+        //    player.GetComponent<PlayerInventory>().computeChangesToFile();
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
