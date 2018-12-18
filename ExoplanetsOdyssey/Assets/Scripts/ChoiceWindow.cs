@@ -52,6 +52,8 @@ public class ChoiceWindow : MonoBehaviour {
         }
         actual.Clear();
         showChoiceWindow();
+
+        GameObject.Find("ObjDisplay").GetComponent<ObjDisplay>().Refresh();
     }
 }
 
