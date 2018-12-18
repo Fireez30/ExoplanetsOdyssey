@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class shipMovement : MonoBehaviour {
 
     public float speed;
+    public Vector3 heading;
+    public int moveCost;
     //public Rigidbody2D rb;
     //public float timerConsoCarbu;
-
-    public int moveCost;
-    public bool moving = false;
-    public Vector3 heading;
+    
+    private bool moving = false;
     Transform theTarget;
 
 	// Update is called once per frame
@@ -77,7 +77,6 @@ public class shipMovement : MonoBehaviour {
             }
 
         }
-
         return moveCost;
     }
 }
