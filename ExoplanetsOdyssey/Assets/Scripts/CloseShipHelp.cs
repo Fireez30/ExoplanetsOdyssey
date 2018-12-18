@@ -10,5 +10,6 @@ public class CloseShipHelp : MonoBehaviour, IPointerClickHandler
 	
 	public void OnPointerClick(PointerEventData eventData) { 
         helpWindows.SetActive(!helpWindows.activeSelf);
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().windowsOpened = helpWindows.activeSelf;
 	}
 }

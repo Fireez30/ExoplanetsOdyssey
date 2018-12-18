@@ -35,49 +35,52 @@ public class SystemInteraction : MonoBehaviour {
     // Affiche le nom du système quand on passe sa souris dessus
     void OnMouseEnter()
     {
-        Vector3 pos = Input.mousePosition;
-        pos.z = 1;
+        if (!param.windowsOpened)
+        {
+            Vector3 pos = Input.mousePosition;
+            pos.z = 1;
 
-        if (Input.mousePosition.y > Screen.height / 2)
-        {
-            if (Input.mousePosition.x > Screen.width / 2)
+            if (Input.mousePosition.y > Screen.height / 2)
             {
-                pos.x -= offset;
-                pos.y -= offset;
+                if (Input.mousePosition.x > Screen.width / 2)
+                {
+                    pos.x -= offset;
+                    pos.y -= offset;
+                }
+                else
+                {
+                    pos.x += offset;
+                    pos.y -= offset;
+                }
             }
             else
             {
-                pos.x += offset;
-                pos.y -= offset;
+                if (Input.mousePosition.x > Screen.width / 2)
+                {
+                    pos.x -= offset;
+                    pos.y += offset;
+                }
+                else
+                {
+                    pos.x += offset;
+                    pos.y += offset;
+                }
             }
-        }
-        else
-        {
-            if (Input.mousePosition.x > Screen.width / 2)
+
+            fenetre.transform.position = Camera.main.ScreenToWorldPoint(pos);
+            if (param.firstMove)
             {
-                pos.x -= offset;
-                pos.y += offset;
+                costvalue = 0;
             }
             else
             {
-                pos.x += offset;
-                pos.y += offset;
+                costvalue = ship.calculateCost(indexSystem);
+                if (costvalue == 0 && (indexSystem != param.currentSystem)) costvalue = 1;
             }
+            system.text = gameObject.name;
+            cost.text = costvalue + "";
+            fenetre.SetActive(true);
         }
-            
-        fenetre.transform.position = Camera.main.ScreenToWorldPoint(pos);
-        if (param.firstMove)
-        {
-            costvalue = 0;
-        }
-        else
-        {
-            costvalue = ship.calculateCost(indexSystem);
-            if (costvalue == 0 && (indexSystem != param.currentSystem)) costvalue = 1; 
-        }
-        system.text = gameObject.name;
-        cost.text = costvalue + "";
-        fenetre.SetActive(true);
     }
 
     //Fait disparaitre le nom du système quand la souris n'est plus dessus
@@ -89,7 +92,7 @@ public class SystemInteraction : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        if (!ship.getMoving())
+        if (!ship.getMoving() && !param.windowsOpened)
             {
                 if (costvalue <= GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>().fuelAmount)
                 {
@@ -113,6 +116,7 @@ public class SystemInteraction : MonoBehaviour {
     private IEnumerator Transport()
     {
         eventW.UpdateLights();
+        param.windowsOpened = true;
         yield return new WaitUntil(() => !ship.getMoving());
         if (indexSystem != param.currentSystem)//check if mouse is on a different system
         {

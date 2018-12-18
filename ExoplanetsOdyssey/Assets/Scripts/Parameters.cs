@@ -22,7 +22,7 @@ public class Parameters : MonoBehaviour {
     public int currentPlanet;         //Système sélectionné par le joueur / Planète choisi par le joueur -> Permet de retrouver la seed de la planète dans seedsPlanetes
     public string currentPlanetName; //pour l'affichage final a l'utilisateur
     private System.Random rand;                     //Le random de notre jeu (pour évènements aléatoire et génération de seeds)
-
+    public bool windowsOpened;          //Si une fenetre est ouverte  ne peut pas cliquer sur une planete
     public List<Choice> habitables;
 
     public bool shipSceneFirstVisit; //set this to true when visited ship scene for the first time ! 
@@ -43,6 +43,7 @@ public class Parameters : MonoBehaviour {
             seedsPlanetes = new List<List<int>>();
             shipSceneFirstVisit = true;
             universeSceneFirstVisit = true;
+            windowsOpened = false;
             nbExtraHabitable = nbHabitable;
             typePlanete = new Dictionary<int, string>();
             habitables = new List<Choice>();

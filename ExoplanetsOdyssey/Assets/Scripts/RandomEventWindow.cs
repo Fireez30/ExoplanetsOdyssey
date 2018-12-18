@@ -32,6 +32,7 @@ public class RandomEventWindow : MonoBehaviour {
             ok = false;
         else
             ok = true;
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().windowsOpened = false;
         this.gameObject.SetActive(false);
     }
 

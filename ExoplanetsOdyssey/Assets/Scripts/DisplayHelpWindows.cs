@@ -13,6 +13,7 @@ public class DisplayHelpWindows : MonoBehaviour
         Parameters p = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         if (p.shipSceneFirstVisit == true)
         {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().windowsOpened = true;
             window.SetActive(true);
             p.shipSceneFirstVisit = false;
         }

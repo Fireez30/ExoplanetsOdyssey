@@ -11,6 +11,7 @@ public class TutoDisplay : MonoBehaviour {
         Parameters p = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         if (p.universeSceneFirstVisit == true)
         {
+            p.windowsOpened = true;
             window.SetActive(true);
             p.universeSceneFirstVisit = false;
         }

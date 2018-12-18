@@ -59,17 +59,20 @@ public class Spaceship_Planet : MonoBehaviour {
        // Debug.Log("Info : " + infoPlaceholder);
     }
     private void OnMouseDown() {
-        GameObject[] planets = GameObject.FindGameObjectsWithTag("planet");
-        param.setCurrentPlanet(indexPlanet,planets[indexPlanet].name);
-        string[] infos = infoPlaceholder.Split(',');
-        if (infos[0]=="Gazeuse") //type = gazeuse
+        if (!param.windowsOpened)
         {
-            //start couroutine dans gameManager
-            param.ToGazeuse();
-        }
-        else
-        {
-            StartCoroutine(LoadScene());
+            GameObject[] planets = GameObject.FindGameObjectsWithTag("planet");
+            param.setCurrentPlanet(indexPlanet, planets[indexPlanet].name);
+            string[] infos = infoPlaceholder.Split(',');
+            if (infos[0] == "Gazeuse") //type = gazeuse
+            {
+                //start couroutine dans gameManager
+                param.ToGazeuse();
+            }
+            else
+            {
+                StartCoroutine(LoadScene());
+            }
         }
     }
 

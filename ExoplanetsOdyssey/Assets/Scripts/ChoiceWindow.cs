@@ -17,7 +17,7 @@ public class ChoiceWindow : MonoBehaviour {
     {
         active = !active;
         fenetrechoix.SetActive(active);
-
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().windowsOpened = active;
     }
 
     public void SetChoice(int i)
