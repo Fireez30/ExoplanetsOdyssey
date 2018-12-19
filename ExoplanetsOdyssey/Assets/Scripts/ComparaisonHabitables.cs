@@ -35,7 +35,7 @@ public class ComparaisonHabitables : MonoBehaviour {
     void Update()
     {
         //scroll
-        t.transform.position = new Vector2(t.transform.position.x, t.transform.position.y+0.005f);
+        t.transform.position = new Vector2(t.transform.position.x, t.transform.position.y + 0.01f);
     }
 
     void ComputeLines()
