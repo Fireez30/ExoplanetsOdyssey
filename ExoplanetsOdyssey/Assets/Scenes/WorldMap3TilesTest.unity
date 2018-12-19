@@ -4124,6 +4124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e021028237c9746b541787be3aa284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 396126507}
+  gest: {fileID: 1150747469}
 --- !u!43 &2102320222
 Mesh:
   m_ObjectHideFlags: 0

@@ -40,8 +40,17 @@ public class ComparaisonHabitables : MonoBehaviour {
 
     void ComputeLines()
     {
-        lines.Add("Félicitation vous avez choisi les " + planetNumber + " planètes que vous considérez habitables.\n");
-        lines.Add("Voyons maintenant ce qui va ou ne va pas dans vos choix :\n");
+        if (param.deadByOxygen)
+        {
+            lines.Add("Vous êtes malheuresement mort d'asphyxie sur une planète qui n'avait pas d'athmosphère respirable.");
+            lines.Add("Les humains ont tout de même retrouvé votre trace et ont pu se servir de vos choix.");
+        }
+        else 
+        {
+            lines.Add("Félicitation vous avez choisi les " + planetNumber + " planètes que vous considérez habitables.\n");
+            lines.Add("Voyons maintenant ce qui va ou ne va pas dans vos choix :\n");
+        }
+
         foreach (Choice c in choices)
         {
             bool flag = false;
@@ -95,14 +104,22 @@ public class ComparaisonHabitables : MonoBehaviour {
         }
         lines.Add("Vous avez fais " + nbCorrects + " choix corrects sur " + planetNumber + "\n");
 
-        float pourcentage = (float)nbCorrects / (float)planetNumber;
-
-        if (pourcentage <= 0.3f)
-            lines.Add("\n Il va falloir s'entrainer un peu plus, pourquoi ne pas faire une nouvelle partie ?");
-        else if (pourcentage <= 0.7f && pourcentage > 0.3f)
-            lines.Add("Bravo, tu as résolu certains des mystères de l'espace, même si certains restent encore à découvrir !");
+       
+        if (param.deadByOxygen)
+        {
+            lines.Add("Pourquoi ne pas faire une nouvelle partie, en faisant attetion à votre oxygène cette fois ? ");
+        }
         else
-            lines.Add("Félicitation, les planètes n'ont plus de secrets pour toi !");
+        {
+            float pourcentage = (float)nbCorrects / (float)planetNumber;
+            if (pourcentage <= 0.3f)
+                lines.Add("\n Il va falloir s'entrainer un peu plus, pourquoi ne pas faire une nouvelle partie ?");
+            else if (pourcentage <= 0.7f && pourcentage > 0.3f)
+                lines.Add(
+                    "Bravo, vous avez résolu certains des mystères de l'espace, même si certains restent encore à découvrir !");
+            else
+                lines.Add("Félicitation, les planètes n'ont plus de secrets pour vous !");
+        }
 
     }
 }

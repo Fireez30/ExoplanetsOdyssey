@@ -60,6 +60,7 @@ public class PlayerAction : MonoBehaviour {
 	void Asphyxia() {
 		if(PI.oxygenAmount <= 0)
 		{
+			param.deadByOxygen = true;
             SceneManager.LoadScene(4);
 		}
 	}

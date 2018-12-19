@@ -128,7 +128,7 @@ public class TileModif : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-        //    GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
+        //    this.gameObject.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
         //    player.GetComponent<PlayerInventory>().computeChangesToFile();
         //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

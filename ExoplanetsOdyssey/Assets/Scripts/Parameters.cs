@@ -34,6 +34,7 @@ public class Parameters : MonoBehaviour {
     public bool comeFromGazeuse;
 	public bool firstMove;
     public bool tutorial;
+    public bool deadByOxygen;
 
 	// Use this for initialization
 	void Awake () {
@@ -45,6 +46,7 @@ public class Parameters : MonoBehaviour {
             planetSpritesIndexes = new List<List<int>>();
             shipSceneFirstVisit = true;
             universeSceneFirstVisit = true;
+            deadByOxygen = false;
             windowsOpened = false;
             nbExtraHabitable = nbHabitable;
             typePlanete = new Dictionary<int, string>();
