@@ -1746,7 +1746,7 @@ Transform:
   m_LocalScale: {x: 304, y: 97, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &987118302
 GameObject:
@@ -2157,7 +2157,7 @@ Transform:
   m_Children:
   - {fileID: 645343269}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1265755700
 GameObject:
@@ -2813,7 +2813,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549484071
 GameObject:
@@ -3003,7 +3003,7 @@ Transform:
   m_Children:
   - {fileID: 1738558509}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1614365497
 GameObject:
@@ -3395,56 +3395,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1781128669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1781128671}
-  - component: {fileID: 1781128672}
-  m_Layer: 0
-  m_Name: GM
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1781128671
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1781128669}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6100172, y: 0.4571736, z: -1.1224383}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1781128672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1781128669}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6df4754e7531194287440aaef6fbe9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilemap: {fileID: 1738558514}
-  tileList:
-  - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
-  - {fileID: 11400000, guid: a244950635aa38544821965cf469cb7a, type: 2}
-  - {fileID: 11400000, guid: d3c11accbd3baee499271e58403df6c2, type: 2}
-  - {fileID: 11400000, guid: aec06497cee8a6642a33137ef12ad22b, type: 2}
-  - {fileID: 11400000, guid: 0321d870ba723754d89938aebe903de2, type: 2}
-  currentIndex: 0
-  player: {fileID: 396126507}
-  canvas: {fileID: 1142203354}
 --- !u!1 &1814395651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3670,7 +3620,7 @@ Transform:
   m_Children:
   - {fileID: 174342908}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1842576034
 GameObject:
