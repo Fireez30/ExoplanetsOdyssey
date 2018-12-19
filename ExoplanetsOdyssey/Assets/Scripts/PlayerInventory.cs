@@ -35,8 +35,8 @@ public class PlayerInventory : MonoBehaviour {
             string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/saves/player.save");
 
             string[] tmp = lines[0].Split(';');
-            fuelAmount = int.Parse(tmp[0]);
-            ironAmount = int.Parse(tmp[1]);
+            fuelAmount = 0;
+            ironAmount = 0;
             oxygenAmount = int.Parse(tmp[2]);
 
             string[] tmp2 = lines[1].Split(';');
