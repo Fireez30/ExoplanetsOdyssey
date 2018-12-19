@@ -2030,8 +2030,8 @@ MonoBehaviour:
   - {fileID: 1838423551}
   - {fileID: 1215554431}
   player: {fileID: 396126507}
-  worldWidht: 100
-  worldHeight: 100
+  worldWidht: 200
+  worldHeight: 200
 --- !u!4 &1150747471
 Transform:
   m_ObjectHideFlags: 0
@@ -2056,8 +2056,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c076873fec43610418eebc345e0c99a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldWidth: 100
-  worldHeight: 100
+  worldWidth: 200
+  worldHeight: 200
   tilesList:
   - type: classic
     Alltiles:
