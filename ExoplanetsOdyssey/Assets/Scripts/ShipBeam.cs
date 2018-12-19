@@ -12,7 +12,7 @@ public class ShipBeam : MonoBehaviour
     {
         
         gest.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
-        player.GetComponent<PlayerInventory>().computeChangesToFile();
+        //player.GetComponent<PlayerInventory>().computeChangesToFile();
         SceneManager.LoadScene(2);
     }
 }
