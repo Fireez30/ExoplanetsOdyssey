@@ -165,7 +165,6 @@ public class TilesLevelGeneration : MonoBehaviour {
     public void SetRessourcesInMap(int[,] map, int chance)
     {
         bool habitable = GM.isCurrentHabitable();
-        Debug.Log("Habitable ? " + habitable);
         for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= map.GetUpperBound(1); y++)

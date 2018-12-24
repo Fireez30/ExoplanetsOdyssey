@@ -86,6 +86,11 @@ public class Parameters : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
+
+    public string getInfosActual()
+    {
+        return typePlanete[seedsPlanetes[currentSystem][currentPlanet]];
+    }
     
     //Récupère la seed de la planète choisie par le joueur
     public int getSeedToGen()

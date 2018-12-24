@@ -128,11 +128,14 @@ public class SystemInteraction : MonoBehaviour {
         {
             param.setCurrentSystem(indexSystem,gameObject.name);
             param.firstMove = false;
+            param.windowsOpened = true;
             SceneManager.LoadScene(2);
+            
         }
         else
         {
-            param.setCurrentSystem(indexSystem,gameObject.name);                                    //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
+            param.setCurrentSystem(indexSystem,gameObject.name); //Pour que le GameManager sache quel système a été sélectionné (pour récupérer la bonne seed de planète)
+            param.windowsOpened = false;
             SceneManager.LoadScene(2); //Vers le vaisseau
         }
     }

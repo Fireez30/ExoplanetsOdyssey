@@ -16,7 +16,6 @@ public class SystemsGenerator : MonoBehaviour {
     private Parameters GM;
 
     void Start () {
-        Debug.Log("Start gen systeme");
         List<int> indexs = new List<int>();
         GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         stars = new List<GameObject>();
