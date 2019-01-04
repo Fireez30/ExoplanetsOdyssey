@@ -13,14 +13,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114767525635330244}
-  - {fileID: 114962115069513010}
-  EditorEvents: []
+  - {fileID: 114886125161929272}
+  EditorEvents:
+  - {fileID: 114910032145747684}
   MasterBanks:
   - {fileID: 114962115069513010}
+  - {fileID: 114886125161929272}
   StringsBanks:
   - {fileID: 114767525635330244}
-  stringsBankWriteTime: 636811632227597596
+  stringsBankWriteTime: 636822116904585707
   cacheVersion: 3
+--- !u!114 &114321978572193848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Random
+  Min: 0
+  Max: 100
+  Default: 0
+--- !u!114 &114710956739106990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 200
+  Default: 0
 --- !u!114 &114767525635330244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,12 +65,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD project\project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636811632227597596
+  lastModified: 636822116904585707
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 672
+    Value: 722
   Exists: 1
+--- !u!114 &114786904827570222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Oxygene
+  Min: 0
+  Max: 100
+  Default: 0
+--- !u!114 &114886125161929272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Fireez\Documents\GitHub\ExoplanetsOdyssey\ExoplanetsOdyssey\Assets\FMOD
+    project\project\Build\Desktop\Master Bank.bank
+  lastModified: 636822116904535738
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 512256
+  Exists: 1
+--- !u!114 &114910032145747684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Planet
+  guid: 9e31f64b6d656b43ab23bd178fc745e4
+  Banks:
+  - {fileID: 114886125161929272}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114321978572193848}
+  - {fileID: 114710956739106990}
+  - {fileID: 114786904827570222}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 47624
 --- !u!114 &114962115069513010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,4 +148,4 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 12474
-  Exists: 1
+  Exists: 0
