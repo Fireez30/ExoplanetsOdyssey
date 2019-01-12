@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 396126514}
   - component: {fileID: 396126515}
   - component: {fileID: 396126516}
+  - component: {fileID: 396126517}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -520,6 +521,7 @@ MonoBehaviour:
   jumpVelocity: 6.04
   fallMult: 2.5
   lowMult: 2
+  comp: {fileID: 1150747469}
 --- !u!114 &396126514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,6 +571,19 @@ MonoBehaviour:
   HelmetOn: 1
   Img: {fileID: 581478505}
   seed: 0
+--- !u!114 &396126517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 396126507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496e7abe0f880024aaf3a9edae9d99c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Music: event:/Music/Planet
+  diceCheck: 0
 --- !u!1 &449847666
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +785,7 @@ MonoBehaviour:
   jumpVelocity: 6.04
   fallMult: 2.5
   lowMult: 2
+  comp: {fileID: 0}
 --- !u!61 &493730759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2125,6 +2141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6df4754e7531194287440aaef6fbe9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  breakSound: event:/Minage
   tilemap: {fileID: 1738558514}
   tileList:
   - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
@@ -2388,6 +2405,7 @@ MonoBehaviour:
   jumpVelocity: 6.04
   fallMult: 2.5
   lowMult: 2
+  comp: {fileID: 0}
 --- !u!61 &1334438772
 BoxCollider2D:
   m_ObjectHideFlags: 0
