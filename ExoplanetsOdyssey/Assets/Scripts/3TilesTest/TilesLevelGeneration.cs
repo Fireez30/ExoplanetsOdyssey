@@ -23,10 +23,30 @@ public class TilesLevelGeneration : MonoBehaviour {
     private string planetType;                                                              //Type de la planète (rocheuse, gazeuse, normal)
     private int planeteSeed;                                                                //Seed de la planète (générée lors du lancement du jeu)
 
+    private float depthRatio;
+    private int maxDepth;
+
+
     public int getPlaneteSeed()
     {
         return planeteSeed;
     }
+
+    public float getProfondeur()
+    {
+        return depthRatio;
+    }
+
+    void Update()
+    {
+        depthRatio = player.transform.position.y / maxDepth;
+    }
+
+    private void Start()
+    {
+        maxDepth = maxSurface * ((int)tiles.cellSize.y) + worldHeight;
+    }
+
 
     // Use this for initialization
     void Awake()

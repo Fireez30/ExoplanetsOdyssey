@@ -33,6 +33,7 @@ public class PlayerJump : MonoBehaviour {
 		if( Input.GetButtonDown("Jump") && rb.velocity.y == 0 ) 
 		{
 			rb.velocity = Vector2.up * jumpVelocity;
+            print("prof == " + profondeur);
             profondeur = tlg.getProfondeur();
             Saut.setParameterValue("Saut", profondeur);
             Saut.start();
