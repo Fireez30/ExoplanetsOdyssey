@@ -15,8 +15,7 @@ public class PlayerJump : MonoBehaviour {
 	public float fallMult = 2.5f;
 	public float lowMult = 2f;
 
-    public GameObject comp;
-    TilesLevelGeneration tlg;
+    public TilesLevelGeneration tlg;
     string nom = "event:/saut";
     FMOD.Studio.EventInstance Saut;
     float profondeur;
@@ -24,7 +23,6 @@ public class PlayerJump : MonoBehaviour {
     private void Start()
     {
         Saut = FMODUnity.RuntimeManager.CreateInstance(nom);
-        tlg = comp.GetComponent<TilesLevelGeneration>();
     }
 
     // Update is called once per frame
@@ -34,9 +32,12 @@ public class PlayerJump : MonoBehaviour {
 		{
 			rb.velocity = Vector2.up * jumpVelocity;
             print("prof == " + profondeur);
-            profondeur = tlg.getProfondeur();
-            Saut.setParameterValue("Saut", profondeur);
-            Saut.start();
+            if (tlg)
+            {
+                profondeur = tlg.getProfondeur();
+                Saut.setParameterValue("Saut", profondeur);
+                Saut.start();
+            }
 		}
 
 		if( rb.velocity.y < 0 )
