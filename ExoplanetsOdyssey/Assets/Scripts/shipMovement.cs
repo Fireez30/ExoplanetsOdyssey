@@ -11,9 +11,17 @@ public class shipMovement : MonoBehaviour {
     //public Rigidbody2D rb;
     //public float timerConsoCarbu;
     
+    [FMODUnity.EventRef]
+    public string movement = "event:/ShipMovement";
+    FMOD.Studio.EventInstance moveEv;
+    
     private bool moving = false;
     Transform theTarget;
 
+    void Start()
+    {
+        moveEv = FMODUnity.RuntimeManager.CreateInstance(movement);
+    }
 	// Update is called once per frame
 	void FixedUpdate () {
   /*      float moveH = Input.GetAxis("Horizontal"), moveV = Input.GetAxis("Vertical");                                                                //-1 si joueur appuie sur Q/<- ou 1 si le joueur appuie sur D/->
@@ -55,8 +63,12 @@ public class shipMovement : MonoBehaviour {
 
     IEnumerator Move()
     {
+        
+        
         moving = true;
+        moveEv.start();
         yield return new WaitUntil(() => ((transform.position - theTarget.position).magnitude <= 0.2));
+        moveEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         moving = false;
     }
 
