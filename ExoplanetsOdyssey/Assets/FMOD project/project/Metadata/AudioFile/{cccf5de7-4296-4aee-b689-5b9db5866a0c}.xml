@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.01.10.00">
-    <object class="AudioFile" id="{b42b4cf9-b899-47a5-894b-3862fe4f7d6c}">
+    <object class="AudioFile" id="{cccf5de7-4296-4aee-b689-5b9db5866a0c}">
         <property name="assetPath">
-            <value>obt9.wav</value>
+            <value>saut.wav</value>
         </property>
         <property name="frequencyInKHz">
-            <value>16</value>
+            <value>44.0999985</value>
         </property>
         <property name="channelCount">
-            <value>1</value>
+            <value>2</value>
         </property>
         <property name="length">
-            <value>0.35718749999999999</value>
+            <value>0.62693877551020405</value>
         </property>
         <relationship name="masterAssetFolder">
             <destination>{bc6d417a-7014-48b0-81f2-9ad3e2d1da1c}</destination>

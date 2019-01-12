@@ -14,13 +14,29 @@ public class PlayerJump : MonoBehaviour {
 	public float jumpVelocity;
 	public float fallMult = 2.5f;
 	public float lowMult = 2f;
-    
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    public GameObject comp;
+    TilesLevelGeneration tlg;
+    string nom = "event:/saut";
+    FMOD.Studio.EventInstance Saut;
+    float profondeur;
+
+    private void Start()
+    {
+        Saut = FMODUnity.RuntimeManager.CreateInstance(nom);
+        tlg = comp.GetComponent<TilesLevelGeneration>();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
 
 		if( Input.GetButtonDown("Jump") && rb.velocity.y == 0 ) 
 		{
 			rb.velocity = Vector2.up * jumpVelocity;
+            profondeur = tlg.getProfondeur();
+            Saut.setParameterValue("Saut", profondeur);
+            Saut.start();
+            Saut.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 		}
 
 		if( rb.velocity.y < 0 )
