@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 public class TilesThoricModifs : MonoBehaviour
 {
 
+    [FMODUnity.EventRef]
+    public string breakSound = "event:/Minage";
+    
+    FMOD.Studio.EventInstance miningEv;
+    
     public Tilemap tilemap;                                                                             //Tilemap centrale
     Tilemap[] maps;                                                                                     //Les 3 tilemaps
     int mapsIndex;                                                                                      //Index de la tilemap sur laquelle le joueur influe
@@ -19,6 +24,7 @@ public class TilesThoricModifs : MonoBehaviour
     private Vector3Int memTile;                                                                         //Pour conserver la position de la tile que le joueur essaie de casser
     private float timerBreakTile;                                                                       //Pour gérer le temps que met la tile à casser (-1 si incassable)
 
+    private bool isPlaying;
     /*Initialisation des variables de classes*/
     private void Awake()
     {
@@ -27,11 +33,13 @@ public class TilesThoricModifs : MonoBehaviour
         maps = new Tilemap[3];
         mapsIndex = 0;
         timerBreakTile = 0;
+        isPlaying = false;
     }
 
     /*Range les tilemaps aux bons index de maps*/
     void Start()
     {
+        miningEv = FMODUnity.RuntimeManager.CreateInstance(breakSound);
         maps[0] = tilemap;
         Tilemap[] t = GameObject.FindObjectsOfType<Tilemap>();
         for (int i = 0; i < t.Length; i++)                                                              //used to sort tilemaps in the tab, 0 = center one
@@ -86,6 +94,13 @@ public class TilesThoricModifs : MonoBehaviour
                     case "carburant": timeBreak = 0.8f; break;
                     default: timeBreak = -1; break;                                                    //Si tileBreak == -1, alors on ne peux pas casser la tile
                 }
+
+                if (!isPlaying)
+                {
+                    miningEv.start();
+                    isPlaying = true;
+                }
+                
             }
             if (tilePos != memTile && timeBreak != -1)                                                    //Si la souris est plus sur la même tiles, on reset le cassage de tile
             {
@@ -93,6 +108,8 @@ public class TilesThoricModifs : MonoBehaviour
                     maps[mapsIndex].SetColor(memTile, new Color(1, 1, 1, 1));
                 timerBreakTile = 0;
                 memTile = tilePos;
+                miningEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                isPlaying = false;
             }
             else if (tilePos == memTile && timeBreak != -1 && timerBreakTile < timeBreak)                  //Si la souris est sur la même tile mais pas depuis assez longtemps pour la casser, on change l'opacité de la tile
             {
@@ -101,6 +118,9 @@ public class TilesThoricModifs : MonoBehaviour
             }
             else if (timerBreakTile >= timeBreak && tilePos == memTile && timeBreak != -1)                 //Si on est toujours sur la même tile et qu'on l'a cassé
             {
+                miningEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                isPlaying = false;
+                //joueur son récupèration 
                 TileBase actual = maps[mapsIndex].GetTile(tilePos);                                         //Récupère la tile cassé
                 for (int i = 0; i < tileList.Count; i++)                                                    //Parcours la liste de tile présente sur la planète pour savoir quelle action faire
                     if (tileList[i].Equals(actual))

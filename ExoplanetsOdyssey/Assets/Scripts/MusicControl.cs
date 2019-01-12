@@ -14,7 +14,7 @@ public class MusicControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		musicEv = FMODUnity.RuntimeManager.CreateInstance(Music);
-		musicEv.start();
+		//musicEv.start();
 		Rand = 0;
 	}
 	
