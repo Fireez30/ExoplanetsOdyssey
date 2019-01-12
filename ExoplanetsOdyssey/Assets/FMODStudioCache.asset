@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114767525635330244}
-  - {fileID: 114227354534883236}
+  - {fileID: 114849145664767632}
   EditorEvents:
   - {fileID: 114910032145747684}
   - {fileID: 114723177198170762}
@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 114227354534883236}
   StringsBanks:
   - {fileID: 114767525635330244}
-  stringsBankWriteTime: 636829099155724897
+  stringsBankWriteTime: 636829109635887414
   cacheVersion: 3
 --- !u!114 &114017067586116048
 MonoBehaviour:
@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: event:/ShipMovement
   guid: edc59cfaed9ac14f898a6a4c51ad6d09
   Banks:
-  - {fileID: 114227354534883236}
+  - {fileID: 114849145664767632}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 1630848
-  Exists: 1
+  Exists: 0
 --- !u!114 &114275516823763618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +159,21 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114347474887177274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Random
+  Min: 0
+  Max: 100
+  Default: 0
 --- !u!114 &114365363212224612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +189,36 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114400890404286404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114426567274938520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114484873547085102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +233,7 @@ MonoBehaviour:
   Path: event:/Music/Univers
   guid: c3dcb2cfb5b189478565190791223376
   Banks:
-  - {fileID: 114227354534883236}
+  - {fileID: 114849145664767632}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -345,7 +390,7 @@ MonoBehaviour:
   Path: event:/Minage
   guid: 10807d33c71b3f4bbb6c6f8fe57fdf6b
   Banks:
-  - {fileID: 114227354534883236}
+  - {fileID: 114849145664767632}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -365,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD project\project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636829099155724897
+  lastModified: 636829109635887414
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -401,6 +446,40 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114828925904169992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Oxygene
+  Min: 0
+  Max: 100
+  Default: 0
+--- !u!114 &114849145664767632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\Fireez\Documents\GitHub\ExoplanetsOdyssey\ExoplanetsOdyssey\Assets\FMOD
+    project\project\Build\Desktop\Master Bank.bank
+  lastModified: 636829144969579629
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1630848
+  Exists: 1
 --- !u!114 &114886125161929272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,14 +513,14 @@ MonoBehaviour:
   Path: event:/Music/Planet
   guid: 9e31f64b6d656b43ab23bd178fc745e4
   Banks:
-  - {fileID: 114227354534883236}
+  - {fileID: 114849145664767632}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114555053152637920}
-  - {fileID: 114616071194556514}
-  - {fileID: 114275516823763618}
+  - {fileID: 114347474887177274}
+  - {fileID: 114400890404286404}
+  - {fileID: 114828925904169992}
   MinDistance: 0
   MaxDistance: 0
   Length: 48000
@@ -474,12 +553,12 @@ MonoBehaviour:
   Path: event:/Saut
   guid: b049801ff08d744e90431bd92eed8ef6
   Banks:
-  - {fileID: 114227354534883236}
+  - {fileID: 114849145664767632}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114556378687693232}
+  - {fileID: 114426567274938520}
   MinDistance: 0
   MaxDistance: 0
   Length: 626

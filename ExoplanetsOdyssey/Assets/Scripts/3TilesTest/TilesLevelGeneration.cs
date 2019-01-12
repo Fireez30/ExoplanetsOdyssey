@@ -25,8 +25,11 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     private float depthRatio;
     private int maxDepth;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of 3c9ae41... dq
     public int getPlaneteSeed()
     {
         return planeteSeed;
@@ -36,7 +39,11 @@ public class TilesLevelGeneration : MonoBehaviour {
     {
         return depthRatio;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> parent of 3c9ae41... dq
     void Update()
     {
         depthRatio = player.transform.position.y / maxDepth;
@@ -44,10 +51,16 @@ public class TilesLevelGeneration : MonoBehaviour {
 
     private void Start()
     {
+<<<<<<< HEAD
         maxDepth = maxSurface * ((int)tiles.cellSize.y) + worldHeight;
     }
 
 
+=======
+        maxDepth = maxSurface*((int)tiles.cellSize.y) + worldHeight;
+    }
+
+>>>>>>> parent of 3c9ae41... dq
     // Use this for initialization
     void Awake()
     {
