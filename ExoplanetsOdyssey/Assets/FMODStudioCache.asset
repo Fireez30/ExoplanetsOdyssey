@@ -13,16 +13,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114767525635330244}
-  - {fileID: 114886125161929272}
+  - {fileID: 114685930843114854}
   EditorEvents:
   - {fileID: 114910032145747684}
   - {fileID: 114723177198170762}
+  - {fileID: 114307008048936024}
+  - {fileID: 114993759315548286}
   MasterBanks:
   - {fileID: 114962115069513010}
   - {fileID: 114886125161929272}
   StringsBanks:
   - {fileID: 114767525635330244}
-  stringsBankWriteTime: 636828252265339900
+  stringsBankWriteTime: 636829060257062641
   cacheVersion: 3
 --- !u!114 &114089860896574084
 MonoBehaviour:
@@ -36,6 +38,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Oxygene
+  Min: 0
+  Max: 100
+  Default: 0
+--- !u!114 &114113613747086248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Random
   Min: 0
   Max: 100
   Default: 0
@@ -54,6 +71,21 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114116641643109032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Oxygene
+  Min: 0
+  Max: 100
+  Default: 0
 --- !u!114 &114160955007158844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +101,43 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114302285896021366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 200
+  Default: 0
+--- !u!114 &114307008048936024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Univers
+  guid: c3dcb2cfb5b189478565190791223376
+  Banks:
+  - {fileID: 114685930843114854}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 73717
 --- !u!114 &114321978572193848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +198,25 @@ MonoBehaviour:
   Min: 0
   Max: 200
   Default: 0
+--- !u!114 &114685930843114854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\Git\ExoplanetsOdyssey\ExoplanetsOdyssey\Assets\FMOD project\project\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636829060256773457
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1461536
+  Exists: 1
 --- !u!114 &114698826215598412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +261,7 @@ MonoBehaviour:
   Path: event:/Minage
   guid: 10807d33c71b3f4bbb6c6f8fe57fdf6b
   Banks:
-  - {fileID: 114886125161929272}
+  - {fileID: 114685930843114854}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -193,11 +281,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD project\project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636828252265339900
+  lastModified: 636829060257062641
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 770
+    Value: 872
   Exists: 1
 --- !u!114 &114780702553271848
 MonoBehaviour:
@@ -247,7 +335,7 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 731072
-  Exists: 1
+  Exists: 0
 --- !u!114 &114910032145747684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,14 +350,14 @@ MonoBehaviour:
   Path: event:/Music/Planet
   guid: 9e31f64b6d656b43ab23bd178fc745e4
   Banks:
-  - {fileID: 114886125161929272}
+  - {fileID: 114685930843114854}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114114912718633008}
-  - {fileID: 114582081881955654}
-  - {fileID: 114089860896574084}
+  - {fileID: 114113613747086248}
+  - {fileID: 114302285896021366}
+  - {fileID: 114116641643109032}
   MinDistance: 0
   MaxDistance: 0
   Length: 48000
@@ -307,3 +395,25 @@ MonoBehaviour:
   - Name: 
     Value: 12474
   Exists: 0
+--- !u!114 &114993759315548286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Obtention
+  guid: caf110204e6a3d4791326ec4555f7c78
+  Banks:
+  - {fileID: 114685930843114854}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 600
