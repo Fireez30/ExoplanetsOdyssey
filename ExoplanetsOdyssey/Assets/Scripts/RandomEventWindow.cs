@@ -56,11 +56,12 @@ public class RandomEventWindow : MonoBehaviour {
     public void UpdateLights()
     {
 
-        OxyBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        FuelBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        ScanBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        print("hollé holla!");
+       // OxyBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //FuelBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        //ScanBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
-        
+
         if  (p.GetFuelTankState() == 0 && FuelSlot.GetComponent<SpriteRenderer>().sprite != red)
         {
             FuelSlot.GetComponent<SpriteRenderer>().sprite = red;
