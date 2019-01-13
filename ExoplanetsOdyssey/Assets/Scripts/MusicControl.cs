@@ -12,9 +12,9 @@ public class MusicControl : MonoBehaviour {
     FMOD.Studio.EventInstance musicEv;
     
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		musicEv = FMODUnity.RuntimeManager.CreateInstance(Music);
-		//musicEv.start();
+		musicEv.start();
 		Rand = 0;
 	}
 	
