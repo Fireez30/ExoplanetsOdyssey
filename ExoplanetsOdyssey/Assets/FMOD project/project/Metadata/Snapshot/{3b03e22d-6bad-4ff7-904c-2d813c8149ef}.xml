@@ -47,7 +47,7 @@
             <value>cutoff</value>
         </property>
         <property name="value">
-            <value>900</value>
+            <value>1000</value>
         </property>
         <relationship name="automatableObject">
             <destination>{93eacd0d-86e5-4661-9a4d-6005bfa709b5}</destination>
