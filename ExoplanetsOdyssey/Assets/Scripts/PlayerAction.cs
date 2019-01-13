@@ -91,7 +91,7 @@ public class PlayerAction : MonoBehaviour {
             casque.enabled = HelmetOn;
 			//animation de remettage de casque si false -> true ou inverse sinon
 
-			if (enabled)
+			if (HelmetOn)
 			{
 				nosnapshotHelmet.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 				snapshotHelmet.start();

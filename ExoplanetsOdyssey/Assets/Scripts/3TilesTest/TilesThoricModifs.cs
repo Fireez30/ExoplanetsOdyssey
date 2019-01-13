@@ -21,7 +21,7 @@ public class TilesThoricModifs : MonoBehaviour
     public int currentIndex;                                                                            //Index de la tile actuellement sélectionné dans l'inventaire
     public GameObject player;                                                                           //Perso de la tilemap du centre
     public UIScript canvas;                                                                             //Script qui gère l'affichage de l'inventaire du joueur
-
+    public TilesLevelGeneration t;
 
     GameObject GM;                                                                                      //GameObject avec les scripts qui subsistent entre les scènes
     private Vector3Int memTile;                                                                         //Pour conserver la position de la tile que le joueur essaie de casser
@@ -186,6 +186,7 @@ public class TilesThoricModifs : MonoBehaviour
             if (!maps[mapsIndex].GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 &&
                 tilePos != maps[mapsIndex].WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))     //S'il n'y a pas déjà une tile à cette position, que le joueur possède au moins une tile de ce genre et qu'on essaie pas de placer un bloc sur le joueur
             {
+                blocEv.setParameterValue("Profondeur", t.getProfondeur());
                 blocEv.start();
                 tilemap.SetTile(tilePos, tileList[currentIndex]);                                       //apply modif to all maps
                 maps[1].SetTile(tilePos, tileList[currentIndex]);
