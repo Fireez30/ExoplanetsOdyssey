@@ -2122,6 +2122,7 @@ MonoBehaviour:
   player: {fileID: 396126507}
   leftPlayer: {fileID: 493730755}
   rightPlayer: {fileID: 1334438768}
+  waterSound: {fileID: 1423761759819058, guid: 63fbfc7682aa2d147bd2c38315e4bd1d, type: 2}
 --- !u!114 &1150747473
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114767525635330244}
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   EditorEvents:
   - {fileID: 114910032145747684}
   - {fileID: 114723177198170762}
@@ -33,8 +33,23 @@ MonoBehaviour:
   - {fileID: 114227354534883236}
   StringsBanks:
   - {fileID: 114767525635330244}
-  stringsBankWriteTime: 636829793573657506
+  stringsBankWriteTime: 636829780035220240
   cacheVersion: 3
+--- !u!114 &114004511465458114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: miningIron
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114009181734405964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +79,7 @@ MonoBehaviour:
   Path: event:/ShipMovement
   guid: edc59cfaed9ac14f898a6a4c51ad6d09
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -86,7 +101,7 @@ MonoBehaviour:
   Path: snapshot:/withHelmet
   guid: 2de2033bad6bf74f904c2d813c8149ef
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -277,12 +292,12 @@ MonoBehaviour:
   Path: event:/Foot
   guid: 6a4578db319a8b41b0ae26296227f9ad
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114717237999024356}
+  - {fileID: 114390423318295396}
   MinDistance: 0
   MaxDistance: 0
   Length: 460
@@ -390,7 +405,7 @@ MonoBehaviour:
   Path: event:/Obtention
   guid: caf110204e6a3d4791326ec4555f7c78
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -537,6 +552,21 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 0
+--- !u!114 &114283660544034012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: miningFuel
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114292152338119890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +583,36 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114300849893941628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114303477964045530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114307283475395894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -671,12 +731,12 @@ MonoBehaviour:
   Path: event:/ventGrotte
   guid: 25d236470b46de429c5cb18a67757aab
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114566048425488094}
+  - {fileID: 114303477964045530}
   MinDistance: 0
   MaxDistance: 0
   Length: 30000
@@ -694,6 +754,21 @@ MonoBehaviour:
   Name: Random
   Min: 0
   Max: 100
+  Default: 0
+--- !u!114 &114390423318295396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 1
   Default: 0
 --- !u!114 &114394224757481240
 MonoBehaviour:
@@ -754,7 +829,7 @@ MonoBehaviour:
   Path: snapshot:/withoutHelmet
   guid: 08c38970436a1d4195021559431df1a7
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -776,6 +851,21 @@ MonoBehaviour:
   Name: Profondeur
   Min: 0
   Max: 1
+  Default: 0
+--- !u!114 &114423017600722886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Random
+  Min: 0
+  Max: 100
   Default: 0
 --- !u!114 &114426567274938520
 MonoBehaviour:
@@ -866,7 +956,7 @@ MonoBehaviour:
   Path: event:/Music/Univers
   guid: c3dcb2cfb5b189478565190791223376
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1398,13 +1488,13 @@ MonoBehaviour:
   Path: event:/Minage
   guid: 10807d33c71b3f4bbb6c6f8fe57fdf6b
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters:
-  - {fileID: 114009181734405964}
-  - {fileID: 114588141233569496}
+  - {fileID: 114004511465458114}
+  - {fileID: 114283660544034012}
   MinDistance: 0
   MaxDistance: 0
   Length: 44500
@@ -1422,7 +1512,7 @@ MonoBehaviour:
   Path: event:/PoseBloc
   guid: d252745077ae624ab963554019cd8bc2
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1472,7 +1562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: Assets\FMOD project\project\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636829793573657506
+  lastModified: 636829780035220240
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -1512,6 +1602,21 @@ MonoBehaviour:
   - Name: 
     Value: 1744128
   Exists: 1
+--- !u!114 &114777902878733704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Profondeur
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114780702553271848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,6 +1827,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114836959917471766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Oxygene
+  Min: 0
+  Max: 100
+  Default: 0
 --- !u!114 &114838372742487032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1879,14 +1999,14 @@ MonoBehaviour:
   Path: event:/Music/Planet
   guid: 9e31f64b6d656b43ab23bd178fc745e4
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114955234937709816}
-  - {fileID: 114781577387059116}
-  - {fileID: 114809925005094806}
+  - {fileID: 114423017600722886}
+  - {fileID: 114307283475395894}
+  - {fileID: 114836959917471766}
   MinDistance: 0
   MaxDistance: 0
   Length: 48000
@@ -2024,15 +2144,34 @@ MonoBehaviour:
   Path: event:/Saut
   guid: b049801ff08d744e90431bd92eed8ef6
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 114677165345679090}
+  - {fileID: 114777902878733704}
   MinDistance: 0
   MaxDistance: 0
   Length: 626
+--- !u!114 &114955971566643592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\Git\ExoplanetsOdyssey\ExoplanetsOdyssey\Assets\FMOD project\project\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636829835352179493
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1895264
+  Exists: 1
 --- !u!114 &114962115069513010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2081,7 +2220,7 @@ MonoBehaviour:
   Path: event:/journal
   guid: 2ebeb6f734c29140837b0c622773d028
   Banks:
-  - {fileID: 114135492677859028}
+  - {fileID: 114955971566643592}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1

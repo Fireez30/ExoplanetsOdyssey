@@ -15,6 +15,7 @@ public class TilesLevelGeneration : MonoBehaviour {
     public GameObject player;                                                               //main player
     public GameObject leftPlayer;                                                           //setup the leftcopy of the player in Awake
     public GameObject rightPlayer;                                                          //setup the rightcopy of the player in Awake
+    public GameObject waterSound;
 
     private int maxSurface;                                                                 //Ordonnée de la tile la plus haute générée
     private System.Random rand;                                                             //Random utilisé pour la génération de la planète
@@ -22,6 +23,7 @@ public class TilesLevelGeneration : MonoBehaviour {
     private Parameters GM;                                                                  //GameObject avec les scripts qui se conservent entre les scènes
     private string planetType;                                                              //Type de la planète (rocheuse, gazeuse, normal)
     private int planeteSeed;                                                                //Seed de la planète (générée lors du lancement du jeu)
+    private List<Vector2> waterPos;
 
     public int getPlaneteSeed()
     {
@@ -36,6 +38,7 @@ public class TilesLevelGeneration : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
+        waterPos = new List<Vector2>();
         GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         //planetType = GM.GetComponent<Parameters>().planetType;
         planetType = "classic";
@@ -91,6 +94,7 @@ public class TilesLevelGeneration : MonoBehaviour {
                 else if (map[x, y] == 4)
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 4));//set the water tile (index 4 in the palette)
+                    Instantiate(waterSound,tilemap.CellToWorld(new Vector3Int(x, y, 0)),Quaternion.identity);
                 }
                 else if (map[x, y] == 0)
                 {
@@ -187,10 +191,13 @@ public class TilesLevelGeneration : MonoBehaviour {
                         type = rand.Next(2);                                                    //On sélectionne quelle ressource on génère
                     else
                         type = rand.Next(3);
-                    if(type <2)
+                    if (type < 2)
                         map[x, y] = type + 2;
                     else
+                    {
                         map[x, y] = 4;
+                        waterPos.Add(new Vector2(x, y));
+                    }
                 }
                 chance = memChance;
             }
