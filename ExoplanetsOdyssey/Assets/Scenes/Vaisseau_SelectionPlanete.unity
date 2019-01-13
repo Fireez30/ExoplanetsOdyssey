@@ -5262,6 +5262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61348b3b69afd541be62c594b4c3547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Music: event:/journal
   fenetrechoix: {fileID: 1497652889}
   actual: 
 --- !u!1 &1526674465

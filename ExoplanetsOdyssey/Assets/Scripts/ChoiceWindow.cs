@@ -6,6 +6,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChoiceWindow : MonoBehaviour {
+    
+    [FMODUnity.EventRef]
+    public string Music = "event:/journal";
+    
+    FMOD.Studio.EventInstance journalEv;
+    
     public GameObject fenetrechoix;
     bool active = false;
     public List<int> actual;
@@ -13,10 +19,15 @@ public class ChoiceWindow : MonoBehaviour {
     public void Awake()
     {
         actual = new List<int>();
+        journalEv = FMODUnity.RuntimeManager.CreateInstance(Music);
     }
     
     public void showChoiceWindow()
     {
+        if (!active)
+        {
+            journalEv.start();
+        }
         active = !active;
         fenetrechoix.SetActive(active);
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().windowsOpened = active;
