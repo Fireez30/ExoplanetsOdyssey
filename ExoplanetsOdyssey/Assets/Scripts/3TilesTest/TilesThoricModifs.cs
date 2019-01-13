@@ -24,12 +24,13 @@ public class TilesThoricModifs : MonoBehaviour
     GameObject GM;                                                                                      //GameObject avec les scripts qui subsistent entre les scènes
     private Vector3Int memTile;                                                                         //Pour conserver la position de la tile que le joueur essaie de casser
     private float timerBreakTile;                                                                       //Pour gérer le temps que met la tile à casser (-1 si incassable)
-
+    private Parameters p;
     private bool isPlaying;
     /*Initialisation des variables de classes*/
     private void Awake()
     {
         GM = GameObject.FindGameObjectWithTag("GameManager");
+        p = GM.GetComponent<Parameters>();
         memTile = new Vector3Int();
         maps = new Tilemap[3];
         mapsIndex = 0;
@@ -192,6 +193,11 @@ public class TilesThoricModifs : MonoBehaviour
           //  GM.GetComponent<PlanetModificationsSaver>().computeChangesInFile();
           //  player.GetComponent<PlayerInventory>().computeChangesToFile();
           //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (p.deadByOxygen)
+        {
+            miningEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         }
     }
 }
