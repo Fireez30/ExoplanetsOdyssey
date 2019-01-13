@@ -16,6 +16,13 @@ public class ShipInventory : MonoBehaviour {
     private int ressourceRepareFuelTank = 10;
     private int ressourceRepareOxygenTank = 10;
 
+    string OxyRepare_name  = "event:/OxyRepare";
+    string FuelRepare_name = "event:/FuelRepare";
+    string ScanRepare_name = "event:/ScanRepare";
+    FMOD.Studio.EventInstance OxyRepare;
+    FMOD.Studio.EventInstance FuelRepare;
+    FMOD.Studio.EventInstance ScanRepare;
+
     public void ReadFile()
     {
 
@@ -52,7 +59,11 @@ public class ShipInventory : MonoBehaviour {
 
     void Start () {
         ReadFile();
-        shipOxygenAmount = 1000;    // 
+        shipOxygenAmount = 1000;    //
+
+        OxyRepare = FMODUnity.RuntimeManager.CreateInstance(OxyRepare_name);
+        FuelRepare = FMODUnity.RuntimeManager.CreateInstance(FuelRepare_name);
+        ScanRepare = FMODUnity.RuntimeManager.CreateInstance(ScanRepare_name);
     }
 
     public void computeChangesToFile()
@@ -95,29 +106,35 @@ public class ShipInventory : MonoBehaviour {
     }
 
     public void repareScanner()
-    {
+    {   //ScanRepare.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         if( GetScannerState() == 0 && ironAmount - ressourceRepareScanner >= 0 )
         {
             ironAmount -= ressourceRepareScanner;
             SetScannerState(1);
+            ScanRepare.start();
         }
     }
 
     public void repareFuelTank()
-    {
+    {   //FuelRepare.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         if (GetFuelTankState() == 0 && ironAmount - ressourceRepareFuelTank >= 0)
         {
             ironAmount -= ressourceRepareFuelTank;
             SetFuelTankState(1);
+            FuelRepare.start();
         }
     }
 
     public void repareOxygenTank()
-    {
+    {   //OxyRepare.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
         if (GetOxygenTankState() == 0 && ironAmount - ressourceRepareOxygenTank >= 0)
         {
             ironAmount -= ressourceRepareOxygenTank;
             SetOxygenTankState(1);
+            OxyRepare.start();
         }
     }
 }

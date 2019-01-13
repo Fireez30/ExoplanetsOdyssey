@@ -16,7 +16,7 @@ public class PlayerJump : MonoBehaviour {
 	public float lowMult = 2f;
 
     public TilesLevelGeneration tlg;
-    string nom = "event:/saut";
+    string nom = "event:/Saut";
     FMOD.Studio.EventInstance Saut;
     float profondeur;
 
@@ -36,7 +36,7 @@ public class PlayerJump : MonoBehaviour {
             {
                 profondeur = tlg.getProfondeur();
                 print("prof == " + profondeur);
-                Saut.setParameterValue("Saut", profondeur);
+                Saut.setParameterValue("Profondeur", profondeur);
                 Saut.start();
             }
 		}
