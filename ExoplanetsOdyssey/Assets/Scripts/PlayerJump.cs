@@ -35,7 +35,6 @@ public class PlayerJump : MonoBehaviour {
             if (tlg)
             {
                 profondeur = tlg.getProfondeur();
-                print("prof == " + profondeur);
                 Saut.setParameterValue("Profondeur", profondeur);
                 Saut.start();
             }
