@@ -16,7 +16,7 @@ public class MusicControl : MonoBehaviour {
 	void Awake () {
 		musicEv = FMODUnity.RuntimeManager.CreateInstance(Music);
 		p = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
-		musicEv.start();
+		//musicEv.start();
 		Rand = 0;
 	}
 	

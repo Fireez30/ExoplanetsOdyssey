@@ -18,6 +18,13 @@ public class PlayerAction : MonoBehaviour {
     Parameters param;
     SpriteRenderer casque;
 
+	[FMODUnity.EventRef]
+	public string snap = "snapshot:/withHelmet";
+	public string nosnap = "snapshot:/withoutHelmet";
+	
+	FMOD.Studio.EventInstance snapshotHelmet;
+	FMOD.Studio.EventInstance nosnapshotHelmet;
+	
     // Use this for initialization
     void Start () {
 		// Je sépare les deux pour plus de flexibilité si jamais faut regler
@@ -27,6 +34,8 @@ public class PlayerAction : MonoBehaviour {
         param = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>();
         seed = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Parameters>().getSeedToGen();
         casque = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+	    snapshotHelmet = FMODUnity.RuntimeManager.CreateInstance(snap);
+	    nosnapshotHelmet = FMODUnity.RuntimeManager.CreateInstance(nosnap);
     }
 	
 	// Update is called once per frame
@@ -81,6 +90,19 @@ public class PlayerAction : MonoBehaviour {
 			HelmetOn = !HelmetOn;
             casque.enabled = HelmetOn;
 			//animation de remettage de casque si false -> true ou inverse sinon
+
+			if (enabled)
+			{
+				nosnapshotHelmet.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+				snapshotHelmet.start();
+				
+			}
+			else
+			{
+				snapshotHelmet.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+				nosnapshotHelmet.start();
+				
+			}
 		}
 	}
 
