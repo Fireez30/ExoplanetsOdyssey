@@ -10,8 +10,9 @@ public class TilesThoricModifs : MonoBehaviour
     [FMODUnity.EventRef]
     public string breakSound = "event:/Minage";
     public string obtentionSound = "event:/Obtention";
+    public string blocSound = "event:/PoseBloc";
 
-    FMOD.Studio.EventInstance miningEv, obtentionEv;
+    FMOD.Studio.EventInstance miningEv, obtentionEv,blocEv;
     
     public Tilemap tilemap;                                                                             //Tilemap centrale
     Tilemap[] maps;                                                                                     //Les 3 tilemaps
@@ -42,6 +43,7 @@ public class TilesThoricModifs : MonoBehaviour
     void Start()
     {
         miningEv = FMODUnity.RuntimeManager.CreateInstance(breakSound);
+        blocEv = FMODUnity.RuntimeManager.CreateInstance(blocSound);
         obtentionEv = FMODUnity.RuntimeManager.CreateInstance(obtentionSound);
         maps[0] = tilemap;
         Tilemap[] t = GameObject.FindObjectsOfType<Tilemap>();
@@ -164,6 +166,7 @@ public class TilesThoricModifs : MonoBehaviour
             if (!maps[mapsIndex].GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 &&
                 tilePos != maps[mapsIndex].WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))     //S'il n'y a pas déjà une tile à cette position, que le joueur possède au moins une tile de ce genre et qu'on essaie pas de placer un bloc sur le joueur
             {
+                blocEv.start();
                 tilemap.SetTile(tilePos, tileList[currentIndex]);                                       //apply modif to all maps
                 maps[1].SetTile(tilePos, tileList[currentIndex]);
                 maps[2].SetTile(tilePos, tileList[currentIndex]);

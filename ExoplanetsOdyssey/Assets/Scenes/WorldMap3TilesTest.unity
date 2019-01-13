@@ -572,6 +572,7 @@ MonoBehaviour:
   Img: {fileID: 581478505}
   seed: 0
   snap: snapshot:/withHelmet
+  nosnap: snapshot:/withoutHelmet
 --- !u!1 &449847666
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +775,7 @@ MonoBehaviour:
   jumpVelocity: 6.04
   fallMult: 2.5
   lowMult: 2
-  tlg: {fileID: 1150747472}
+  tlg: {fileID: 0}
 --- !u!61 &493730759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -914,6 +915,7 @@ MonoBehaviour:
   Img: {fileID: 581478505}
   seed: 0
   snap: snapshot:/withHelmet
+  nosnap: snapshot:/withoutHelmet
 --- !u!1 &504442670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,6 +2135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakSound: event:/Minage
   obtentionSound: event:/Obtention
+  blocSound: event:/PoseBloc
   tilemap: {fileID: 1738558514}
   tileList:
   - {fileID: 11400000, guid: 7722e45fb32bf4245be3f7a0ea9e7f71, type: 2}
@@ -2537,6 +2540,7 @@ MonoBehaviour:
   Img: {fileID: 581478505}
   seed: 0
   snap: snapshot:/withHelmet
+  nosnap: snapshot:/withoutHelmet
 --- !u!1 &1410618097
 GameObject:
   m_ObjectHideFlags: 0
