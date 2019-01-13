@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000000045690D28 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000000005CF18B68 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -20,6 +20,111 @@
 [LOG] Manager::readBank                        : fileversion = 100, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 100, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 100, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 100, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] Manager::readBank                        : fileversion = 100, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SoundI::release                          :  (0000000022F6DCB8)
+[LOG] SoundI::release                          :     ScanRepare (000000005CFAEBA8)
+[LOG] SoundI::release                          :  (000000004C40E5D8)
+[LOG] SoundI::release                          :     obt1 (000000004C1B9E18)
+[LOG] SoundI::release                          :  (000000004C40D8E8)
+[LOG] SoundI::release                          :     obt10 (000000005CFAC648)
+[LOG] SoundI::release                          :  (000000004C40CD68)
+[LOG] SoundI::release                          :     obt11 (000000004C1B95F8)
+[LOG] SoundI::release                          :  (000000004C410578)
+[LOG] SoundI::release                          :     obt12 (000000004C1B8A98)
+[LOG] SoundI::release                          :  (000000004C40F5A8)
+[LOG] SoundI::release                          :     obt13 (000000004C1B88F8)
+[LOG] SoundI::release                          :  (000000004C410408)
+[LOG] SoundI::release                          :     obt14 (000000004C1BA2F8)
+[LOG] SoundI::release                          :  (000000004C40FCD8)
+[LOG] SoundI::release                          :     obt15 (000000005CFAADE8)
+[LOG] SoundI::release                          :  (000000004C40DA58)
+[LOG] SoundI::release                          :     obt2 (000000005CFAB468)
+[LOG] SoundI::release                          :  (000000004C40CED8)
+[LOG] SoundI::release                          :     obt3 (000000005CFAB608)
+[LOG] SoundI::release                          :  (000000004C410128)
+[LOG] SoundI::release                          :     obt4 (000000004C1B8C38)
+[LOG] SoundI::release                          :  (000000004C40ED08)
+[LOG] SoundI::release                          :     obt5 (000000005CFACE68)
+[LOG] SoundI::release                          :  (000000004C410858)
+[LOG] SoundI::release                          :     obt6 (000000005CFAB7A8)
+[LOG] SoundI::release                          :  (000000004C40DEA8)
+[LOG] SoundI::release                          :     obt7 (000000005CFAE6C8)
+[LOG] SoundI::release                          :  (000000004C40E188)
+[LOG] SoundI::release                          :     obt8 (000000004C1B9458)
+[LOG] SoundI::release                          :  (000000004C40DBC8)
+[LOG] SoundI::release                          :     obt9 (000000004BFC5CA8)
+[LOG] SoundI::release                          :  (000000004C40F718)
+[LOG] SoundI::release                          :     fuelFuite (000000005CFAEA08)
+[LOG] SoundI::release                          :  (000000004C40D048)
+[LOG] SoundI::release                          :     pose1 (000000005CFAB128)
+[LOG] SoundI::release                          :  (000000004C40F158)
+[LOG] SoundI::release                          :     pose2 (000000004C1B9798)
+[LOG] SoundI::release                          :  (000000004C40EE78)
+[LOG] SoundI::release                          :     pose3 (000000004C1B8758)
+[LOG] SoundI::release                          :  (000000004C40CBF8)
+[LOG] SoundI::release                          :     pose4 (000000004C1B9118)
+[LOG] SoundI::release                          :  (000000004C40FE48)
+[LOG] SoundI::release                          :     pose5 (000000005CFAE528)
+[LOG] SoundI::release                          :  (000000004C40D608)
+[LOG] SoundI::release                          :     Planet partie 3 (000000004C1B92B8)
+[LOG] SoundI::release                          :  (000000004C40EA28)
+[LOG] SoundI::release                          :     Bruit de clefs (000000005CFAC168)
+[LOG] SoundI::release                          :  (000000004C40FFB8)
+[LOG] SoundI::release                          :     foot1 (000000005CFAB2C8)
+[LOG] SoundI::release                          :  (000000004C40EFE8)
+[LOG] SoundI::release                          :     foot10 (000000004C1B8DD8)
+[LOG] SoundI::release                          :  (000000004C40F9F8)
+[LOG] SoundI::release                          :     foot11 (000000005CFADD08)
+[LOG] SoundI::release                          :  (000000004C410298)
+[LOG] SoundI::release                          :     foot12 (000000004C1BA498)
+[LOG] SoundI::release                          :  (000000004C40F888)
+[LOG] SoundI::release                          :     foot13 (000000005CFADB68)
+[LOG] SoundI::release                          :  (000000004C40E748)
+[LOG] SoundI::release                          :     foot2 (000000005CFACB28)
+[LOG] SoundI::release                          :  (000000004C4109C8)
+[LOG] SoundI::release                          :     foot3 (000000004C1B9FB8)
+[LOG] SoundI::release                          :  (000000004C40E018)
+[LOG] SoundI::release                          :     foot4 (000000004C1BA158)
+[LOG] SoundI::release                          :  (000000004C40F2C8)
+[LOG] SoundI::release                          :     foot5 (000000004BFC5FE8)
+[LOG] SoundI::release                          :  (000000004C40D498)
+[LOG] SoundI::release                          :     foot6 (000000004C1B9938)
+[LOG] SoundI::release                          :  (000000004C40E8B8)
+[LOG] SoundI::release                          :     foot7 (000000004C1B9C78)
+[LOG] SoundI::release                          :  (000000004C40EB98)
+[LOG] SoundI::release                          :     foot8 (000000005CFAE868)
+[LOG] SoundI::release                          :  (000000004C40DD38)
+[LOG] SoundI::release                          :     foot9 (000000005CFADEA8)
+[LOG] SoundI::release                          :  (000000004C40FB68)
+[LOG] SoundI::release                          :     saut (000000005CFAE048)
+[LOG] SoundI::release                          :  (000000004C40D778)
+[LOG] SoundI::release                          :     Tassecafe (000000005CFAC4A8)
+[LOG] SoundI::release                          :  (000000004C4106E8)
+[LOG] SoundI::release                          :     Tassecafe2 (000000004C1B8F78)
+[LOG] SoundI::release                          :  (000000004C40D1B8)
+[LOG] SoundI::release                          :     Tassecafe3 (000000005CFACCC8)
+[LOG] SoundI::release                          :  (000000004C40F438)
+[LOG] SoundI::release                          :     Tassecafe4 (000000005CFAE1E8)
+[LOG] SoundI::release                          :  (000000004C40D328)
+[LOG] SoundI::release                          :     oxyFuite (000000005CFAAF88)
+[LOG] SoundI::release                          :  (000000004C40E468)
+[LOG] SoundI::release                          :     FuelRepare (000000005CFAE388)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
+[LOG] SystemI::close                           : Closed.

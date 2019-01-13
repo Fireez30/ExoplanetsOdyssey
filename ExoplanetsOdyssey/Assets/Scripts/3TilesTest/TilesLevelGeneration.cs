@@ -94,7 +94,11 @@ public class TilesLevelGeneration : MonoBehaviour {
                 else if (map[x, y] == 4)
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), getTileFromPalette(planetType, 4));//set the water tile (index 4 in the palette)
-                    Instantiate(waterSound,tilemap.CellToWorld(new Vector3Int(x, y, 0)),Quaternion.identity);
+                    foreach(Vector2 v in waterPos)
+                    {
+                        if(v.x == x && v.y ==y)
+                            Instantiate(waterSound, tilemap.CellToWorld(new Vector3Int(x, y, 0)), Quaternion.identity);
+                    }
                 }
                 else if (map[x, y] == 0)
                 {
