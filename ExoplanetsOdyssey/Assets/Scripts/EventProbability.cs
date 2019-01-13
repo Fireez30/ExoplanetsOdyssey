@@ -12,6 +12,20 @@ public class EventProbability : MonoBehaviour {
     public float probaFuel = 5f;
     public float probaScan = 5f;
 
+    string OxyBreak_name  = "event:/OxyBreak";
+    string FuelBreak_name = "event:/FuelBreak";
+    string ScanBreak_name = "event:/ScanBreak";
+    FMOD.Studio.EventInstance OxyBreak;
+    FMOD.Studio.EventInstance FuelBreak;
+    FMOD.Studio.EventInstance ScanBreak;
+
+    private void Start()
+    {
+        OxyBreak = FMODUnity.RuntimeManager.CreateInstance(OxyBreak_name);
+        FuelBreak = FMODUnity.RuntimeManager.CreateInstance(FuelBreak_name);
+        ScanBreak = FMODUnity.RuntimeManager.CreateInstance(ScanBreak_name);
+    }
+
     void Awake()
     {
         SI = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ShipInventory>();
@@ -30,6 +44,8 @@ public class EventProbability : MonoBehaviour {
             if (SI.GetOxygenTankState() == 1)
             {
                 SI.SetOxygenTankState(0);
+
+                OxyBreak.start();
             }
         }
 
@@ -38,6 +54,8 @@ public class EventProbability : MonoBehaviour {
             if (SI.GetFuelTankState() == 1)
             {
                 SI.SetFuelTankState(0);
+
+                FuelBreak.start();
             }
         }
 
@@ -46,7 +64,13 @@ public class EventProbability : MonoBehaviour {
             if (SI.GetScannerState() == 1)
             {
                 SI.SetScannerState(0);
+
+                ScanBreak.start();
             }
         }
+
+        // OxyBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        // FuelBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        // ScanBreak.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }
