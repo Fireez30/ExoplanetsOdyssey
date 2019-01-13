@@ -704,6 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Music: event:/Music/Planet
+  Vent: event:/ventGrotte
+  t: {fileID: 1150747472}
   diceCheck: 1
 --- !u!1 &493730755
 GameObject:
@@ -4198,6 +4200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 396126507}
   gest: {fileID: 1150747469}
+  t: {fileID: 472775635}
 --- !u!43 &2102320222
 Mesh:
   m_ObjectHideFlags: 0
