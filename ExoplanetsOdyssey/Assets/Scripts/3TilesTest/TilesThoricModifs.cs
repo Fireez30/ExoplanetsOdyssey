@@ -21,6 +21,7 @@ public class TilesThoricModifs : MonoBehaviour
     public GameObject player;                                                                           //Perso de la tilemap du centre
     public UIScript canvas;                                                                             //Script qui gère l'affichage de l'inventaire du joueur
 
+
     GameObject GM;                                                                                      //GameObject avec les scripts qui subsistent entre les scènes
     private Vector3Int memTile;                                                                         //Pour conserver la position de la tile que le joueur essaie de casser
     private float timerBreakTile;                                                                       //Pour gérer le temps que met la tile à casser (-1 si incassable)
@@ -96,10 +97,29 @@ public class TilesThoricModifs : MonoBehaviour
                 string nameTile = tile.name;
                 switch (nameTile)
                 {
-                    case "ground": timeBreak = 0.2f; break;
-                    case "metal": timeBreak = 0.5f; break;
-                    case "carburant": timeBreak = 0.8f; break;
-                    default: timeBreak = -1; break;                                                    //Si tileBreak == -1, alors on ne peux pas casser la tile
+                    case "ground": 
+                        timeBreak = 0.2f;
+                        miningEv.setParameterValue("miningIron",0);
+                        miningEv.setParameterValue("miningFuel",0);
+                        break;
+                    
+                    case "metal": 
+                        timeBreak = 0.5f; 
+                        miningEv.setParameterValue("miningIron",1);
+                        miningEv.setParameterValue("miningFuel",0);
+                        break;
+                    
+                    case "carburant": 
+                        timeBreak = 0.8f; 
+                        miningEv.setParameterValue("miningIron",0);
+                        miningEv.setParameterValue("miningFuel",1);
+                        break;
+                    
+                    default: 
+                        timeBreak = -1; 
+                        miningEv.setParameterValue("miningIron",0);
+                        miningEv.setParameterValue("miningFuel",0);
+                        break;                                                    //Si tileBreak == -1, alors on ne peux pas casser la tile
                 }
                 
             }
