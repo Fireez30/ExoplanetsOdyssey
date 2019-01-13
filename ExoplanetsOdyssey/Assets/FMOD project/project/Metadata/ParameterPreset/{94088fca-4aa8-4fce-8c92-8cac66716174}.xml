@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{94088fca-4aa8-4fce-8c92-8cac66716174}">
+        <property name="name">
+            <value>miningFuel</value>
+        </property>
+        <relationship name="folder">
+            <destination>{fa52e5f4-ca60-42ed-b32b-84edcc9d3036}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{09fd2077-6342-4ae5-8ed3-ceff17599704}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{09fd2077-6342-4ae5-8ed3-ceff17599704}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="ParameterPreset" id="{9c66c0f8-76d5-46ff-ac2f-b646c25bfbc9}">
+        <property name="name">
+            <value>miningIron</value>
+        </property>
+        <relationship name="folder">
+            <destination>{fa52e5f4-ca60-42ed-b32b-84edcc9d3036}</destination>
+        </relationship>
+        <relationship name="parameter">
+            <destination>{5fd22a22-da07-4161-943d-999f2b644843}</destination>
+        </relationship>
+    </object>
+    <object class="GameParameter" id="{5fd22a22-da07-4161-943d-999f2b644843}">
+        <property name="initialValue">
+            <value>0</value>
+        </property>
+    </object>
+</objects>
