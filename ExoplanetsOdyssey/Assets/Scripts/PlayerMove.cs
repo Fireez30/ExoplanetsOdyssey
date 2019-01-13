@@ -16,13 +16,19 @@ public class PlayerMove : MonoBehaviour {
 
 	public float maxVerticalSpeed = -20.0f;
     private bool isPlaying = false;
-
+	public TilesLevelGeneration t;
+	
     private void Start()
     {
         footEv = FMODUnity.RuntimeManager.CreateInstance(footSount);
     }
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate ()
+    {
+	    if (t)
+	    {
+		    footEv.setParameterValue("Profondeur", t.getProfondeur());
+	    }
 		float move = Input.GetAxis("Horizontal");                   //-1 si joueur appuie sur Q/<- ou 1 si le joueur appuie sur D/->
 		rb.velocity = new Vector2 (speed * move, rb.velocity.y);
 
