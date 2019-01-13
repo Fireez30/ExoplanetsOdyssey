@@ -1104,7 +1104,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.155, y: 0, z: -10}
+  m_LocalPosition: {x: -1.209, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2164,6 +2164,7 @@ MonoBehaviour:
   currentIndex: 0
   player: {fileID: 396126507}
   canvas: {fileID: 1142203354}
+  t: {fileID: 1150747472}
 --- !u!114 &1150747474
 MonoBehaviour:
   m_ObjectHideFlags: 0

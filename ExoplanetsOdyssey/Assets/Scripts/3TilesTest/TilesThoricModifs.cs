@@ -186,14 +186,14 @@ public class TilesThoricModifs : MonoBehaviour
             if (!maps[mapsIndex].GetTile(tilePos) && player.GetComponent<PlayerInventory>().tileAmounts[currentIndex] > 0 &&
                 tilePos != maps[mapsIndex].WorldToCell(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z)))     //S'il n'y a pas déjà une tile à cette position, que le joueur possède au moins une tile de ce genre et qu'on essaie pas de placer un bloc sur le joueur
             {
-                blocEv.setParameterValue("Profondeur", t.getProfondeur());
-                blocEv.start();
                 tilemap.SetTile(tilePos, tileList[currentIndex]);                                       //apply modif to all maps
                 maps[1].SetTile(tilePos, tileList[currentIndex]);
                 maps[2].SetTile(tilePos, tileList[currentIndex]);
                 int nb = --player.GetComponent<PlayerInventory>().tileAmounts[currentIndex];            //Décrémente le nombre de tile dans l'inventaire
                 canvas.UpdateNbTiles(0, nb);                                                            //Update le nombre dans l'UI
                 gameObject.GetComponent<PlanetModificationsSaver>().AddModification(gameObject.GetComponent<TilesLevelGeneration>().getPlaneteSeed(), GM.GetComponent<Parameters>().planetType, currentIndex, tilePos.x, tilePos.y);//send the modification to the modif saver
+                blocEv.setParameterValue("Profondeur", t.getProfondeur());
+                blocEv.start();
             }
         }
 
