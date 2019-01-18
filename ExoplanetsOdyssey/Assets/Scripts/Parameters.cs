@@ -37,11 +37,22 @@ public class Parameters : MonoBehaviour {
     public bool deadByOxygen;
 
 	// Use this for initialization
-	void Awake () {
+	public void LaunchGame () {
         if (!Instance)                              //Structure Singleton
         {
             Instance = this;
             DontDestroyOnLoad(this);                //Conserver antre les scènes
+            int seedWorld;
+            if (!System.IO.File.Exists(Application.streamingAssetsPath + "/saves/seed.save"))
+            {
+                seedWorld = System.DateTime.Now.GetHashCode();
+                System.IO.File.Create(Application.streamingAssetsPath + "/saves/seed.save").Close();
+                System.IO.File.WriteAllText(Application.streamingAssetsPath + "/saves/seed.save", seedWorld + "");
+            }
+            else
+            {
+                seedWorld = Int32.Parse(System.IO.File.ReadAllText(Application.streamingAssetsPath + "/saves/seed.save"));
+            }
             seedsPlanetes = new List<List<int>>();
             planetSpritesIndexes = new List<List<int>>();
             shipSceneFirstVisit = true;
@@ -51,7 +62,7 @@ public class Parameters : MonoBehaviour {
             nbExtraHabitable = nbHabitable;
             typePlanete = new Dictionary<int, string>();
             habitables = new List<Choice>();
-            rand = new System.Random(seedBase.GetHashCode());   //Random seedé
+            rand = new System.Random(seedWorld.GetHashCode());   //Random seedé
             for(int i = 0; i < nbSystem; i++)       //Génère les seeds des planètes
             {
                 planetSpritesIndexes.Add(new List<int>());

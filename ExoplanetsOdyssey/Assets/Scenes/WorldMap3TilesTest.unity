@@ -2318,10 +2318,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Vous voil\xE0 sur la surface de la plan\xE8te! Un petit tutoriel s'impose
     commandant. D\xE9placez-vous gr\xE2ce aux touches fl\xE9ch\xE9es ou avec ZQSD.
-    Vous pouvez sauter avec la barre espace et enlever/remettre votre casque avec
-    t. Pour finir, rester appuy\xE9 sur le clic gauche de la souris permet de d\xE9truire
-    des ressources et de les r\xE9colter, le clic droit permet lui de poser des cubes
-    de terres o\xF9 vous voulez. "
+    Vous pouvez sauter avec la barre espace ou ctrl droit et enlever/remettre votre
+    casque avec t. Pour finir, rester appuy\xE9 sur le clic gauche de la souris permet
+    de d\xE9truire des ressources et de les r\xE9colter, le clic droit permet lui
+    de poser des cubes de terres o\xF9 vous voulez. "
 --- !u!222 &1265755703
 CanvasRenderer:
   m_ObjectHideFlags: 0
